@@ -1,4 +1,4 @@
 smallprogs
 ==========
 
-misc programmers; coding challenges; etc
+misc programs, coding challenges; etc
