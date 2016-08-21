@@ -16,11 +16,16 @@ class MergingAlloc
   std::map<BlkId, size_t> freeList;
   size_t maxFreeListSize{0};
 
+  // inverted and derived map sorted by size
+  // map will have many entries for same size
+  std::multimap<size_t, BlkId> sizeSortedList;
+
   public:
 
   int init(size_t numSegs)
   {
     freeList.insert(std::make_pair(0, numSegs));
+    sizeSortedList.insert(std::make_pair(numSegs, 0));
     return 0;
   }
 
@@ -34,6 +39,8 @@ class MergingAlloc
     auto iter = freeList.begin();
     static const auto iterEnd = freeList.end();
     bool found = false;
+
+    // TODO use sizeSortedList
     for (; iter != iterEnd; iter ++)
     {
       if (iter->second >= numSegs)
@@ -47,15 +54,33 @@ class MergingAlloc
     {
       if (iter->second > numSegs)
       {
-        freeList.insert(std::make_pair(
-          iter->first + numSegs,
-          iter->second - numSegs));
+        BlkId id = iter->first + numSegs;
+        size_t sz = iter->second - numSegs;
+
+        freeList.insert(std::make_pair(id, sz));
+        sizeSortedList.insert(std::make_pair(sz, id));
       }
       ret_blkid = iter->first;
+      eraseSizeSortedList(iter->second, iter->first);
       freeList.erase(iter);
       return 0;
     }
     return -1;
+  }
+
+  void eraseSizeSortedList(size_t sz, BlkId blkid)
+  {
+    // TODO use lower bound
+    auto sizeIter = sizeSortedList.find(sz);
+    for (; sizeIter != sizeSortedList.end(); sizeIter ++)
+    {
+      if (sizeIter->second == blkid)
+      {
+        break;
+      }
+    }
+    assert(sizeIter != sizeSortedList.end());
+    sizeSortedList.erase(sizeIter);
   }
 
   /*
@@ -99,6 +124,7 @@ class MergingAlloc
         // merge before
         insert_blkid = prevIter->first;
         insert_numSegs += prevIter->second;
+        eraseSizeSortedList(prevIter->second, prevIter->first);
         freeList.erase(prevIter);
       }
     }
@@ -114,11 +140,13 @@ class MergingAlloc
       {
         // merge after
         insert_numSegs += nextIter->second;
+        eraseSizeSortedList(nextIter->second, nextIter->first);
         freeList.erase(nextIter);
       }
     }
 
     freeList.insert(std::make_pair(insert_blkid, insert_numSegs));
+    sizeSortedList.insert(std::make_pair(insert_numSegs, insert_blkid));
     maxFreeListSize = std::max(maxFreeListSize, freeList.size());
 
     return 0;
@@ -129,6 +157,10 @@ class MergingAlloc
     for (auto elem : freeList)
     {
       os << "blk=" << elem.first << ":num=" << elem.second << std::endl;
+    }
+    for (auto elem : sizeSortedList)
+    {
+      os << "num=" << elem.first << ":blk=" << elem.second << std::endl;
     }
     std::cout << "max freelist size=" << maxFreeListSize << std::endl;
     // about MaxSegs / (2 * MaxAllocSize)
