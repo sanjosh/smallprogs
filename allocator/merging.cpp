@@ -41,13 +41,11 @@ class MergingAlloc
     bool found = false;
 
     // TODO use sizeSortedList
-    for (; iter != iterEnd; iter ++)
-    {
-      if (iter->second >= numSegs)
-      {
-        found = true;
-        break;
-      }
+    auto sizeIter = sizeSortedList.lower_bound(numSegs);
+    if (sizeIter != sizeSortedList.end()) {
+      iter = freeList.find(sizeIter->second);
+      assert(iter != iterEnd);
+      found = true;
     }
 
     if (found)
