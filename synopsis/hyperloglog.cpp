@@ -81,6 +81,21 @@ uint32_t hyperloglog64(uint32_t range)
   }
 
   double est = (alpha * NumStreams * NumStreams)/inverse_harmonic;
+
+  // bias correction 
+  if (est < (5/2 * NumStreams)) {
+    int zeroCounter = 0;
+    for (int idx = 0; idx < NumStreams; idx ++)
+    {
+      if (counter[idx] == 0) zeroCounter ++;
+    }
+    if (zeroCounter != 0) {
+      est = (double)NumStreams * log((double)NumStreams/zeroCounter);
+    }
+  }
+  if (est > ((double)(1LL << 32)/30)) {
+    est = log (1 - (est/(1LL << 32))) * (-1) * (1LL << 32);
+  }
   return est;
 }
 
