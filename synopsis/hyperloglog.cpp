@@ -36,7 +36,10 @@ uint32_t fm_sketch(uint32_t range)
     bitmap |= (1 << (pos - 1));
     //std::cout << std::bitset<32>(bitmap) << std::endl;
   }
-  return (1 << getRightmostSetBitPos(~bitmap));
+  uint32_t invert_bitmap = ~bitmap;
+  int pos = getRightmostSetBitPos(invert_bitmap);
+  double final = (double(1 << pos))/0.77351f;
+  return final;
 }
 
 // keep it power of 2

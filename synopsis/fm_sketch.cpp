@@ -42,7 +42,14 @@ int main(int argc, char* argv[])
     //std::cout << std::bitset<32>(bitmap) << std::endl;
   }
 
-  std::cout << std::bitset<32>(bitmap) 
-    << ":estimate of N=" << pow(2, getRightmostSetBitPos(~bitmap)) 
+  uint32_t invert_bitmap = ~bitmap;
+  int pos = getRightmostSetBitPos(invert_bitmap);
+  double final = (double(1 << pos))/0.77351f;
+
+  std::cout 
+    << std::bitset<32>(bitmap)
+    << ":" << std::bitset<32>(invert_bitmap)
+    << ":pos=" << pos
+    << ":estimate of N=" << final
     << std::endl;
 }
