@@ -6,10 +6,15 @@
 //
 #define NUM 16
 
-void haar(double input[], int sz)
+void haar(double input[], double output[], int sz)
 {
   double s = sqrt(2.0);
   int k = sz;
+
+  for (int i = 0; i < k; i++)
+  {
+    output[i] = input[i];
+  }
 
   while (k > 1)
   {
@@ -21,20 +26,25 @@ void haar(double input[], int sz)
     for (int i = 0; i < k; i++)
     {
       // average
-      temp[i] = (input[2*i] + input[2*i + 1])/s;
+      temp[i] = (output[2*i] + output[2*i + 1])/s;
       // diff
-      temp[i + k] = (input[2*i] - input[2*i + 1])/s;
+      temp[i + k] = (output[2*i] - output[2*i + 1])/s;
     }
     for (int i = 0; i < k*2; i ++)
     {
-      input[i] = temp[i];
+      output[i] = temp[i];
     }
   }
 }
 
-void inv_haar(double input[], int sz)
+void inv_haar(double input[], double output[], int sz)
 {
   double s = sqrt(2.0);
+
+  for (int i = 0; i < sz; i++)
+  {
+    output[i] = input[i];
+  }
 
   int k = 1;
   while (k * 2 <= sz)
@@ -44,12 +54,12 @@ void inv_haar(double input[], int sz)
 
     for (int i = 0; i < k; i++)
     {
-      temp[2*i] = (input[i] + input[i + k])/s; 
-      temp[2*i + 1] = (input[i] - input[i + k])/s; 
+      temp[2*i] = (output[i] + output[i + k])/s; 
+      temp[2*i + 1] = (output[i] - output[i + k])/s; 
     }
     for (int i = 0; i < k*2; i ++)
     {
-      input[i] = temp[i];
+      output[i] = temp[i];
     }
     k = k << 1;
   }
@@ -64,34 +74,39 @@ void printme(double arr[], int sz)
   std::cout << std::endl;
 }
 
-int main()
+int main(int argc, char* argv[])
 {
+
   // create CDF first
   // implement range query
-  double input[NUM] = {1, 12, 3, 4,
-    6, 9, 121, 3,
-    2, 33, 54, 45,
-    1, 3, 4, 6};
+  double input[NUM] = {1, 1, 3, 4,
+    6, 9, 121, 125,
+    200, 233, 254, 396,
+    400, 503, 544, 566};
+
+  double output[NUM];
 
   printme(input, NUM);
 
-  haar(input, NUM);
+  haar(input, output, NUM);
 
-  printme(input, NUM);
+  printme(output, NUM);
 
-  for (int i = 0; i < NUM; i++)
+  for (int thres = 1.0f; thres < 100.0f; thres += 5.0f)
   {
-    // zero out smaller coeff 
-    if (abs(input[i]) < 3.0)
+    for (int i = 0; i < NUM; i++)
     {
-      input[i] = 0;
+      // zero out smaller coeff 
+      if (abs(output[i]) < thres)
+      {
+        output[i] = 0;
+      }
     }
+    std::cout << "thres=" << thres << "--";
+
+    double input_back[NUM];
+    inv_haar(output, input_back, NUM);
+    printme(input_back, NUM);
   }
-
-  printme(input, NUM);
-
-  inv_haar(input, NUM);
-
-  printme(input, NUM);
 }
 
