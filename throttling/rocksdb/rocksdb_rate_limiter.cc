@@ -25,7 +25,7 @@ std::unique_ptr<RateLimiter> limiter;
 
 int64_t rate_bytes_per_sec = 1024; // 1 MB per sec
 int64_t refill_period_us = 1000000;
-int32_t fairness = 100;
+int32_t fairness = 5;
 int32_t totalThreads = 5;
 
 int64_t start_time = 0;
@@ -41,7 +41,7 @@ int64_t getmytime()
 void serverWorker(int index, int totalreq) {
 
   std::mt19937 seedGen(getpid() + index);
-  std::uniform_int_distribution<int64_t> reqGen(1, rate_bytes_per_sec/totalThreads);
+  std::uniform_int_distribution<int64_t> reqGen(rate_bytes_per_sec/3, rate_bytes_per_sec);
 
   rocksdb::GenericRateLimiter* limiter_ptr = dynamic_cast<rocksdb::GenericRateLimiter*>(limiter.get());
 
@@ -50,6 +50,9 @@ void serverWorker(int index, int totalreq) {
   int numreq = totalreq;
   int halftime = totalreq/2;
   int one_tenth = totalreq/10;
+
+  rocksdb::Env::IOPriority pri = (index < totalThreads/2) ? Env::IO_LOW : Env::IO_HIGH;
+  //rocksdb::Env::IOPriority pri = Env::IO_HIGH;
 
   while (numreq > 0) {
 
@@ -60,13 +63,19 @@ void serverWorker(int index, int totalreq) {
       req = 1;
     }
 
-    limiter_ptr->Request(req, Env::IO_HIGH);
+    limiter_ptr->Request(req, pri);
 
-    os << req << "," << limiter_ptr->available_bytes_ << "," << getmytime() - start_time << std::endl;
+    if (pri == Env::IO_LOW) {
+      os << req << ",0," << limiter_ptr->available_bytes_ << "," << getmytime() - start_time << std::endl;
+    } else {
+      os << "0," << req << "," << limiter_ptr->available_bytes_ << "," << getmytime() - start_time << std::endl;
+    }
 
     numreq --;
+    if (numreq % 50 == 0) {
+      std::cerr << "thread=" << index << " reached " << numreq << std::endl;
+    }
   }
-
   std::cout << os.str();
 }
 
@@ -78,7 +87,7 @@ int main(int argc, char* argv[]) {
     req = atoi(argv[1]);
   }
 
-  std::cout << "requested,available,time_us" << std::endl;
+  std::cout << "required,available,time_us" << std::endl;
 
   limiter = std::unique_ptr<rocksdb::RateLimiter>(new rocksdb::GenericRateLimiter(
         rate_bytes_per_sec,
