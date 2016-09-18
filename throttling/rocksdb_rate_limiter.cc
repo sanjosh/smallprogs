@@ -2,16 +2,20 @@
 // This source code is licensed under the BSD-style license found in the
 // LICENSE file in the root directory of this source tree. An additional grant
 // of patent rights can be found in the PATENTS file in the same directory.
+//
 #include <cstdio>
 #include <iostream>
+#include <sstream>
 #include <unistd.h>
 #include <string>
 
-#include "util/rate_limiter.h"
+#include "rate_limiter.h"
 
 #include <chrono>
 #include <future>
 #include <random>
+
+#include <sys/time.h>
 
 using namespace rocksdb;
 
@@ -19,45 +23,69 @@ typedef std::chrono::high_resolution_clock Clock;
 
 std::unique_ptr<RateLimiter> limiter;
 
-int64_t rate_bytes_per_sec = 1024 * 1024; // 1 MB per sec
+int64_t rate_bytes_per_sec = 1024; // 1 MB per sec
 int64_t refill_period_us = 1000000;
 int32_t fairness = 100;
 int32_t totalThreads = 5;
 
-void serverWorker(int index, int numreq) {
+int64_t start_time = 0;
+
+int64_t getmytime()
+{
+   struct timeval tp;
+   gettimeofday(&tp, NULL);
+   long long mslong = (long long) tp.tv_sec * 1000L + tp.tv_usec / 1000; //get current timestamp in milliseconds
+   return mslong;
+}
+
+void serverWorker(int index, int totalreq) {
 
   std::mt19937 seedGen(getpid() + index);
   std::uniform_int_distribution<int64_t> reqGen(1, rate_bytes_per_sec/totalThreads);
+
+  rocksdb::GenericRateLimiter* limiter_ptr = dynamic_cast<rocksdb::GenericRateLimiter*>(limiter.get());
+
+  std::ostringstream os;
+
+  int numreq = totalreq;
+  int halftime = totalreq/2;
+  int one_tenth = totalreq/10;
 
   while (numreq > 0) {
 
     int64_t req = reqGen(seedGen);
 
-    limiter->Request(req, Env::IO_HIGH);
+    // underutilize in middle half
+    if ((numreq > (halftime - one_tenth)) && (numreq < (halftime + one_tenth))) {
+      req = 1;
+    }
 
-    Clock::time_point end;
-    end = Clock::now();
+    limiter_ptr->Request(req, Env::IO_HIGH);
 
-    std::time_t ttp = std::chrono::system_clock::to_time_t(end);
-
-    std::cout << index << "," << req << "," << std::ctime(&ttp);
+    os << req << "," << limiter_ptr->available_bytes_ << "," << getmytime() - start_time << std::endl;
 
     numreq --;
   }
+
+  std::cout << os.str();
 }
 
 int main(int argc, char* argv[]) {
 
-  int64_t req = 1024;
+  int64_t req = 100;
 
   if (argc > 1) { 
     req = atoi(argv[1]);
   }
 
+  std::cout << "requested,available,time_us" << std::endl;
+
   limiter = std::unique_ptr<rocksdb::RateLimiter>(new rocksdb::GenericRateLimiter(
         rate_bytes_per_sec,
         refill_period_us,
         fairness));
+
+  start_time = getmytime();
 
   std::vector<std::future<void>> futvec;
   for (int i = 0; i < totalThreads; i++) {
