@@ -1,49 +1,22 @@
-#include <boost/interprocess/containers/deque.hpp>
-#include <boost/interprocess/allocators/allocator.hpp>
-#include <boost/interprocess/managed_shared_memory.hpp>
 
-#include <boost/interprocess/sync/scoped_lock.hpp>
-#include <boost/interprocess/sync/named_mutex.hpp>
-
+#include "ShmemQueue.h"
 #include <iostream>
 
-int main()
+int main(int argc, char* argv[1])
 {
-  using namespace boost::interprocess;
-
-   //Create shared memory
-   managed_shared_memory segment(open_only, "MySharedMemory");
-
-   //Typedef the allocator
-   typedef allocator<int, managed_shared_memory::segment_manager> ShmemAllocator;
-
-   //Alias deque of ints that uses the previous allocator.
-   typedef deque<uint64_t , ShmemAllocator> MyQueue;
-
-   const ShmemAllocator allocInst(segment.get_segment_manager());
-
-  named_mutex mutex(open_only, "fts");
-
-   MyQueue* queue = nullptr;
-   auto pair = segment.find<MyQueue>("myqueue");
-   if (pair.second) {
-     queue = pair.first;
-   }
+  if (argc != 2) {
+    exit(1);
+  }
+  ShmemQueue<int64_t> queue(atoi(argv[1]));
 
   int64_t ctr = 0;
   int64_t prevCtr = -1;
   while (ctr >= 0) {
 
-    do {
-      scoped_lock<named_mutex> lock(mutex);
-      if (queue->size()) {
-        ctr = queue->front();
-        queue->pop_front();
-        break;
-      }
-    } while (1);
+    queue.read(ctr);
 
     if (ctr != prevCtr + 1) {
+      assert("failed" == 0);
     } else {
       prevCtr = ctr;
       if (ctr % 1000 == 0) {

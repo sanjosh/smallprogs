@@ -22,7 +22,7 @@ set(CMAKE_VERBOSE_MAKEFILE on)
 if (NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
   message(STATUS "No build type selected, default to Release")
   message(STATUS "To change pass -DCMAKE_BUILD_TYPE on command line")
-  set(CMAKE_BUILD_TYPE "Release")
+  set(CMAKE_BUILD_TYPE "Debug")
 endif()
 
 # turns on colors in generated Makefile
