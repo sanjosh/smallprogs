@@ -8,6 +8,8 @@
 #include <boost/interprocess/sync/named_mutex.hpp>
 #include <boost/interprocess/sync/named_condition.hpp>
 
+#include <memory>
+
 namespace bip = boost::interprocess;
 
 template <class D>
@@ -17,6 +19,7 @@ class ShmemQueue
   typedef bip::deque<D, ShmemAlloc> BaseQueue;
 
   bool isCreator_{false};
+
   const std::string name_;
   const std::string mutexName_;
   const std::string condName_;
@@ -28,7 +31,7 @@ class ShmemQueue
 
   public:
 
-  ShmemQueue(size_t numEntries, int pid)
+  ShmemQueue(int pid, size_t numEntries)
     : isCreator_(true)
     , name_("n" + std::to_string(pid))
     , mutexName_(name_ + "m")
@@ -80,6 +83,16 @@ class ShmemQueue
     return 0;
   }
 
+  int try_read(D& d) {
+    bip::scoped_lock<decltype(mutex_)> lock(mutex_);
+    if (not queue_->size()) {
+      return -1;
+    }
+    d = queue_->front();
+    queue_->pop_front();
+    return 0;
+  }
+
   int read(D& d) {
     bip::scoped_lock<decltype(mutex_)> lock(mutex_);
     while (not queue_->size()) {
@@ -90,3 +103,6 @@ class ShmemQueue
     return 0;
   }
 };
+
+typedef std::unique_ptr<ShmemQueue> ShmemQueueUPtr;
+typedef std::shared_ptr<ShmemQueue> ShmemQueueSPtr;

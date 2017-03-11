@@ -77,3 +77,13 @@ add_executable(reader
   reader.cpp)
 target_link_libraries(reader
   ${LIB_LIST})
+
+add_executable(ShmemServer
+  ShmemServer.cpp)
+target_link_libraries(ShmemServer
+  ${LIB_LIST})
+
+add_executable(ShmemClient
+  ShmemClient.cpp)
+target_link_libraries(ShmemClient
+  ${LIB_LIST})
