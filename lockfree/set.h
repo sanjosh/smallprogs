@@ -7,20 +7,21 @@ template <class N>
 struct SmartPtr : public std::atomic<N>
 {
     typedef std::atomic<N> base_type;
+    const int SHIFT_LEN = 48;
 
     bool compare_exchange_strong(N& oldptr, N newval, bool oldf, bool newf)
     {
-       uintptr_t old = uintptr_t(oldptr) | (uintptr_t(oldf) << 48);
-       uintptr_t newv = uintptr_t(newval) | (uintptr_t(newf) << 48);
+       uintptr_t old = uintptr_t(oldptr) | (uintptr_t(oldf) << SHIFT_LEN);
+       uintptr_t newv = uintptr_t(newval) | (uintptr_t(newf) << SHIFT_LEN);
        N oldn = N(old);
        return base_type::compare_exchange_strong(oldn, N(newv));
     }
 
     N load(bool& flag) const noexcept
     {
-        // TODO extract flag
-        flag = true;
-        return base_type::load();
+        N x = base_type::load();
+        flag = (uintptr_t(x) >> SHIFT_LEN);
+        return x;
     }
 
     N load() const noexcept
@@ -35,8 +36,8 @@ struct SmartPtr : public std::atomic<N>
 
     void store(N n, bool flag) noexcept
     {
-        // TODO encode flag
-        base_type::store(n);
+        uintptr_t newv = uintptr_t(n) | (uintptr_t(flag) << SHIFT_LEN);
+        base_type::store(N(newv));
     }
 
     SmartPtr() noexcept = default;

@@ -7,6 +7,8 @@
 Set::Set() {
     head = new Node(std::numeric_limits<int64_t>::min());
     tail = new Node(std::numeric_limits<int64_t>::max());
+    Node* h = head;
+    h->next.store(tail);
 }
 
 Set::Bound Set::find(Node* head, int64_t key) {
@@ -19,9 +21,9 @@ retry:
     while (true) {
         pred = head;
         curr = pred->next.load();
-        while (true) {
+        while (curr) {
             succ = curr->next.load(marked); 
-            while (marked) {
+            while (succ && marked) {
                 // if node is deleted, unlink it
                 bool snip = pred->next.compare_exchange_strong(curr, succ, false, false);
                 if (not snip) {
@@ -83,7 +85,7 @@ bool Set::contains(int64_t key) {
     Node *curr = head;
     while (curr->key < key) {
         curr = curr->next.load();
-        Node* succ = curr->next.load(marked);
+        curr->next.load(marked);
     }
     return (curr->key == key) && (not marked);
 }
