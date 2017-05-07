@@ -23,7 +23,9 @@ int main(int argc, char* argv[])
     int recv_timeout_ms = 100000;
     clientid_t cid;
 
-    zhandle_t *zh = zookeeper_init(host, watcher_func, recv_timeout_ms, &cid, (void*)1, 0);
+    struct ACL_vector acl = ZOO_OPEN_ACL_UNSAFE;
+
+    zhandle_t *zh = zookeeper_init(host, watcher_func, recv_timeout_ms, 0, (void*)0, 0);
     if (zh == NULL) {
         printf("failed to connect\n");
         exit(1);
@@ -38,11 +40,12 @@ int main(int argc, char* argv[])
     char value[] = "helloworld";
     char *path = "/sandeep";
     char *path_buffer = (char*)malloc(1024);
-    rc = zoo_create(zh, path, value, strlen(value), &ZOO_OPEN_ACL_UNSAFE, 0, path_buffer, 1024);
+    rc = zoo_create(zh, path, value, strlen(value), &ZOO_OPEN_ACL_UNSAFE, ZOO_EPHEMERAL|ZOO_SEQUENCE, path_buffer, 1024);
     if (rc != ZOK) {
         printf("create err=%d\n", rc);
     }
 
+    getchar();
     rc = zookeeper_close(zh);
     if (rc != ZOK) {
         printf("close err=%d\n", rc);
