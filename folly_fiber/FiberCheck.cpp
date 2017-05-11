@@ -3,6 +3,7 @@
  */
 #include <folly/fibers/FiberManager.h>
 #include <folly/fibers/SimpleLoopController.h>
+#include <iostream>
 
 
 using namespace folly::fibers;
