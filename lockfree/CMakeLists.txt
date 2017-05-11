@@ -44,3 +44,13 @@ TARGET_LINK_LIBRARIES(set_tester
     rt)
 
 ADD_TEST(NAME set_tester COMMAND set_tester)
+
+ADD_EXECUTABLE(skiptest
+    skiptest.cpp
+	)
+
+TARGET_LINK_LIBRARIES(skiptest
+	folly
+	glog
+    pthread
+    )
