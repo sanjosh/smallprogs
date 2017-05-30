@@ -122,6 +122,7 @@ int main(int argc, const char **argv, char * const *envp) {
   if (T.isOSBinFormatCOFF())
     T.setObjectFormat(llvm::Triple::ELF);
 
+  // Driver is required to ensure compiler env is accurately created inside program!
   Driver TheDriver(Path, T.str(), Diags);
   TheDriver.setTitle("clang interpreter");
   TheDriver.setCheckInputsExist(false);
