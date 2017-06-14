@@ -45,7 +45,14 @@ TARGET_LINK_LIBRARIES(set_tester
     pthread
     rt)
 
-ADD_TEST(NAME set_tester COMMAND set_tester)
+ADD_EXECUTABLE(thrset_test
+	set.cpp
+    thrset_test.cpp
+	)
+
+TARGET_LINK_LIBRARIES(thrset_test
+    pthread
+    )
 
 ADD_EXECUTABLE(skiptest
     skiptest.cpp
