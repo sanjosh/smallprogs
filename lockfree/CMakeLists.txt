@@ -9,6 +9,8 @@ set(CMAKE_COLOR_MAKEFILE)
 
 set(CXX_STANDARD c++14)
 
+set(CMAKE_BUILD_TYPE Release)
+
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=${CXX_STANDARD} -Wnon-virtual-dtor -Woverloaded-virtual -DBOOST_LOG_DYN_LINK")
 
 # these below apply to C and C++ files
@@ -52,5 +54,13 @@ ADD_EXECUTABLE(skiptest
 TARGET_LINK_LIBRARIES(skiptest
 	folly
 	glog
+    pthread
+    )
+
+ADD_EXECUTABLE(stack_test
+    stack_test.cpp
+	)
+
+TARGET_LINK_LIBRARIES(stack_test
     pthread
     )
