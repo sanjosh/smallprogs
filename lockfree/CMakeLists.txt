@@ -71,3 +71,19 @@ ADD_EXECUTABLE(stack_test
 TARGET_LINK_LIBRARIES(stack_test
     pthread
     )
+
+ADD_EXECUTABLE(queue_test
+    queue_test.cpp
+	)
+
+TARGET_LINK_LIBRARIES(queue_test
+    pthread
+    )
+
+ADD_EXECUTABLE(spsc_queue_test
+    spsc_queue_test.cpp
+	)
+
+TARGET_LINK_LIBRARIES(spsc_queue_test
+    pthread
+    )
