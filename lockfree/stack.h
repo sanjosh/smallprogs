@@ -23,32 +23,26 @@ struct Stack
 	std::atomic<size_t> size_ {0};
 
 	void push(int64_t key) {
-		Node* oldHead = head_.load();
-		Node* newNode = new Node(key, oldHead);
-		while (!head_.compare_exchange_strong(oldHead, newNode)) {
-			sched_yield();
+		Node* newNode = new Node(key, nullptr);
+		int attempt = 0;
+		Node* oldHead = nullptr;
+		do {
+			if (attempt++) { sched_yield(); }
 			oldHead = head_.load();
 			newNode->next_ = oldHead;
-		}
+		} while (!head_.compare_exchange_strong(oldHead, newNode));
 		size_.fetch_add(1, std::memory_order_relaxed);
 	};
 
 	void pop(int64_t& key) {
-		Node* oldHead = head_.load();
-		while (!oldHead) {
-			sched_yield();
-			oldHead = head_.load();
-		}
-		Node* nextNode = oldHead->next_;
-		while (!head_.compare_exchange_strong(oldHead, nextNode)) {
-			do {
-				oldHead = head_.load();
-				if (!oldHead) {
-					sched_yield();
-				}
-			} while (!oldHead);
+		Node* oldHead = nullptr;
+		Node* nextNode = nullptr;
+		do {
+			while (!(oldHead = head_.load())) {
+				sched_yield();
+			} 
 			nextNode = oldHead->next_;
-		}
+		} while (!head_.compare_exchange_strong(oldHead, nextNode));
 		key = oldHead->key_;
 		delete oldHead; 
 		size_.fetch_sub(1, std::memory_order_relaxed);
