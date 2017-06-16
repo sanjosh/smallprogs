@@ -1,5 +1,6 @@
 #include <thread>
 #include <vector>
+#include <unistd.h>
 #include <mutex>
 #include <cassert>
 #include <iostream>
@@ -28,12 +29,11 @@ struct Modulo {
 void popFunc() {
 	std::vector<int64_t> valvec;
 	for (int i = 0; i < TOTALVAL; i++) {
+		bool is_empty;
 		int64_t val;
 		do {
-			val = q.dequeue();
-			if (val == -1) { sched_yield(); }
-		} while (val == -1);
-		assert(val >= 0);
+			val = q.dequeue(is_empty);
+		} while (is_empty);
 		assert(val < TOTALVAL);
 		valvec.push_back(val);
 	}
@@ -46,7 +46,7 @@ void pushFunc() {
 		int64_t val = i;
 		valvec.push_back(val);
 		q.enqueue(val);
-		sched_yield();
+		if (i && (i % 10 == 0)) sched_yield();
 	}
 }
 
@@ -64,7 +64,7 @@ int main(int argc, char* argv[])
 	for (auto& th : pushThr) th.join();
 	for (auto& th : popThr) th.join();
 
-	//assert(q.size() == 0);
+	assert(q.size() == 0);
 
 	Modulo<10> i;
 	for (auto v  : kValVec) {

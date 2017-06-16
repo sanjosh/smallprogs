@@ -13,10 +13,15 @@ struct Node {
 
 class SPSCQueue {
 
-	std::atomic<Node*> tail_;
-	std::atomic<Node*> head_;
+	Node* tail_;
+	Node* head_;
+	std::atomic<size_t> size_{0};
 
 	public:
+
+	size_t size() const {
+		return size_;
+	}
 
 	SPSCQueue() {
 		head_ = tail_ = new Node(-1);
@@ -24,24 +29,27 @@ class SPSCQueue {
 	
 	// only moves tail
 	void enqueue(int64_t val) {
-		Node* n = new Node(val);
-		tail_.load()->next_ = n;
-		// dequeue can happen here
-		tail_.store(n);
+		Node* n = new Node(size_);
+		tail_->next_ = n;
+		// dequeue can happen here - fine
+		tail_ = n;
+		size_.fetch_add(1, std::memory_order_relaxed);
 	}
 
 	// only moves head
-	int64_t dequeue() {
+	int64_t dequeue(bool& is_empty) {
 		// first node is always the sentinel
-		Node* oldHead = head_.load();
+		is_empty = false;
+		Node* oldHead = head_;
 		if (oldHead->next_ == nullptr) {
-			sched_yield();
+			is_empty = true;
 			return -1;
 		}
 		Node* n = oldHead->next_;
 		int64_t ret = n->value_;
-		head_.store(n);
+		head_ = n;
 		delete oldHead;
+		size_.fetch_sub(1, std::memory_order_relaxed);
 		return ret;
 	}
 };

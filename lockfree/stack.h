@@ -30,7 +30,7 @@ struct Stack
 			if (attempt++) { sched_yield(); }
 			oldHead = head_.load();
 			newNode->next_ = oldHead;
-		} while (!head_.compare_exchange_strong(oldHead, newNode));
+		} while (not head_.compare_exchange_strong(oldHead, newNode));
 		size_.fetch_add(1, std::memory_order_relaxed);
 	};
 
@@ -42,7 +42,7 @@ struct Stack
 				sched_yield();
 			} 
 			nextNode = oldHead->next_;
-		} while (!head_.compare_exchange_strong(oldHead, nextNode));
+		} while (not head_.compare_exchange_strong(oldHead, nextNode));
 		key = oldHead->key_;
 		delete oldHead; 
 		size_.fetch_sub(1, std::memory_order_relaxed);
