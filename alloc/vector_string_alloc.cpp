@@ -9,30 +9,42 @@
 
 template <class T>
 class Arena {
+
 	public:
+
+	std::vector<size_t> slots_;
+	char* buffer_;
+	size_t end_{0};
 	size_t num_allocs_{0};
 
 	Arena() noexcept {
-  		std::cout << "ctor arena " << (void*)this << std::endl;
+		buffer_ = new char[1048576];
 	}
 	~Arena() {
-  		std::cout << "dtor arena " << (void*)this << std::endl;
 	}
 	Arena(const Arena&) = delete;
 	Arena& operator = (const Arena&) = delete;
 	
 	char* allocate(size_t n) {
 	   // print message and allocate memory with global new
-	   char* ret = (char*)(::operator new(n * sizeof(T)));
+	   size_t req_size = n * sizeof(T);
+	   char* ret = buffer_ + end_;
+	   end_ += req_size;
+	   slots_.push_back(req_size);
 	   num_allocs_ ++;
-  		std::cout << "alloc " << (void*)this << std::endl;
 	   return ret;
 	}
 	char* deallocate(char* p, size_t n) noexcept {
 	   // print message and deallocate memory with global delete
-  		std::cout << "dealloc " << (void*)this << std::endl;
 	   num_allocs_ --;
-	   ::operator delete((void*)p);
+	}
+
+	void save() {
+		size_t start = 0;
+		for (auto slot : slots_) {
+			std::cout << slot << "," << (char*)buffer_ + start << std::endl;
+			start += slot;
+		}
 	}
 };
 
@@ -71,13 +83,10 @@ class MemoryMappedAlloc {
 	* - nothing to do because the allocator has no state
 	*/
    MemoryMappedAlloc(arena_type& a):  a_(a) {
-   	//std::cout << "ctor with arena this=" << (void*)this << std::endl;
    }
    MemoryMappedAlloc(const MemoryMappedAlloc& other) : a_(other.a_) {
-   	//std::cout << "copy ctor this=" << (void*)this << ",arena=" << (void*)&a_ << std::endl;
    }
    ~MemoryMappedAlloc() throw() {
-   	//std::cout << "dtor this=" << (void*)this << std::endl;
    }
 
    // return maximum number of elements that can be allocated
@@ -121,27 +130,21 @@ bool operator!= (const MemoryMappedAlloc<T1>&,
 }
 
 typedef std::basic_string<char, std::char_traits<char>, MemoryMappedAlloc<char>> MString;
-typedef std::vector<MString, MemoryMappedAlloc<MString>> MVector;
+typedef std::vector<MString> MVector;
 
 int main() {
 
-	MVector::allocator_type::arena_type ma;
 	MString::allocator_type::arena_type string_alloc;
 
 	{
-		MVector avec{ma};
+		MVector avec;
 	
 		for (int i = 0; i < 3; i++) {
 			// for small strings lt 16 bytes, allocation is inline
 			avec.emplace_back(16, 'a' + (i % 26), string_alloc);
-			std::cout << "string arena=" << string_alloc.num_allocs_ << std::endl;
 		}
 
-		std::cout << "vector arena=" << ma.num_allocs_ << std::endl;
-
-		for (auto& elem : avec) {
-			std::cout << elem << std::endl;
-		}
+		string_alloc.save();
 	}
 }
 
