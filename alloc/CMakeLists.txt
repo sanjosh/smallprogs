@@ -37,3 +37,8 @@ ADD_EXECUTABLE(stl_alloc_test
     StlAllocTest.cpp
     )
 
+
+ADD_EXECUTABLE(vsalloc
+    vector_string_alloc.cpp
+    )
+

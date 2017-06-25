@@ -3,6 +3,7 @@
  */
 #include <cstdint>
 #include <limits>
+#include <string.h>
 #include <vector>
 #include <iostream>
 #include <string>
@@ -12,17 +13,31 @@ class Arena {
 
 	public:
 
+	std::string name_;
 	std::vector<size_t> slots_;
 	char* buffer_;
+	size_t bufferSize_{1048576};
 	size_t end_{0};
 	size_t num_allocs_{0};
 
-	Arena() noexcept {
-		buffer_ = new char[1048576];
+	Arena(const std::string& name) noexcept {
+		name_ = name;
+		buffer_ = new char[bufferSize_];
 	}
+
 	~Arena() {
+		free(buffer_);
 	}
-	Arena(const Arena&) = delete;
+
+	Arena(const Arena& other) {
+		name_ = other.name_;
+		slots_ = other.slots_;
+		buffer_ = (char*)malloc(bufferSize_);
+		memcpy(buffer_, other.buffer_, other.end_);
+		end_ = other.end_;
+		num_allocs_ = other.num_allocs_;
+	}
+
 	Arena& operator = (const Arena&) = delete;
 	
 	char* allocate(size_t n) {
@@ -32,14 +47,21 @@ class Arena {
 	   end_ += req_size;
 	   slots_.push_back(req_size);
 	   num_allocs_ ++;
+	   std::cout << "alloc=" << name_ << ",num=" << num_allocs_ << std::endl;
 	   return ret;
 	}
-	char* deallocate(char* p, size_t n) noexcept {
+	void deallocate(char* p, size_t n) noexcept {
 	   // print message and deallocate memory with global delete
 	   num_allocs_ --;
+	   std::cout << "dealloc=" << name_ << ",num=" << num_allocs_ << std::endl;
 	}
 
-	void save() {
+	void save(const std::string& filename) {
+
+		//json_t save_json = json_object();
+		//int rc = json_object_set_new(save_json, 
+
+		std::cout << name_ << "," << (void*)buffer_ << "," << end_ << std::endl;
 		size_t start = 0;
 		for (auto slot : slots_) {
 			std::cout << slot << "," << (char*)buffer_ + start << std::endl;
@@ -130,21 +152,32 @@ bool operator!= (const MemoryMappedAlloc<T1>&,
 }
 
 typedef std::basic_string<char, std::char_traits<char>, MemoryMappedAlloc<char>> MString;
-typedef std::vector<MString> MVector;
+typedef std::vector<MString, MemoryMappedAlloc<MString>> MVector;
 
 int main() {
 
-	MString::allocator_type::arena_type string_alloc;
+	MString::allocator_type::arena_type string_alloc("string");
+	MVector::allocator_type::arena_type vector_alloc("vector");
 
+	MVector avec(vector_alloc);
+	avec.reserve(3);
 	{
-		MVector avec;
-	
 		for (int i = 0; i < 3; i++) {
 			// for small strings lt 16 bytes, allocation is inline
-			avec.emplace_back(16, 'a' + (i % 26), string_alloc);
+			avec.emplace_back(i + 14, 'a' + (i % 26), string_alloc);
 		}
+		//vector_alloc.save();
+		//string_alloc.save();
+	}
 
-		string_alloc.save();
+	{
+		MVector bvec(vector_alloc);
+		memcpy(&bvec, &avec, sizeof(avec));
+		std::cout << "bvec=" << bvec.size() << std::endl;
+		for (int i = 0; i < 3; i++) {
+			// for small strings lt 16 bytes, allocation is inline
+			std::cout << bvec[i] << std::endl;
+		}
 	}
 }
 
