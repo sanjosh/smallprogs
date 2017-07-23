@@ -104,5 +104,5 @@ class ShmemQueue
   }
 };
 
-typedef std::unique_ptr<ShmemQueue> ShmemQueueUPtr;
-typedef std::shared_ptr<ShmemQueue> ShmemQueueSPtr;
+typedef std::unique_ptr<ShmemQueue<int64_t>> ShmemQueueUPtr;
+typedef std::shared_ptr<ShmemQueue<int64_t>> ShmemQueueSPtr;
