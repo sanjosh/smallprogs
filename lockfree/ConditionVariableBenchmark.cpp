@@ -1,7 +1,7 @@
 
 /**
  * g++ condvar.cc -std=c++11 -lboost_thread -lboost_system -lpthread
- * https://svn.boost.org/trac/boost/attachment/ticket/7422/test.cc
+ * from https://svn.boost.org/trac/boost/attachment/ticket/7422/test.cc
  */
 
 #include <boost/thread/condition_variable.hpp>
