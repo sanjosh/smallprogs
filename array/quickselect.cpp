@@ -51,7 +51,7 @@ int quickselect(std::vector<int>& a, int left, int right, int rank_required) {
 	}
 }
 
-void do_sort(std::vector<int> a, int rank) {
+void find_rank(std::vector<int> a, int rank) {
 	int k = quickselect(a, 0, a.size() - 1, rank);
 	std::for_each(a.begin(), a.end(), [] (int elem) { 
 		std::cout << elem << ",";
@@ -62,14 +62,14 @@ void do_sort(std::vector<int> a, int rank) {
 }
 
 int main() {
-	do_sort({ 1, 5, 2, 5, 7, 3, 9, 11}, 0);
-	do_sort({ 1, 5, 2, 5, 7, 3, 9, 11}, 1);
-	do_sort({ 1, 5, 2, 5, 7, 3, 9, 11}, 2);
-	do_sort({ 1, 5, 2, 5, 7, 3, 9, 11}, 3);
-	do_sort({ 1, 5, 2, 5, 7, 3, 9, 11}, 7);
-	do_sort({1}, 0);
-	do_sort({2, 1}, 0);
-	do_sort({2, 1}, 1);
-	do_sort({3, 2, 1}, 2); 
+	find_rank({ 1, 5, 2, 5, 7, 3, 9, 11}, 0);
+	find_rank({ 1, 5, 2, 5, 7, 3, 9, 11}, 1);
+	find_rank({ 1, 5, 2, 5, 7, 3, 9, 11}, 2);
+	find_rank({ 1, 5, 2, 5, 7, 3, 9, 11}, 3);
+	find_rank({ 1, 5, 2, 5, 7, 3, 9, 11}, 7);
+	find_rank({1}, 0);
+	find_rank({2, 1}, 0);
+	find_rank({2, 1}, 1);
+	find_rank({3, 2, 1}, 2); 
 }
 
