@@ -6,6 +6,12 @@
 
  https://www.hackerrank.com/challenges/maximum-subarray-sum
 
+ real answer
+
+ https://stackoverflow.com/questions/31113993/maximum-subarray-sum-modulo-m
+
+ https://stackoverflow.com/questions/37700917/find-the-maximum-value-of-sum-of-subarray-modulo-m
+
  */
 
 #include <iostream>
@@ -13,62 +19,68 @@
 #include <vector>
 #include <list>
 #include <climits>
+#include <limits>
 
 using namespace std;
 
-int Modulo = 7;
+typedef std::vector<uint64_t> VecNum;
  
-int maxSubArraySum(int a[], int size)
+uint64_t maxSubArraySum(const VecNum& a, uint64_t Modulo)
 {
-    int max_so_far = INT_MIN, max_ending_here = 0;
-	int prev_ending_here = 0;
+  uint64_t max_so_far = std::numeric_limits<uint64_t>::min();
+	uint64_t max_ending_here = 0;
+	uint64_t prev_ending_here = 0;
+	size_t size = a.size();
  
-    for (int i = 0; i < size; i++)
-    {
-        max_ending_here = (max_ending_here + a[i]) % Modulo;
-        if (i > 0) { prev_ending_here = (prev_ending_here + a[i]) % Modulo; }
+	for (size_t i = 0; i < size; i++)
+	{
+		max_ending_here = (max_ending_here + a[i]) % Modulo;
+		if (i > 0) { prev_ending_here = (prev_ending_here + a[i]) % Modulo; 
+	}
 
-		if (max_ending_here == 0) {
-			max_ending_here = prev_ending_here;
-			prev_ending_here = a[i] % Modulo;
-		}
+	if (max_ending_here == 0) {
+		max_ending_here = prev_ending_here;
+		prev_ending_here = a[i] % Modulo;
+	}
 
-        if (max_so_far < max_ending_here)
-            max_so_far = max_ending_here;
+	if (max_so_far < max_ending_here)
+		max_so_far = max_ending_here;
 
-        if (max_so_far < prev_ending_here)
-            max_so_far = prev_ending_here;
- 
-        if (max_ending_here < 0)
-            max_ending_here = 0;
+	if (max_so_far < prev_ending_here)
+		max_so_far = prev_ending_here;
 
-		//std::cout << max_so_far << "," << max_ending_here << "," << prev_ending_here << "," << a[i] << endl;
-    }
-    return max_so_far;
+	if (max_ending_here < 0)
+		max_ending_here = 0;
+
+	}
+	return max_so_far;
 }
  
 int main(int argc, char* argv[])
 {
-	Modulo = 7;
-	if (argc == 2) { Modulo = atoi(argv[1]); }
+	int num_test_cases = 0;
+  scanf("%d", &num_test_cases);
 
-	std::list<std::vector<int>> listvec;
-	listvec.emplace_back(std::vector<int>({2, 2, 3, 2, 2, 3}));
-	listvec.emplace_back(std::vector<int>({2, 2, 3}));
-	listvec.emplace_back(std::vector<int>({9, 9, 3, 3, 5}));
-	listvec.emplace_back(std::vector<int>({6, 6, 6, 6, 6, 6, 6, 6}));
-	listvec.emplace_back(std::vector<int>({3, 4, 3, 4, 3, 4, 3, 4}));
-	listvec.emplace_back(std::vector<int>({7}));
-	listvec.emplace_back(std::vector<int>({1, 1, 1, 4, 1, 1, 1, 4, 1, 1, 1}));
-	listvec.emplace_back(std::vector<int>({1, 2, 4, 2, 1, 2, 4, 2, 1, 1}));
-	listvec.emplace_back(std::vector<int>({2, 2, 0, 2, 2, 0}));
+  std::vector<VecNum> tests;
+  std::vector<uint64_t> mods;
 
-	for (auto& vec : listvec) {
-		int max_sum = maxSubArraySum(&vec[0], vec.size());
-		for (auto elem : vec) {
-			cout << elem << ",";
-		}
-		cout << ":sum=" << max_sum << std::endl;
+  for (int t = 0; t < num_test_cases; t++) {
+		int n = 0;
+	  uint64_t d = 0;
+	  scanf("%d %lu", &n, &d);
+		VecNum arr(n);
+	  for (int i = 0; i < n; i++)
+	  {
+	    scanf("%lu", &arr[i]);
+	  }
+		mods.push_back(d);
+		tests.emplace_back(arr);
 	}
-    return 0;
+
+	for (int i = 0; i < tests.size(); i ++) {
+		const auto& vec = tests[i];
+		auto max_sum = maxSubArraySum(vec, mods[i]);
+		cout << max_sum << std::endl;
+	}
+  return 0;
 }
