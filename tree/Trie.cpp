@@ -13,7 +13,7 @@ class Node
     public:
     Node()
     {
-        wordEnd = true;
+        wordEnd = false;
         for (int i = 0; i < ALPHABET_SIZE; i++)
             list[i] = NULL;
     }
@@ -44,7 +44,6 @@ class Trie
             if (!n)
             {
                 parent->list[index] = n = new Node;
-                parent->wordEnd = false;
             }
             parent = n;
         }
@@ -56,6 +55,8 @@ class Trie
         Node* parent = root;
         Node* n = NULL;
         bool found = false;
+
+				if (!parent) return false;
 
         for (int i = 0; i < findStr.size(); i++)
         {
@@ -78,7 +79,7 @@ int main()
 {
     Trie tt;
 
-    string list[] = {"abcd", "abce", "def", "ghi", "jkl" };
+    string list[] = {"abc", "abce", "def", "ghi", "jkl" };
     int len = sizeof(list)/sizeof(list[0]);
 
     for (int i = 0; i < len; i++)
