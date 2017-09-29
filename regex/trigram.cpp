@@ -5,20 +5,35 @@
 #include <ftw.h>
 #include <unordered_map>
 #include <set>
+#include <iterator>
+#include <algorithm>
 #include <string>
 
 typedef uint64_t FileNumber;
 typedef std::set<FileNumber> FileNumberList;
 typedef uint32_t Trigram;
-std::unordered_map<Trigram, FileNumberList> trigrams;
+std::unordered_map<Trigram, FileNumberList> trigram_map;
 
 void insert_trigram(Trigram t, FileNumber f) {
-	auto iter = trigrams.find(t);
-	if (iter != trigrams.end()) {
+	auto iter = trigram_map.find(t);
+	if (iter != trigram_map.end()) {
 		iter->second.insert(f);
 	} else {
-		trigrams.insert({t, {f}});
+		trigram_map.insert({t, {f}});
 	}
+}
+
+FileNumberList get_intersection(const std::set<Trigram>& trigrams) {
+	FileNumberList f;
+	for (auto trigram : trigrams) {
+		FileNumberList result;
+		auto iter = trigram_map.find(trigram);
+		std::set_intersection(f.begin(), f.end(),
+			iter->second.begin(), iter->second.end(),
+			std::inserter(result, result.end()));
+		f = result;
+	}
+	return f;
 }
 
 FileNumber file_no = 1;
@@ -39,7 +54,7 @@ void process_file(const char* filename) {
 	}
 	file_no ++;
 	if (file_no % 10 == 0) {
-		std::cout << "processed=" << file_no << " trigrams=" << trigrams.size() << std::endl;
+		std::cout << "processed=" << file_no << " trigrams=" << trigram_map.size() << std::endl;
 	}
 }
 
@@ -63,8 +78,8 @@ int main(int argc, char* argv[])
 		exit(1); 
 	}
 
-	std::cout << trigrams.size() << std::endl;
-	for (auto& trigram: trigrams) {
+	std::cout << trigram_map.size() << std::endl;
+	for (auto& trigram: trigram_map) {
 		std::cout << trigram.first << std::endl;
 	}
 }
