@@ -38,8 +38,8 @@ add_compile_options(
 ADD_LIBRARY(re2 STATIC IMPORTED)
 SET_TARGET_PROPERTIES(re2 PROPERTIES IMPORTED_LOCATION /usr/local/lib/libre2.a)
 
-ADD_EXECUTABLE(prefix_search prefix_search.cpp)
-TARGET_LINK_LIBRARIES(prefix_search re2 pthread)
+ADD_EXECUTABLE(atom_search atom_search.cpp)
+TARGET_LINK_LIBRARIES(atom_search re2 pthread)
 
 ADD_EXECUTABLE(regex_search regex_search.cpp)
 TARGET_LINK_LIBRARIES(regex_search re2 pthread)

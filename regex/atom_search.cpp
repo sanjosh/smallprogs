@@ -17,13 +17,13 @@ int main()
 	fre.Add(regexp1, opts, &id);
 	std::cout << id << std::endl;
 
-	std::vector<std::string> required_prefixes;
+	std::vector<std::string> atoms;
 	// any string that is matching the regexp must begin with the prefixes
 	// returned in required_prefixes
-	fre.Compile(&required_prefixes);
+	fre.Compile(&atoms);
 
-	for (auto& prefix : required_prefixes) {
-		std::cout << prefix << ", ";
+	for (auto& atom : atoms) {
+		std::cout << atom << ", ";
 	}
 	std::cout << std::endl;
 }
