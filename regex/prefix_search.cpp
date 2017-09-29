@@ -9,15 +9,12 @@ using namespace re2;
 
 int main()
 {
-	const std::string regexp1 = "^ab4.*c[0-9]$";
-	const std::string regexp2 = "^de3.*c[0-9]$";
+	const std::string regexp1 = "^(ab4|def).*c[0-9]jjj$";
 
 	FilteredRE2 fre;
 	RE2::Options opts;
 	int id;
 	fre.Add(regexp1, opts, &id);
-	std::cout << id << std::endl;
-	fre.Add(regexp2, opts, &id);
 	std::cout << id << std::endl;
 
 	std::vector<std::string> required_prefixes;
