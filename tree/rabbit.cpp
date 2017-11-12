@@ -39,7 +39,7 @@ int64_t topdown_memo(int n) {
 	if (n == 0) {
 		memof[n] = 1;
 	} else if (memof[n] == -1) {
-		memof[n] = (topdown(n-1) * 3) - ((n >= dying_after) ? topdown(n-dying_after) : 0);
+		memof[n] = (topdown_memo(n-1) * 3) - ((n >= dying_after) ? topdown_memo(n-dying_after) : 0);
 	}
 	return memof[n];
 }
