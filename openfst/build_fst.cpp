@@ -3,8 +3,13 @@
 #include <glog/logging.h>
 
 #include <fst/fstlib.h>
+#include <fst/script/getters.h>
+#include <fst/script/intersect.h>
+#include <fst/arcsort.h>
 
 using namespace fst;
+using namespace fst::script;
+using fst::ComposeFilter;
 
 int main(int argc, char* argv[]) {
 
@@ -73,16 +78,46 @@ int main(int argc, char* argv[]) {
 		search_fst.SetFinal(2, 3.5); // 1st arg is state ID, 2nd arg weight
 	}
 
-	static const ILabelCompare<StdArc> icomp;
-	ArcSort(&fst, icomp);
-	StdIntersectFst ofst(fst, search_fst);
+	{
+		for (StateIterator<StdVectorFst> siter(fst); not siter.Done(); siter.Next()) {
+			StdIntersectFst::StateId s = siter.Value();
+			std::cout << "state=" << s << ":";
+			for (ArcIterator<StdVectorFst> aiter(fst, s); not aiter.Done(); aiter.Next()) {
+				const StdArc& arc = aiter.Value();
+				std::cout << arc.ilabel << "/" << arc.olabel << "->" << arc.nextstate << ",";
+			}
+			std::cout << std::endl;
+		}
+	}
+
+	{
+		Matcher<StdVectorFst> matcher(fst, MATCH_INPUT);
+		matcher.SetState(0);
+		StdArc::Label find_label = 1;
+		if (matcher.Find(find_label)) {
+			for (; not matcher.Done(); matcher.Next()) {
+				const StdArc& arc = matcher.Value();
+				std::cout << "found=" 
+					<< arc.ilabel << "/" << arc.olabel << "->" << arc.nextstate << std::endl;
+			}
+		}
+	}
+
+	ArcSort(&fst, StdOLabelCompare());
 
 	/*
-	StateIterator<StdIntersectFst> siter(ofst);
-
-	for (; !siter.Done(); siter.Next()) {
-		StdIntersectFst::StateId s = siter.Value();
-		std::cout << s << std::endl;
+	 intersect contains strings in both A and B
+	{
+	
+		ComposeFilter compose_filter;
+		if (!GetComposeFilter("auto", &compose_filter)) {
+			LOG(ERROR) << "failed";
+			exit(1);
+		}
+	
+		const fst::IntersectFstOptions<StdArc> opts;
+	
+		StdIntersectFst ofst(fst, search_fst, opts);
 	}
 	*/
 
