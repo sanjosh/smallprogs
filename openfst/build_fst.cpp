@@ -103,12 +103,13 @@ int main(int argc, char* argv[]) {
 		}
 	}
 
-	ArcSort(&fst, StdOLabelCompare());
 
-	/*
-	 intersect contains strings in both A and B
+//	 intersect contains strings in both A and B
 	{
+		ArcSort(&fst, StdOLabelCompare());
+		ArcSort(&search_fst, StdILabelCompare());
 	
+		/*
 		ComposeFilter compose_filter;
 		if (!GetComposeFilter("auto", &compose_filter)) {
 			LOG(ERROR) << "failed";
@@ -116,9 +117,10 @@ int main(int argc, char* argv[]) {
 		}
 	
 		const fst::IntersectFstOptions<StdArc> opts;
+		*/
 	
-		StdIntersectFst ofst(fst, search_fst, opts);
+		//StdIntersectFst ofst(fst, search_fst, opts);
+		StdIntersectFst ofst(fst, search_fst);
 	}
-	*/
 
 }
