@@ -13,6 +13,8 @@ and the Gaussian is generating random numbers centered around mean of 70
 but the estimate converges to 70
 and the Kalman Gain converges to 0.01
 
+The Kalman Filter is not a "filter" per se, but an estimator
+
 '''
 
 class KalmanFilter:
