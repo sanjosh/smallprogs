@@ -1,0 +1,78 @@
+Use labels to encode paths
+need a way to flip alternative edges
+identify edge/vertex as belonging to a matching
+
+=======
+
+M = matching
+U = unmatched vertices = outer vertices
+F = forest 
+inner vertex = at odd distance from U; have deg 2 (one matched, one unmatched edge)
+===========
+
+algo stops when outer points have no unexamined neighbours
+
+FindAugmentingPath(G, M)
+{
+    F = empty forest
+    ummark all vertices & edges in G
+    
+    for each exposed vertex 
+    {
+        create singleton tree(V) and add to F
+    }
+
+    while there is unmatched v in F with distance(v, root(v)) == even
+    {
+        while exists unmarked edge e = (v, w)
+        {
+            if w is not in F
+            {
+                // new edge to augment matching rooted at V
+                x = vertex matched to w inside M
+                add edges(v,w)+(w,x) to tree(v)
+            }
+            else if (root(v) != root(w)
+            {
+                if distance(w, root(w)) == odd
+                {
+                    do nothing
+                }
+                else
+                {
+                    // join 2 trees inside matching
+                    P = path(root(v)...v - w ... root(w))
+                    return P
+                }
+            }
+            else // root(v) == root(w)
+            {
+                //contract blossom in G
+                B = blossom(edge e and edges on path v->w in T)
+                G',M" = contract G,M by B
+                P' = FindAugmentingPath(G',M')
+                P = lift P to G
+                return P
+            }
+
+            mark edge e
+        }
+
+        mark vertex v
+    }
+    return empty path
+}
+
+FindMaxMatching(G, M)
+{
+    P = FindAugmentingPath(G, M)
+    if P 
+    {
+        then return FindMaxMatching(G, augment M along P)
+    }
+    else
+    {
+        return M
+    }
+}
+================

@@ -1,0 +1,47 @@
+
+http://stackoverflow.com/questions/24996689/how-to-given-a-predetermined-set-of-keys-reorder-the-keys-such-that-the-minimu?rq=1
+
+insert() - node can split
+{
+    if (node.entries > d)
+    {
+        // move middle elem up to root
+        // split the node into 2 
+        // set parent links to 2 new nodes
+
+        node.parent.insert(node.entry[d/2])
+        node.split(newleft, newright);
+        node.parent.insertNode(newleft, afterKey)
+        node.parent.insertNode(newright, afterKey)
+        node.destroy
+    }
+
+}
+
+delete() - can result in transfer/fusion
+{
+    Basically identical to (2,4)-trees,
+    Ensure that entry to be deleted is at node with leaf children
+    If not, swap the entry with its inorder successor
+
+    Delete the entry at node v and the appropriate leaf child
+
+    Underflow occurs if number of children left is less than d/2. Handle
+    underflow with either transfer and fusion (transfer is preferable)
+
+    Transfer, if an adjacent sibling w has at least d/2 +1 entries
+    v gets an entry which is between v and w from its parent u,
+    sibling w gives the entry to parent u as a replacement, this is
+    the entry of w which is closest to the entry moved from u to v
+
+    After transfer, no new underflows
+
+    Fusion if both adjacent siblings have less than d/2 +1 entries
+    merge node u with an adjacent sibling w into new entry v’
+    v’ gets an entry from the parent. This is the entry between the
+    old nodes v and w
+
+    After fusion, underflow at a parent node may occur.
+
+}
+

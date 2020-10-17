@@ -1,0 +1,155 @@
+
+http://www.itworld.com/print/35352
+
+    Summary: Library interposition is a useful technique for tuning performance, collecting runtime statistics, or debugging applications. This article offers helpful tips and tools for working with the technique and gets you started on your own interposer.
+
+ By Greg Nakhimovsky, Unix Insider 
+
+Most of today's applications use shared libraries and dynamic linking, especially for such system libraries as the standard C library (libc), or the X Window or OpenGL libraries. Operating system vendors encourage this method because it provides many advantages.
+
+With dynamic linking, you can intercept any function call that an application makes to any shared library. Once you intercept it, you can do whatever you want in that function, as well as call the real function that the application originally intended to call.
+
+Performance tuning is one use of this technology. Even if you have access to profilers and other development tools, or the application's source code itself, having your own library interposer puts you completely in control. You can see exactly what you're doing and make adjustments at any time.
+
+Building and running your first interposer
+
+To use library interposition, you need to create a special shared library and set the LD_PRELOAD environment variable. When LD_PRELOAD is set, the dynamic linker will use the specified library before any other when it searches for shared libraries.
+
+Let's create a simple interposer for malloc(), which is normally a part of /usr/lib/libc.so.1, the standard C library. A message, displaying the argument passed to each malloc() call, will be printed out each time the application calls malloc().
+
+Here's the source for this interposer:
+
+
+
+malloc_interposer.c
+
+In the above example, func is a function pointer to the real malloc() routine, which is in /usr/lib/libc.so.1. The RTLD_NEXT argument passed to dlsym(3X) tells the dynamic linker to find the next reference to the specified function, using the normal dynamic linker search sequence.
+
+Now let's build and run this interposer, using ls(1) as our sample application. We'll use the C-shell syntax for this and other examples.
+
+
+% cc -o malloc_interposer.so -G -Kpic malloc_interposer.c
+% setenv LD_PRELOAD $cwd/malloc_interposer.so
+% ls -l malloc_interposer.so
+malloc(64) is called
+malloc(52) is called
+malloc(1072) is called
+-rwxr-xr-x   1 gregn        5224 Aug  3 15:21 malloc_interposer.so*
+% unsetenv LD_PRELOAD
+
+Without access to the source code of ls(1), and without rebuilding it in any way, we've just discovered which arguments the application used to call malloc() in the test run.
+
+Note that LD_PRELOAD must specify the full path to the interposer library, and that library interposition is disabled for setuid programs in order to prevent security problems.
+
+Collecting runtime statistics
+
+Here's a more practical example of library interposition on malloc(), as well as on a few other routines. It collects statistics about the size of the memory blocks requested with the calls to malloc(), calloc(), and realloc(), and prints out a histogram detailing their use upon exiting the application.
+
+Here's the source code:
+
+
+malloc_hist.c
+
+Note that we round up all memory-request sizes to the next power of two. To obtain the name of the current executable, we use the proc(4) interface. The version of the proc(4) interface used here works with Solaris 2.6 and above.
+
+We can run this interposer with the CDE editor dtpad as the test application.
+
+
+% setenv LD_PRELOAD $cwd/malloc_hist.so
+% dtpad malloc_hist.c
+% unsetenv LD_PRELOAD
+
+Here are the results.
+
+
+% cat /tmp/malloc_histogram.dtpad.15203
+prog_name=dtpad.15203
+******** malloc **********
+         1              76
+         2             105
+         4             450
+         8             667
+        16            2047
+        32             620
+        64             158
+       128              39
+       256              33
+       512              22
+      1024              32
+      2048              10
+      4096              14
+      8192              46
+     32768               2
+    131072               3
+******** calloc **********
+         1               0
+         2               0
+         4            1676
+         8              40
+        16              21
+        32              12
+        64              34
+       128               4
+       256               2
+       512               0
+      1024               3
+      8192               7
+******** realloc **********
+         1               0
+         2               0
+         4               2
+         8               2
+        16              11
+        32              11
+        64              14
+       128               1
+       256               0
+       512               0
+
+If the application invokes more than one executable, you'll get a histogram in the /tmp directory for each.
+
+Such histograms can be quite useful in application performance tuning. We now know that dtpad (as used in this session) calls malloc() to request 16-byte memory blocks more often than it requests other sizes.
+
+This tool has been used with many real applications. It revealed that most of one application's malloc() requests were for blocks of four bytes or less. There are two performance problems with this pattern.
+
+First of all, most malloc() implementations, including the default Solaris malloc(3C), will waste a lot of memory when used this way. malloc(3C) uses eight bytes of overhead for each memory block it returns to the caller. When the application calls malloc, requesting only four bytes of memory, the malloc() overhead is twice as large as the useful memory consumed. This memory waste can easily lead to increased paging to disk, ruining the application's performance.
+
+Second, it's possible to create your own memory allocator specially geared towards small blocks. It can be made a lot faster than the system's default malloc(), which is designed to deal with a wide variety of block sizes.
+
+Fixing a bug
+
+This is a true story. A major mechanical CAD application stopped working with Solaris 2.6, but continued to work with Solaris 2.5.1. Debugging showed that the reason for failure was a call to XOpenDisplay(3X11) that returned NULL. Interposing on that routine revealed that the application was calling XOpenDisplay() with the argument unix:0.0 instead of with the usual NULL.
+
+The reason it didn't work was a bug in X. It could also be considered a bug in the application, because using unix:0.0 for DISPLAY is an old Unix technique which no longer makes sense.
+
+In any case, we needed a quick workaround until the bug was fixed.
+
+The application in question was old and complex. It called XOpenDisplay() many times from different modules, so even tracking the troublesome calls was a challenge. The following library interposer was our solution. Not only did this interposer print out the argument passed to XOpenDisplay(), it actually changed the XOpenDisplay() argument to NULL, fixing the problem.
+
+
+XOpenDisplay_interpose.c
+
+More ideas
+
+Now that you know how to build and use library interposers, here are some other things you can have them do:
+
+    Compute the amount of time spent in malloc(), realloc(), and free() routines, and print out the results upon exiting. A good timing routine in Solaris is gethrtime(3C). Once you have this information, you'll know if memory management is a performance bottleneck.
+
+    Collect usage statistics for memmove(), memcpy(), and memset() routines, and print out a histogram similar to the one for malloc(). This will tell you how much data the application is moving around, and whether or not this area of the program is worth optimizing.
+
+    You can also determine how many backward moves or copies the application performs. A backward move occurs when the source address is larger than the destination address. The performance of backward memory moves is often much worse than that of forward moves.
+
+    Determine which environment variables the application is using. Interpose on getenv(3C), and print its argument and return value.
+
+    Test a different version of malloc(), or any other dynamically-linked routine, with your application. All you have to do is interpose the test version (assuming it's built as a shared library). To go back to using the original version, simply undefine LD_PRELOAD.
+
+Using the library interposers described in this article, you can monitor your applications' patterns of system-resource consumption and provide useful feedback to application developers.
+
+Acknowledgments
+
+I'd like to thank two of my colleagues at Sun Microsystems: Bart Smaalders, who wrote the original version of the interposer to collect malloc statistics, and Morgan Herrington, who generously helped in many ways.
+
+Resources
+
+    "Profiling and Tracing Dynamic Library Usage via Interposition," Timothy W. Curry (USENIX Conference Proceedings, Summer 1994): http://www.usenix.org/publications/library/proceedings/bos94/curry.html
+    Unix Insider's community discussions -- share your expertise and get help when you need it: http://forums.itworld.com/webx?14@@.ee6b675 

@@ -1,0 +1,220 @@
+0a1
+> #include "mergesort.h"
+4,13d4
+< #include <stdio.h>
+< #include <sys/stat.h>
+< #include <errno.h>
+< #include <string.h>
+< #include <stdlib.h>
+< #include <fcntl.h>
+< 
+< #include "MergeSort.h"
+< #include "SVConfig.h"
+< 
+21,40c12
+< size_t SFile::headerSize() 
+< {
+<     static const size_t value = pageAlign(((sizeof (SFileHeader)) 
+<       + (sizeof (vdiskoffset_t) * SVConfig::Instance().getCacheBlocksPerStagingBlock())));
+<     return value;
+< }
+< 
+< int SFile::allocBuffer(SFileHeader*& header, char*& dataBlocks)
+< {
+<     char* buffer = NULL;
+<     int ret = posix_memalign ((void**)&buffer, PAGE_SIZE, SFile::totalSize());
+<     // do memset to eliminate valgrind error about uninitialized bytes being written to disk
+<     sv_assert(ret == 0);
+<     memset (buffer, 0, SFile::headerSize());
+<     header = (SFileHeader *) buffer;
+<     dataBlocks = (buffer + SFile::headerSize());
+<     return ret;
+< }
+< 
+< size_t SFile::totalSize()
+---
+> SFile::SFile(int in_fileNum, int in_pass) : fileNum(in_fileNum), pass(in_pass)
+42,50d13
+<     return headerSize() + SVConfig::Instance().getStagingBlockSize();
+< }
+< 
+< SFile::SFile(vdiskid_t in_vDiskId, version_t in_snapId, fileid_t in_fileNum, int in_pass) 
+< {
+<     vDiskId = in_vDiskId;
+<     snapId = in_snapId;
+<     saFileId = in_fileNum;
+<     pass = in_pass;
+54,56d16
+< SFile::~SFile()
+< {
+< }
+58c18
+< SFile::remove()
+---
+> SFile::~SFile()
+63c23
+<         buildName(name, pass, saFileId, curChunk);
+---
+>         buildName(name, pass, fileNum, curChunk);
+74c34
+<     sv_assert(mkret == 0);
+---
+>     assert(mkret == 0);
+86c46
+<     fd = -1;
+---
+>     int fd = -1;
+88c48
+<     buildName(name, pass, saFileId, curChunk);
+---
+>     buildName(name, pass, fileNum, curChunk);
+98,119c58
+<     return 0;
+< }
+< 
+< int SFile::close()
+< {
+<     ::close(fd);
+<     fd = -1;
+<     return 0;
+< }
+< 
+< int SFile::readFile(SFileHeader* header)
+< {
+<     ssize_t ioret = pread(fd, header, SFile::totalSize(), 0);   
+<     sv_assert(ioret == SFile::totalSize());
+<     return 0;
+< }
+< 
+< int SFile::writeFile(const SFileHeader* header)
+< {
+<     ssize_t ioret = pwrite(fd, header, SFile::totalSize(), 0);    
+<     sv_assert(ioret == SFile::totalSize());
+<     return 0;
+---
+>     return fd;
+129c68
+<         buildName(oldname, pass, saFileId, curChunk);
+---
+>         buildName(oldname, pass, fileNum, curChunk);
+143c82
+<         it->fileid = newFileNum;
+---
+>         it->fileNum = newFileNum;
+147c86
+<     saFileId = newFileNum;
+---
+>     fileNum = newFileNum;
+191c130
+< int SFile::buildName(char* name, int pass, fileid_t fileNum, int chunkNum)
+---
+> int SFile::buildName(char* name, int pass, int fileNum, int chunkNum)
+200c139
+< SFileIter::SFileIter(fileid_t in_file, int pass, int in_mode) : sfile(in_file, pass), mode(in_mode)
+---
+> SFileIter::SFileIter(SFile& in_file, int in_mode) : sfile(in_file), mode(in_mode)
+202,203c141,144
+<     SFile::allocBuffer(header, dataBuffer);
+<     header->numBlocks = 0;
+---
+>     nextOffset = 0; 
+>     wasWritten = false;
+>     dataBufferLen = CHUNKSIZE;
+>     dataBuffer = (char*) malloc(dataBufferLen);
+205c146,147
+<     sfile.open(mode, curChunk);
+---
+>     fd = sfile.open(mode, curChunk);
+>     assert(fd >= 0);
+211c153
+<     if (header->numBlocks)
+---
+>     if (wasWritten)
+214c156,157
+<         sfile.writeFile(header);
+---
+>         ssize_t writeSize = write(fd, dataBuffer, dataBufferLen);
+>         assert(writeSize == dataBufferLen);
+216,217c159,160
+<     sfile.close(); 
+<     free(header); 
+---
+>     close(fd); 
+>     free(dataBuffer); 
+222c165
+<     sv_assert(mode == O_RDONLY);
+---
+>     assert(mode == O_RDONLY);
+224c167
+<     if (header->numBlocks == 0)
+---
+>     if (nextOffset == 0)
+226c169,170
+<         sfile.readFile(header);
+---
+>         ssize_t ioret = read(fd, dataBuffer, dataBufferLen);    
+>         assert(ioret == dataBufferLen);
+228c172
+<     const char* retbuf = (const char*)(dataBuffer + SFile::headerSize() + (header->numBlocks * CACHESIZE));
+---
+>     const char* retbuf = (const char*)(dataBuffer + nextOffset);
+233,234c177,178
+<     header->numBlocks ++;
+<     if (header->numBlocks == SVConfig::Instance().getCacheBlocksPerStagingBlock())
+---
+>     nextOffset += CACHESIZE;
+>     if (nextOffset == dataBufferLen)
+236c180
+<         header->numBlocks = 0;
+---
+>         nextOffset = 0;
+238c182
+<         sfile.close();
+---
+>         close(fd);
+241c185,187
+<             sfile.open(mode, curChunk);
+---
+>             fd = sfile.open(mode, curChunk);
+>         else    
+>             fd = -1;
+244c190
+<     // sv_assert if indexIter is eof, then fd == -1
+---
+>     // assert if indexIter is eof, then fd == -1
+252c198
+<     if (header->numBlocks == SVConfig::Instance().getCacheBlocksPerStagingBlock())
+---
+>     if (nextOffset == dataBufferLen)
+254,256c200,202
+<         sfile.writeFile(header);
+< 
+<         header->numBlocks = 0;
+---
+>         ssize_t ioret = write(fd, dataBuffer, dataBufferLen);    
+>         assert(ioret == dataBufferLen);
+>         nextOffset = 0;
+258c204
+<         sfile.close();
+---
+>         close(fd);
+260c206
+<         sfile.open(mode, curChunk);
+---
+>         fd = sfile.open(mode, curChunk);
+262,263c208,209
+<     retBlk.offset = header->numBlocks;
+<     retBlk.fileid = sfile.saFileId;
+---
+>     retBlk.offset = nextOffset;
+>     retBlk.fileNum = sfile.fileNum;
+265c211
+<     memcpy(dataBuffer + (header->numBlocks * CACHESIZE), buf, CACHESIZE);
+---
+>     memcpy(dataBuffer + nextOffset, buf, CACHESIZE);
+271c217,218
+<     header->numBlocks ++;
+---
+>     nextOffset += CACHESIZE;
+>     wasWritten = true;
+289c236

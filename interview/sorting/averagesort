@@ -1,0 +1,6 @@
+
+TODO
+elements increase on average
+not perfectly sorted
+
+K-sorted if A[i] < A[i + k] for all i = 0..n-k

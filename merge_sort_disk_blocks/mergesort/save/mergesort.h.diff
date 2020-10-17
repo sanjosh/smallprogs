@@ -1,0 +1,100 @@
+6a7
+> #include <cctype>
+8c9,17
+< #include "Common.h"
+---
+> #include <stdio.h>
+> #include <assert.h>
+> #include <sys/stat.h>
+> #include <sys/types.h>
+> #include <errno.h>
+> #include <string.h>
+> #include <stdlib.h>
+> #include <stdint.h>
+> #include <fcntl.h>
+18,20c27,29
+<     vdiskoffset_t cacheblock;
+<     fileid_t fileid;
+<     vdiskoffset_t offset;
+---
+>     int cacheblock;
+>     int fileNum;
+>     int offset;
+25c34
+<     DiskBlk() { cacheblock = -1; fileid = -1; offset = -1;}
+---
+>     DiskBlk() { cacheblock = -1; fileNum = -1; offset = -1;}
+39c48
+<         sv_assert(memret == 0);
+---
+>         assert(memret == 0);
+47c56
+<             << ":file=" << me.fileid 
+---
+>             << ":file=" << me.fileNum 
+67,73d75
+< 
+< struct SFileHeader
+< {
+<     uint16_t numBlocks;
+<     vdiskoffset_t cacheBlockId[0];
+<     // C99 allows zero-sized arrays
+< };
+80c82
+<     fileid_t saFileId;
+---
+>     int fileNum;
+82d83
+< 
+84,87d84
+<     int fd;
+<     // add version_t snapId;
+<     // add vdiskid_t vDiskId;
+<     // add string fileName;
+91c88,90
+<     static int buildName(char* name, int pass, fileid_t fileNum, int chunkNum);
+---
+>     SFile(int in_fileNum, int in_pass);
+>     ~SFile();
+> 
+94,99d92
+<     static size_t headerSize();
+<     static int allocBuffer(SFileHeader*& header, char*& dataBlocks);
+<     static size_t totalSize();
+< 
+<     SFile(fileid_t in_fileNum, int in_pass);
+<     ~SFile();
+102,106d94
+<     int close();
+< 
+<     int readFile(SFileHeader* header);
+<     int writeFile(const SFileHeader* header);
+< 
+112a101
+>     static int buildName(char* name, int pass, int fileNum, int chunkNum);
+122d110
+< // iterator over sfile which caches blocks for read/write
+125c113,114
+<     SFile sfile;
+---
+>     SFile& sfile;
+>     int fd;
+129c118,119
+<     public:
+---
+>     bool wasWritten;
+>     off_t nextOffset;
+131d120
+<     SFileHeader* header;
+132a122,124
+>     size_t dataBufferLen; 
+> 
+>     public:
+136c128
+<     SFileIter(fileid_t in_file, int pass, int in_mode); // 4K block size as param?
+---
+>     SFileIter(SFile& in_file, int in_mode); // 4K block size as param?
+158a151
+> 
+162a156
+> void Smerge_nway(SFile* file[], int numFiles, SFile& outFile);

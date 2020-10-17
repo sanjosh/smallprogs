@@ -1,0 +1,26 @@
+
+Boyer-Moore
+KMP
+Factorization algo 
+Suffix tree
+Trie
+Burrows-Wheeler
+
+find substr & its anagram in longer string
+
+find palindromes in string
+edit distance
+
+rabin fingerprint
+regular expr search
+reverse words in string
+
+print all permutations of string
+eliminate duplicate char from str
+
+find if string is interleaving of 2 other strings
+
+reverse min number of elem to get lexicographically smaller string
+
+edit distance
+longest common subsequence

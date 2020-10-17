@@ -1,0 +1,20 @@
+
+if tree is right heavy
+    if tree right subtree is left heavy
+        double left
+    else
+        single left
+
+rotateRight(node n2)
+{
+    Node k = n2.left
+    n2.left = k.right
+    k.right = n2
+}
+
+doubleRotateRight(Node n3)
+{
+}
+
+
+

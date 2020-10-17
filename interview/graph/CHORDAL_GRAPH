@@ -1,0 +1,30 @@
+
+Linear-Time Counting Algorithms for Independent Sets in
+Chordal Graphs
+Yoshio Okamoto∗ Takeaki Uno† and Ryuhei Uehara
+
+
+A chordal graph is a graph in which every cycle of length at least four has a chord. 
+From the practical point of view, chordal graphs have numerous applications in, for example,
+sparse matrix computation (e.g., see Blair & Peyton [2]), relational databases [1], and computational biology
+[4]. Chordal graphs have been widely investigated, and they are sometimes called triangulated graphs, or rigid
+circuit graphs (see, e.g., Golumbic’s book [13, Epilogue 2004]). A chordal graph has various characterizations;
+for example, a chordal graph is an intersection graph of subtrees of a tree, and a graph is chordal if and only if it
+admits a special vertex ordering, called perfect elimination ordering [3]. Also, the class of chordal graphs forms a
+wide subclass of perfect graphs [13].
+
+It is known that many graph optimization problems can be solved in polynomial time for chordal graphs; to
+list a few of them, the maximum weighted clique problem, the maximum weighted independent set problem, the
+minimum coloring problem [12], the minimum maximal independent set problem [8]. There are also parallel algo-
+rithms to solve some of these problems efficiently [14]. However, relatively fewer problems have been studied for
+enumeration and counting in chordal graphs; the only algorithms we are aware of are the enumeration algorithms
+for all maximal cliques [11], all maximal independent sets [7, 16], all minimum separators and minimal separators
+[5], and all perfect elimination orderings [6].
+
+See Golumbic Algo Graph theory and perfect graphs
+
+Gavril Algorithms for Minimum Coloring, Maximum Clique, Minimum Covering by Cliques, and Maximum Independent Set of a Chordal Graph.
+Farber. Independent Domination in Chordal Graphs
+
+Brandstadt Graph Classes: A Survey.
+

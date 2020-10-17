@@ -1,0 +1,53 @@
+
+Cost of recomputation has to be minimized
+
+First do graph subdivision to create chordal graph
+Union-find data structures are more suited to the task than conventional edge lists and adj matrix
+Sparse subgraphs maintained
+Divide and conquer algos are better than conventional complete graph traversal algos
+
+
+========
+Problems
+MST
+
+Standard graph transform used by Frederickson
+First transform the graph G into a max-3-degree G
+Split each vertex of deg >3 into vertices v1..vd
+such that {v1..vd} are joined by loopy edges cycle graph
+and they individually connect to the original neighbours
+
+Frederickson gave three algo
+1) only uses clustering
+2) adds topological tree to each cluster
+3)
+
+=======
+Fredreciks Encyclopedia of Algorithms edited by Ming-Yang Kao 
+Eppstein - Sparsification
+Eppstein - Maintenance of MST
+Henzinger - Randomized fully dynamic
+Thorup : Near-optimal fully-dynamic graph connectivity
+
+Empirical Study of Dynamic Graph Algo : David Alberts
+http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.42.5954
+
+===============
+
+For querying graphs which are dynamically changing, use ambivalent data structures
+
+Frederickson - ambivalent data structures : partition graph into clusters and create topological tree.  Update (edge insert, delete, swap) can be accomplished in O(logN) time.
+
+Eppstein - sparsification : split graph into sparse subgraphs
+
+Monika Henzinger
+
+Frederickson 2] developed a data structure for maintaining a Minimum Span-
+ning Tree (MST) dynamically. The idea in his data structure is to partition the
+vertices set (of size m) to (m/z) clusters, each of size (z). Clusters are con-
+nected parts of the MST. The clusters themselves form a graph that can be further partitioned. Applying this composition hierarchically, we have a tree,
+called topological tree of G, that each level is a decomposition of the level above it.  
+
+Using this technique, Frederickson maintains a MST of general graph with
+O( m) time per update and O(log n) time per query. The variant for planar
+graphs achieves O(log 2 n) time per query

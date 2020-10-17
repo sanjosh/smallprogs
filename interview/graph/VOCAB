@@ -1,0 +1,204 @@
+
+http://en.wikipedia.org/wiki/Induced_subgraph#Subgraphs
+
+
+eccentricity(v) : max distance of v from any other
+diameter(G) : max eccentricity across all V
+radius(G) : min eccentricity across all V
+Girth?
+vertices of min eccentricity form center of G
+
+Order(G) : graph invariant - num of vertices
+Genus(G) : graph invariant - lowest genus of surface on which it can be embedded
+ChromaticNumber(G) : graph invariant 
+
+sum of degrees = 2.E
+num of vertices with odd degree is even
+degree sequence is graph invariant (i.e.isomorphic graphs) but does not uniquely identify graph
+
+k-edge connectivity : k edge-disjoint paths between x and y
+k-vertex connectivity : k vertex-disjoint paths between x and y
+vertex-connectivity : min number of vertices which disconnect G
+edge-connectivity : min number of edge which disconnect G
+vertex-conn(G) <= edge-conn(G) <= min-degree(G)
+vertex-transitive
+
+Graph problems become easier on a tree
+treewidth of graph & tree decomposition
+treewidth = 1 is a tree
+small numbers indicate graph is tree-like
+Determining tree width of graph is NP-hard
+Given graph of treewidth less than w, it is possible to produce TD of width less than 4w in poly time
+
+http://en.wikipedia.org/wiki/Tree_decomposition
+http://stackoverflow.com/questions/23519929/obtaining-a-tree-decomposition-from-an-elimination-ordering-and-chordal-graph
+
+Bramble
+
+Haven
+
+Hadwiger number : low number implies sparsity; atleast as large as chromatic number
+
+Chordal graph - poly time algos 
+Recognition, Coloring is polytime
+http://en.wikipedia.org/wiki/Chordal_graph
+
+Mycielskian construction
+=========
+Alg graph theory
+
+Eigenvalues
+Charpoly
+Eigenvector
+Laplacian : L = D-A where D=degree matrix
+Adj matrix
+
+isospectral need not be isomorphic
+
+num of zeroes in eigenvalue of Laplacian = num of connected components of G
+second smallest eigenvalue of L = algebraic connectivity (its greater than 0 if G is connected; higher is more connected)
+smallest non-zero eigenvalue = spectral gap
+
+==========
+Dominating set : IndepSet is also DominatingSet iff it is maximal
+IndepSet(G) = set of vertices no 2 of which are adjacent.
+
+max IndepSet = Clique in Complement(G)
+but clique can be solved in poly time in planar while indep set remains NP-hard for planar ! (wikipedia) 
+
+MaxIndepSet + MinVertexCover = Number of Vertices in Graph
+bcos indepset = no two vertices represent same edge
+vertex cover = every edge covered by atleast one vertex
+Complement(triangle-free(G)) = graph which is Claw-free 
+
+Chromatic Num >=  NumVertices(G)/IndepNumber(G)
+
+Vertex cover(G) = each edge incident on atleast one vertex
+Edge Cover(G) = each vertex incident on atleast one edge
+===========
+Claw- : Complete bipartite K1,3 (i.e. Star graph)
+===========
+
+
+Coloring 
+Lawler : graph can be 3-colored if the complement of one of its maximal indep set is bipartite.  this approach is used in coloring algo
+
+===========
+
+Covering and packing problems are dual to each other
+min set cover : max set matching
+min vertex cover : max indep set
+min edge cover : max matching (smallest edge cover can be found in poly time but smallest vertex cover is NP-hard)
+
+
+matching(G) = indep set(Line graph(G))
+edge chromatic(G) = vertex chromatic(Line Graph(G))
+
+===========
+Factor
+k-factor : k-regular spanning subgraph
+1-factor is perfect matching
+===========
+Complement(G)
+
+==========
+Spanning subgraph (G)
+
+Min Spanning Tree:
+number of spanning trees calc by Laplacian and Kirchoff theorem
+========
+
+Interval Graph 
+Comparability Graph
+Permutation graph
+
+===========
+important to subdivide graph so that 
+Triangulations : every vertex has deg at most 3
+
+Graph contains triangle iff its adj & square of adj matrix contain nonzero entries in same cell;
+
+Graph is triangle free iff Trace(A^3) = 0
+
+http://en.wikipedia.org/wiki/Triangle-free_graph
+
+
+Cartesian product of graphs
+=========
+
+Perfect graph : A perfect graph is a graph G such that for every induced subgraph of G, the clique number equals the chromatic number
+
+In all graphs, the clique number provides a lower bound for the chromatic number, as all vertices in a clique must be assigned distinct colors in any proper coloring. The perfect graphs are those for which this lower bound is tight, not just in the graph itself but in all of its induced subgraphs. For graphs that are not perfect, the chromatic number and clique number can differ; for instance, a cycle of length five requires three colors in any proper coloring but its largest clique has size two.
+
+In all perfect graphs, the graph coloring problem, maximum clique problem, and maximum independent set problem can all be solved in polynomial time (Grötschel, Lovász & Schrijver 1988). The algorithm for the general case involves the use of the ellipsoid method for linear programming, but more efficient combinatorial algorithms are known for many special cases.
+
+=======
+
+Chromatic number
+Complete graph  : trivial
+Bipartite : easy
+Perfect : same as clique number (in other cases, it could be more)
+
+Perfect elimination ordering => easy to find clique number
+If G has PEO, so does all its induced subgraphs
+if G has PEO, G is perfect
+
+===========
+
+Planar graph results:
+every planar graph has all vertex of degree <=5 
+planar embedding has vertex of deg atmost 3 or a face of degree 3
+V + F - E =2 for connected plane
+
+Any G which contains K5 or K3,3 is non-planar
+
+Four Color theorem for planar G
+
+===========
+Regular graph : all degrees same
+k-regular : every vertex has same degree k
+
+========
+Complete graphs
+
+Clique problem : find complete subgraphs (cliques) in a graph
+
+==========
+Strongly connected component : slightly weaker than clique
+every vertex in directed graph reachable by all other nodes in subgraph
+==========
+Dual (G)
+
+=============
+
+Petersen graph
+
+==========
+
+Subdivision of graph : add vertices of degree 2 each of which splits an edge
+Graph is planar <=> every subdivision is planar
+
+Kuratowski : G is planar iff G contains no subdivision of K5 or K3,3 as a subgraph
+
+========
+
+Graph Minor : formed by deleting E and V and contracting E
+
+========
+
+http://en.wikipedia.org/wiki/Graph_realization_problem
+
+http://en.wikipedia.org/wiki/Havel-Hakimi_Algorithm
+
+============
+Subgraph
+Supergraph
+Graph sandwich problem : 
+========
+
+Expander graph : sparse graph with strong connectivity
+
+===========
+
+Line graph
+

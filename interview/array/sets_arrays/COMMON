@@ -1,0 +1,88 @@
+
+use stack of open problems  - as in max area of histogram - see karumanchi chap5,prob 24
+
+(Karumanchi page 275 notes)
+1) use XOR
+1) use Hash table
+1) use Dutch National flag (maintain 2 ptrs)
+1) use 2 passes 
+1) traverse from right or left
+1) use transitivity
+1) use stack or tree or hash
+1) keep array of prefix sums (left and right) - and subtract
+1) negation of each A[i] elem
+1) addition of size to each A[i] elem
+1) swapping A[i] and A[A[i]]
+1) make functions over the numbers - Newton symmetric poly
+1) compute hash on f([A[i])
+1) Randomized algo select arbitrary elements
+1) Divide Array into bins - Pigeonhole - to find duplicate elems 
+1) Binary search / Fibonnaci search
+1) swap using (x + y * sz)/sz = y and (x + y * sz)%sz = x
+
+1) Inversion table uniquely determines permutation (Marshall Hall in Knuth vol 3)
+
+=======================================
+to find local maxima in array - 
+    use "peak detection in time series"  - compare a[i] with a[i-1] and a[i+1]
+    using wavelet
+    detect zero crossings
+
+compute sign array
+    sign[i] = a[i] - a[i+1]
+    2 3 4 5 3 2 1
+    - - - - + + +
+
+compute derivative
+    der[i] = a[i+1] - a[i]/unit(1)
+    1 1 1 -1 -1 -1 
+
+    2nd derivative
+    2der[i] 
+    0 0 0 -2 0 0 
+    if 2der < 0, then f has local maxima
+    if 2der > 0, then f has local minima
+
+moving average
+    oldave = oldave + (newnumber - oldaverage/numexecs)
+moving average is a filter
+============
+
+max XOR sum in subarray:  trie
+
+
+===============
+
+RMQ
+for any computation (min, gcd, lcm) over ranges
+1) precompute 2D array 
+2) segment tree
+3) precompute over square root decomposition
+4) keep sparse table over for each [i, i + 2^j]  for all j < log(n)
+
+--------------
+
+max element to right of each element - use STACK
+http://www.geeksforgeeks.org/next-greater-element/
+
+http://www.geeksforgeeks.org/number-nges-right/
+
+stock span problem - use Stack
+
+http://www.geeksforgeeks.org/replace-every-element-with-the-greatest-on-right-side/
+
+http://www.geeksforgeeks.org/longest-subarray-not-k-distinct-elements/
+
+==========
+
+inversions
+
+http://www.geeksforgeeks.org/count-inversions-of-size-three-in-a-give-array/
+
+count of smaller elements to right  of each element - use BST
+http://www.geeksforgeeks.org/count-smaller-elements-on-right-side/
+
+http://www.geeksforgeeks.org/count-inversions-in-an-array-set-2-using-self-balancing-bst/
+
+every node of Fenwick stores sum of subset of first n, where n is power of 2
+parent = remove last set bit = index + (index & -index)

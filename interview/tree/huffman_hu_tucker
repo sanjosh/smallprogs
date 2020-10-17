@@ -1,0 +1,29 @@
+
+
+Huffman
+
+data[] = { ... }
+freq[] = { ... } 1 1 3 4 6 10  
+
+http://www.geeksforgeeks.org/greedy-algorithms-set-3-huffman-coding/
+
+    Create a leaf node for each symbol and add it to the priority queue.
+    While there is more than one node in the queue:
+        Remove the two nodes of highest priority (lowest probability) from the queue
+        Create a new internal node with these two nodes as children and with probability equal to the sum of the two nodes' probabilities.
+        Add the new node to the queue.
+    The remaining node is the root node and the tree is complete.
+
+If the symbols are sorted by probability, there is a linear-time (O(n)) method to create a Huffman tree using two queues, the first one containing the initial weights (along with pointers to the associated leaves), and combined weights (along with pointers to the trees) being put in the back of the second queue. This assures that the lowest weight is always kept at the front of one of the two queues:
+
+    Start with as many leaves as there are symbols.
+    Enqueue all leaf nodes into the first queue (by probability in increasing order so that the least likely item is in the head of the queue).
+    While there is more than one node in the queues:
+        Dequeue the two nodes with the lowest weight by examining the fronts of both queues.
+        Create a new internal node, with the two just-removed nodes as children (either node can be either child) and the sum of their weights as the new weight.
+        Enqueue the new node into the rear of the second queue.
+    The remaining node is the root node; the tree has now been generated.
+
+
+===============
+Hu-Tucker
