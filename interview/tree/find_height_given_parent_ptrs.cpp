@@ -1,6 +1,8 @@
 /*
 
-A given array represents a tree in such a way that the array value gives the parent node of that particular index.The value of the root node index would always be -1.Find the height of the tree.
+A given array represents a tree in such a way that the array value gives the parent node of that particular index.
+The value of the root node index would always be -1.
+Find the height of the tree.
 
     Ex: Array: 1 5 5 2 2 -1 3
          5 

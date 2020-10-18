@@ -2,7 +2,11 @@
 http://www.geeksforgeeks.org/transform-bst-sum-tree/
 
 Method 2 (Using only one traversal)
-By leveraging the fact that the tree is a BST, we can find an O(n) solution. The idea is to traverse BST in reverse inorder. Reverse inorder traversal of a BST gives us keys in decreasing order. Before visiting a node, we visit all greater nodes of that node. While traversing we keep track of sum of keys which is the sum of all the keys greater than the key of current node.
+By leveraging the fact that the tree is a BST, we can find an O(n) solution. 
+The idea is to traverse BST in reverse inorder. 
+Reverse inorder traversal of a BST gives us keys in decreasing order. 
+Before visiting a node, we visit all greater nodes of that node. 
+While traversing we keep track of sum of keys which is the sum of all the keys greater than the key of current node.
 // C++ program to transform a BST to sum tree
 #include<iostream>
 using namespace std;

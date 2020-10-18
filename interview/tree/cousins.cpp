@@ -18,7 +18,9 @@ Say two nodes are 7 and 5, result is FALSE.
 
 We strongly recommend to minimize the browser and try this yourself first.
 
-The idea is to find level of one of the nodes. Using the found level, check if ‘a’ and ‘b’ are at this level. If ‘a’ and ‘b’ are at given level, then finally check if they are not children of same parent.
+The idea is to find level of one of the nodes. 
+Using the found level, check if ‘a’ and ‘b’ are at this level. 
+If ‘a’ and ‘b’ are at given level, then finally check if they are not children of same parent.
 
 Following is C implementation of the above approach.
 // C program to check if two Nodes in a binary tree are cousins

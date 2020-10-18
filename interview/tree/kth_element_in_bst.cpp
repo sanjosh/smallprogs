@@ -7,7 +7,10 @@ For example, in the following BST, if k = 3, then output should be 10, and if k 
 
 Method 1: Using Inorder Traversal.
 
-Inorder traversal of BST retrieves elements of tree in the sorted order. The inorder traversal uses stack to store to be explored nodes of tree (threaded tree avoids stack and recursion for traversal, see this post). The idea is to keep track of popped elements which participate in the order statics. Hypothetical algorithm is provided below,
+Inorder traversal of BST retrieves elements of tree in the sorted order. 
+The inorder traversal uses stack to store to be explored nodes of tree (threaded tree avoids stack and recursion for traversal, see this post). 
+The idea is to keep track of popped elements which participate in the order statics. 
+Hypothetical algorithm is provided below,
 
 Time complexity: O(n) where n is total nodes in tree..
 
