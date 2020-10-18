@@ -1,0 +1,28 @@
+
+Use Base-62 numbers [62 bcos {a-z, A-Z, 0-9}]
+
+assign incrementing integer to each new URL
+====
+
+Database has 3 col
+
+long URL : auto-increment numeric field
+
+=========
+
+hashDigits = []
+dividend = ID
+remainder = 0
+ 
+while(dividend > 0)
+  remainder = modulo(dividend, 62)
+  dividend = divide(dividend, 62)
+  hashDigits.prepend(remainder)
+endwhile
+
+Given long URL, auto-increment the last field
+then convert number to base-62 [62 bcos {a-z, A-Z, 0-9}]
+this becomes the short URL
+insert into table "number, long URL"
+
+

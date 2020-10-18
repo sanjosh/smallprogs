@@ -1,0 +1,6 @@
+
+mx + ny = d is solvable iff gcd(m,n) div d
+
+http://www.geeksforgeeks.org/two-water-jug-puzzle/
+
+http://www.geeksforgeeks.org/water-jug-problem-using-bfs/
