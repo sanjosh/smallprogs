@@ -1,0 +1,96 @@
+
+http://stackoverflow.com/questions/17466218/what-are-the-differences-between-segment-trees-interval-trees-binary-indexed-t?rq=1
+
+http://www.geeksforgeeks.org/segment-tree-set-1-range-minimum-query/
+
+Segment tree stores intervals, and optimized for "which of these intervals contains a given point" queries.
+Interval tree stores intervals as well, but optimized for "which of these intervals overlap with a given interval" queries. It can also be used for point queries - similar to segment tree.
+Range tree stores points, and optimized for "which points fall within a given interval" queries.
+Binary indexed tree stores items-count per index, and optimized for "how many items are there between index m and n" queries.
+Performance / Space consumption for one dimension:
+
+Segment tree - O(n logn) preprocessing time, O(k+logn) query time, O(n logn) space
+Interval tree - O(n logn) preprocessing time, O(k+logn) query time, O(n) space
+Range tree - O(n logn) preprocessing time, O(k+logn) query time, O(n) space
+Binary Indexed tree - O(n logn) preprocessing time, O(logn) query time, O(n) space
+
+===
+
+Approaches:
+1) Quad Tree, R-tree, Octree
+2) k-d tree
+3) bitmap rep/Sparse matrix algo ?
+4) latitude and longitude index
+5) transform spherical to another domain - metric preserving
+	http://math.stackexchange.com/questions/1356097/mapping-sphere-surface-to-a-vector-space-such-that-distances-are-preserved
+6) Locality preserving hash
+7) Geohash (hilbert curve vs Z-curve)
+
+hyperdim hash?
+semantic hash for documents
+spectral hash
+
+====
+
+one degree longitude difference differs greatly depending on the latitude. A longitude 1° from the equator is 111.321 km, but longitude 1° from latitude 60° is only 55.802 km.
+
+Geohash 
+Scheme : subdivide horizontally and vertically, represent each bit as a 0 or 1.
+Disadvantage : The nearest point can have wildly different Geohash value, if the location is close to a grid-square boundary.   There is an algo for calculating the geohash values of the 8 surrounding grid-squares of a given grid square,
+
+http://www.bigfastblog.com/geohash-intro
+
+
+PostGIS standard
+========
+
+http://www.jandrewrogers.com/2015/03/02/geospatial-databases-are-hard/
+SpaceCurve
+
+https://news.ycombinator.com/item?id=9206989
+
+Issues by Andrew Rogers (SpaceCurve)
+1) Resolution
+2) Sharding
+3) Approx for transcendental func
+4) Polygon intersecc
+5) Spatial joins across different data sources (say, weather and social media) 
+
+https://en.wikipedia.org/wiki/Vincenty%27s_formulae
+
+Meeus approximation
+http://www.abecedarical.com/zenosamples/zs_great_circle_route.html
+
+========
+
+Proximity search
+
+locality sensitive hashing : 
+1) maximize probability of collision for similar items.  
+2) Used for spam detection.
+3) actual hash = concat of many primitive hash func
+
+data dependent hash
+1) Spherical LSH
+
+how to do range scan
+
+=======
+
+Polygon intersection problem
+
+1) bitmap rep - can do AND op 
+2) decompose into triangles (like 3-regular graph)
+3) Quantization - find nearest triangle
+
+==========
+
+Ways to tackle a problem
+1) Exact vs Approx algo
+2) Combination of algo methods
+3) Transformation of problem domain
+
+Ease of expanding given scheme into Distributed system 
+Can the data be cached, sharded, 
+Can state be easily recovered on failure (checkpoint/snapshot)
+
