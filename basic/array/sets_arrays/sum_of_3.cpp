@@ -1,5 +1,7 @@
 
- When the integers are in the range [-u, \dots, u], 3SUM can be solved in O(n + u\log u) time by representing the input set S as a bit vector, computing the set S+S of all pairwise sums as a discrete convolution using the Fast Fourier transform, and finally comparing this set to -S.
+ When the integers are in the range [-u, \dots, u], 3SUM can be solved in O(n + u\log u) time 
+ by representing the input set S as a bit vector, computing the set S+S of all pairwise 
+ sums as a discrete convolution using the Fast Fourier transform, and finally comparing this set to -S.
 
 From WIkipedia
 =====================
