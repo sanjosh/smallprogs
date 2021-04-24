@@ -1,9 +1,10 @@
 
 * write some examples
-* write out all (corner) cases to handle
+* write out all (corner) cases to handle [ 0, 1, element equality, max length, max element ]
 * write psuedo-code
 * write code
 
+* identify decomposition into smaller parts
 * identify loop invariant
 
 * sort
@@ -13,7 +14,7 @@
 * use swap, XOR or bit op
 * exploit limited range of input values (van emde boas)
 * augmented data structure (fenwick)
-* auxiliary data structure (stack, queue, tree)
+* auxiliary data structure (stack, queue, RMQ, segment tree, heap, fully sorted tree)
 * bound the solution
 * use symmetry 
 * change radix

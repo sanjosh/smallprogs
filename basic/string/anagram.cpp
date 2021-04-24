@@ -59,6 +59,15 @@ uint64_t ElemSymmetricPoly(const string& s, int k)
     return sum;
 }
 
+/*
+ https://twitter.com/fermatslibrary/status/1385957963429515266
+ map each char of alphabet to prime
+ multiply all char in string
+ if product is same, they are anagrams
+ */
+
+int64_t MapToPrime(const string& s, int k);
+
 int main(int argc, char* argv[])
 {
     if (argc != 3) exit(1);

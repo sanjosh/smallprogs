@@ -86,3 +86,19 @@ http://www.geeksforgeeks.org/count-inversions-in-an-array-set-2-using-self-balan
 
 every node of Fenwick stores sum of subset of first n, where n is power of 2
 parent = remove last set bit = index + (index & -index)
+
+========
+
+problems around smallest element in array
+1. next on right : no intersect between consecutive nearest(i), hence use stack
+2. farthest on right : there is intersect between consecutive nearest(i), hence use range array
+3. count of smallest to right (inversion table) : put in tree or use merge sort
+4. count of elem with at least one smaller to left and right : use stack + count
+
+compute over fixed length moving window 
+1. drop first char in window
+
+smallest window in which all elements occur
+1. detect first window
+2. if start of window changes, do update 
+3. keep smallest window so far
