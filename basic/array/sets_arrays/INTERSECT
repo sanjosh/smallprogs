@@ -6,3 +6,19 @@ x1 < y2 && x2 < y1
 
 or 
 return max(x1, x2) <= min(y1, y2)
+
+CASE 1
+x1   y1  
+   x2   y2
+
+CASE 2
+x1          y1  
+   x2   y2
+
+CASE 3
+  x1   y1  
+x2   y2
+
+Non-Intersect
+x1 y1 
+     x2 y2

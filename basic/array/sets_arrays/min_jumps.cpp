@@ -2,6 +2,8 @@
 
 http://www.geeksforgeeks.org/minimum-number-of-jumps-to-reach-end-of-a-given-array/
 
+https://www.geeksforgeeks.org/minimum-number-jumps-reach-endset-2on-solution/?ref=rp
+
 TODO
 
 Vinisha Vyasa Stackoverflow

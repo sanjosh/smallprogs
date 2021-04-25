@@ -102,3 +102,20 @@ smallest window in which all elements occur
 1. detect first window
 2. if start of window changes, do update 
 3. keep smallest window so far
+
+==========
+
+SUM problems in unsorted
+
+sum of any k = M where M is external or internal element of array
+sum of any k < M where M is external or internal 
+
+where elem is pos & negative
+
+use
+1. decrement any elem > sum/2 as elem = elem-sum/2; then find duplicates
+1. hash of triplet
+2. trie of triplet in sorted order
+3. tree of sums of triplet
+
+sum of pair = sum of another pair in array

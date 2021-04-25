@@ -1,4 +1,5 @@
 
+/*
 http://www.geeksforgeeks.org/find-number-of-triangles-possible/
 
 Given an unsorted array of positive integers. Find the number of triangles that can be formed with three different array elements 
@@ -9,4 +10,18 @@ For example, if the input array is {4, 6, 3, 7}, the output should be 3.
 
 There are three triangles possible {3, 4, 6}, {4, 6, 7} and {3, 6, 7}. Note that {3, 4, 7} is not a possible triangle.
 
+Approach 1
 
+tree will have n(n-1)/2 elements
+
+for each sorted pair of numbers
+    put sum into tree
+for each number greater than min1 + min2
+    return all pairs greater than number
+
+Approach 2
+
+for all sorted pair (A, B)
+    find all numbers in range [B+1, A+B]
+
+*/
