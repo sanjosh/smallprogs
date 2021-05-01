@@ -1,0 +1,8 @@
+
+Optimal substructure
+
+As rrenaud (and Wikipedia) say, 
+    top-down is memoization, 
+    bottom-up is dynamic programming.
+
+

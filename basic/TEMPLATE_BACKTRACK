@@ -1,0 +1,87 @@
+
+Find symmetry in soln set to restrict the generated set
+
+(from Horowitz Sahni)
+
+================
+
+Iterative Backtrack
+
+IBacktrack(n)
+{
+    k = 1
+    while (k neq 0)
+    {
+        if there remains untried x[k] in T(x[1]...x[k-1])
+            and Bk(x[1]...x[k]) is true
+        {
+            if (x[1]...x[k]) is a path to answer node
+                then write x[1..k]
+            k = k+1 // consider next set
+        }
+        else
+            k = k-1 // backtrack to prev set
+    }
+}
+
+Non-recursive backtracking
+
+boolean solve(Node n) {
+    put node n on the stack;
+    while the stack is not empty {
+        if the node at the top of the stack is a leaf {
+            if it is a goal node, return true
+            else pop it off the stack
+        }
+        else {
+            if the node at the top of the stack has untried children
+                push the next untried child onto the stack
+            else pop the node off the stack
+
+    }
+    return false
+}
+
+=========
+
+Complexity depends on 4 factors
+
+1) time to generate next x_k
+2) number of x_k satisfying explicit constraints
+3) time for bounding func B_k
+4) number of x_k satisfying B_k
+
+Assuming static bounding func, the number of nodes at
+level 2 is m1
+level 3 is m1.m2
+
+level i+1 is m1.m2...m_i
+
+hence total num of nodes generated = 1 + m1 + m1.m2 + m1.m2.m3 + ...
+
+
+===========
+
+depth first search 
+    with current state passed on stack
+
+bool Solve(configuration conf)
+{
+    // BASE CASE
+    if (no more choices)
+        return (conf is goal state);
+
+    for (all available choices) 
+    {
+        try one choice c;
+        // recursively solve after making choice
+        ok = Solve(conf with choice c made);
+        if (ok)
+            return true;
+        else
+            unmake choice c;
+    }
+		return false
+}
+ret
+

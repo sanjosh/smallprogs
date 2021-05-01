@@ -1,0 +1,5 @@
+
+Global var to maintain cumulative
+Stack/Local variables at each call used to maintain local max/min
+
+Tree : remember pred/succ are not same as left/right

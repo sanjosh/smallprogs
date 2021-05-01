@@ -1,0 +1,33 @@
+
+
+Horowitz Sahni p 211
+
+Greedy(a, n) / a[1:n] contains the n inputs
+{
+    sol = 0
+    for i = 1 to n
+    {
+        x = Select(a)
+        if feasible(solution, n) 
+        {
+            solution = Union(solution, n) 
+        }
+    }
+    return solution
+}
+=============
+
+Cormen
+
+Most Greedy algo (not all) can be defined by matroid structure
+M (S, I) where S = finite set and I = indep subsets of S
+
+Greedy(M, w)
+{
+    A=null
+    sort M.S into decreasing order by weight
+    for each x n M.S, taken in decreasing order of weight
+        if A + {x} belongs to M.I
+            A = A + {x}
+    return A
+}

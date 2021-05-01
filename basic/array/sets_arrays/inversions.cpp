@@ -4,7 +4,16 @@ Count inversions using merge sort
 
 http://www.geeksforgeeks.org/counting-inversions/
 
- Suppose we know the number of inversions in the left half and right half of the array (let be inv1 and inv2), what kinds of inversions are not accounted for in Inv1 + Inv2? The answer is – the inversions we have to count during the merge step. Therefore, to get number of inversions, we need to add number of inversions in left subarray, right subarray and merge(). 
+ Suppose we know the number of inversions in the left half and right half of the array (let be inv1 and inv2), 
+ what kinds of inversions are not accounted for in Inv1 + Inv2? The answer is – the inversions we have to 
+ count during the merge step. Therefore, to get number of inversions, we need to add number of inversions in 
+ left subarray, right subarray and merge(). 
+
+ https://www.geeksforgeeks.org/count-inversions-in-an-array-set-2-using-self-balancing-bst/
+
+ https://www.geeksforgeeks.org/counting-inversions-using-set-in-c-stl/
+
+ https://www.geeksforgeeks.org/count-inversions-array-set-3-using-bit/
 
 */
 

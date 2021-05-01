@@ -1,0 +1,26 @@
+
+Horowitz Sahni - page 138
+
+DivideAndConquer(P)
+{
+    if small(P) return soln(P)
+    else
+    {   
+        divide P into smaller instances P1...Pk
+        apply DivideAndConquer to each sub-problem
+        return Combine [DivideAndConquer(P1),...,DivideAndConquer(Pk)]
+    }
+}
+
+for divide and conquer algo
+
+T(n) = a.T(n/b) + C(n) + D(n)
+
+soln is divided into "a" subproblems of size "n/b"
+C(n) = cost of combining the subprobs
+D(n) = cost of dividing the size "n" prob
+T(n/b) = cost of computing n/b soln
+
+Master Theorem by - Cormen Leiserson Rivest
+
+T(n) = Theta(n.logn)
