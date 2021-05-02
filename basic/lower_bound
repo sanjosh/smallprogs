@@ -1,0 +1,11 @@
+
+(horowitz sahni)
+
+Theta(n)
+
+more complicated bcos lower bounds hold across all algorithms
+
+sorting and searching : use comparison tree
+oracle/adversary arguments (worst case input)
+reduce it to a known problem
+    - from convex hull to sorting

@@ -1,0 +1,54 @@
+
+
+Binomial : lattice paths 
+
+Catalan number : num of lattice paths which do not rise above diagonal
+    num of triangulations of convex poly
+    num of binary trees with n+1 leaves
+    num of parentheses (() ())
+
+Eulerian number <n/k> : num of n-len sequences with k ascents/descents
+
+Stirling num first kind : num of perm of n with k cycles
+
+Stirling num second kind : num of ways to partition n elem into k sets
+
+===============
+
+n-th Harmonic number Hn = Sum (1/i) from i=0..n
+
+
+==========
+
+
+inversions : pair(i,j) where entries in perm are in opposite order.
+to bring perm with k inversions into order requires k transpositions
+bubble sort and insertion sort are transposition based algo
+
+number of perm of n with k inversions = Mahonian numbero
+
+How to number permutations - 
+
+http://en.wikipedia.org/wiki/Permutation
+
+==========
+
+Robinson Schensted Knuth correspondence
+
+From permutation => build Pair of Young tableau (P, Q)
+longest incr subseq(perm) = length of first row of P
+longest decr subseq(perm) = length of first col of P
+
+Inversion table uniquely defines permutaton
+
+Index(perm) = sum of j such that a[j] > a[j+1]
+
+==========
+
+Count Inversions of array
+= use Balanced tree
+= use Merge sort
+
+===========
+
+binomial tree
