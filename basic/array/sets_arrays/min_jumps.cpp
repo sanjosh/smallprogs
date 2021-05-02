@@ -4,9 +4,8 @@ http://www.geeksforgeeks.org/minimum-number-of-jumps-to-reach-end-of-a-given-arr
 
 https://www.geeksforgeeks.org/minimum-number-jumps-reach-endset-2on-solution/?ref=rp
 
-TODO
-
 Vinisha Vyasa Stackoverflow
+https://stackoverflow.com/questions/23301358/linear-time-algorithm-for-minimum-number-of-jumps-required-to-reach-end
 */
 
 #include <stdio.h>

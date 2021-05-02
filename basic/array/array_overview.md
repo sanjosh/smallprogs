@@ -121,26 +121,6 @@ https://www.geeksforgeeks.org/partition-a-set-into-two-subsets-such-that-the-dif
 -----------
 
 
-SEQUENCES
-
-longest bitonic subsequence
-
-https://www.geeksforgeeks.org/printing-longest-bitonic-subsequence/
-
-longest common subsequence
-
-https://www.geeksforgeeks.org/longest-common-subsequence-dp-using-memoization/
-
-max sum subsequence with at least k distinct - 
-http://www.geeksforgeeks.org/maximum-sum-subsequence-least-k-distant-elements/
-
-https://www.geeksforgeeks.org/the-stock-span-problem/
-
-longest increasing subsequence
-https://www.geeksforgeeks.org/longest-increasing-subsequence-dp-3/
-
-https://www.geeksforgeeks.org/longest-monotonically-increasing-subsequence-size-n-log-n/
-
 -----------------
 
 edit distance

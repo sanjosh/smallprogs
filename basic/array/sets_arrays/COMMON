@@ -62,15 +62,6 @@ for any computation (min, gcd, lcm) over ranges
 
 --------------
 
-max element to right of each element - use STACK
-
-http://www.geeksforgeeks.org/next-greater-element/
-
-http://www.geeksforgeeks.org/number-nges-right/
-
-
-http://www.geeksforgeeks.org/replace-every-element-with-the-greatest-on-right-side/
-
 http://www.geeksforgeeks.org/longest-subarray-not-k-distinct-elements/
 
 ==========
@@ -95,6 +86,12 @@ problems around smallest element in array
 3. count of smallest to right (inversion table) : put in tree or use merge sort
 4. count of elem with at least one smaller to left and right : use stack + count
 
+max element to right of each element - use STACK
+
+http://www.geeksforgeeks.org/next-greater-element/
+http://www.geeksforgeeks.org/number-nges-right/
+http://www.geeksforgeeks.org/replace-every-element-with-the-greatest-on-right-side/
+
 compute over fixed length moving window 
 1. drop first char in window
 
@@ -102,11 +99,6 @@ smallest window in which all elements occur
 1. detect first window
 2. if start of window changes, do update 
 3. keep smallest window so far
-
-stock span problem 
-1. contiguous array which is less than current element (stack)
-
-https://www.geeksforgeeks.org/the-stock-span-problem/
 
 ==========
 
@@ -132,10 +124,12 @@ subarray contiguous
 1. max sum (kadane)
 2. max sum modulo
 3. rotated array
-4. has negative
+4. if it has negative (cormen rivest)
 5. rainwater trapped between two elements
 
 https://www.geeksforgeeks.org/maximum-subarray-sum-using-divide-and-conquer-algorithm/
+
+cormen rivest
 
 
 ============
@@ -144,3 +138,55 @@ distance or window problems
 
 1. min distance between min & max element
 1. max distance between same element
+
+======
+
+SEQUENCE
+
+stock span problem 
+1. contiguous array which is less than current element (stack)
+
+https://www.geeksforgeeks.org/the-stock-span-problem/
+
+----------
+
+longest bitonic subsequence
+
+https://www.geeksforgeeks.org/printing-longest-bitonic-subsequence/
+
+https://www.geeksforgeeks.org/longest-bitonic-subsequence-dp-15/
+
+-----------
+
+Longest Increasing Subsequence (LIS)
+
+https://www.geeksforgeeks.org/longest-common-subsequence-dp-using-memoization/
+
+https://www.geeksforgeeks.org/longest-increasing-subsequence-dp-3/
+
+https://www.geeksforgeeks.org/longest-monotonically-increasing-subsequence-size-n-log-n/
+
+-----------
+
+Max Sum subsequence with at least k distinct -
+
+http://www.geeksforgeeks.org/maximum-sum-subsequence-least-k-distant-elements/
+
+-----
+
+Min jumps to end of array
+
+snake ladder
+
+http://www.geeksforgeeks.org/minimum-number-of-jumps-to-reach-end-of-a-given-array/
+
+https://www.geeksforgeeks.org/minimum-number-jumps-reach-endset-2on-solution/?ref=rp
+
+https://stackoverflow.com/questions/33227584/shortest-path-through-an-array-of-max-jump-lengths?rq=1
+
+https://stackoverflow.com/questions/59335693/minimum-number-of-jumps-to-reach-end-of-the-array-with-sequence-using-recursion?rq=1
+
+https://stackoverflow.com/questions/23301358/linear-time-algorithm-for-minimum-number-of-jumps-required-to-reach-end
+
+----
+

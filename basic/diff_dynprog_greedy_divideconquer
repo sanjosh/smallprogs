@@ -1,0 +1,12 @@
+
+(Cormen Rivest)
+greedy : first makes a greedy choice and then solve subprob
+dynprog : first finds optimal soln to subprob 
+
+==============
+
+dynprog has overlapping subproblems which require memoization
+divide and conquer generates independent subproblems
+
+backtracking can reach an invalid soln
+
