@@ -3,6 +3,8 @@
 
 /*
  * generate combinations C(n, r)
+
+ * same as path between diagonals in a square matrix (0 indicating go right, 1 indicating go up)
  */
 
 int n = 5;
