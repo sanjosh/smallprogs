@@ -1,0 +1,55 @@
+
+young tableau - LIS
+
+inversions with AVL tree
+
+========
+
+tree
+serialize it
+iterative method
+Morris traversal
+threaded binary tree
+huffman
+avl tree
+trie
+
+http://www.geeksforgeeks.org/binary-tree-data-structure/
+http://www.geeksforgeeks.org/print-nodes-distance-k-given-node-binary-tree/
+
+http://www.geeksforgeeks.org/avl-tree-set-1-insertion/
+http://www.geeksforgeeks.org/clone-binary-tree-random-pointers/
+=======
+
+string - levenhstein
+
+http://www.geeksforgeeks.org/string-data-structure/
+http://www.geeksforgeeks.org/number-distinct-permutation-string-can/
+http://www.geeksforgeeks.org/dynamic-programming-set-28-minimum-insertions-to-form-a-palindrome/
+http://www.geeksforgeeks.org/maximum-length-prefix-one-string-occurs-subsequence-another/
+http://www.geeksforgeeks.org/count-distinct-subsequences/
+http://www.geeksforgeeks.org/printing-longest-common-subsequence/
+
+=========
+
+array - rainfall problem
+
+elem = min(max_left, max_right) - arr[i]
+
+http://www.geeksforgeeks.org/trapping-rain-water/
+
+http://www.geeksforgeeks.org/partition-a-set-into-two-subsets-such-that-the-difference-of-subset-sums-is-minimum/
+
+http://www.geeksforgeeks.org/write-a-c-program-to-print-all-permutations-of-a-given-string/
+http://www.geeksforgeeks.org/heaps-algorithm-for-generating-permutations/
+http://www.geeksforgeeks.org/lexicographic-permutations-of-string/
+http://www.geeksforgeeks.org/print-all-permutations-with-repetition-of-characters/
+
+========
+
+linked list
+
+http://www.geeksforgeeks.org/detect-and-remove-loop-in-a-linked-list/
+
+http://www.geeksforgeeks.org/merge-sort-for-linked-list/
+
