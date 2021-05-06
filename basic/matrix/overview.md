@@ -21,6 +21,8 @@ row with max 1's
 
 islands in matrix
 http://www.geeksforgeeks.org/count-number-islands-every-island-separated-line/
+https://www.geeksforgeeks.org/find-the-number-of-islands-set-2-using-disjoint-set/
+https://www.geeksforgeeks.org/find-number-of-islands/
 
 path in matrix
 http://www.geeksforgeeks.org/find-the-longest-path-in-a-matrix-with-given-constraints/

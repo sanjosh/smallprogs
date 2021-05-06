@@ -4,6 +4,10 @@ TODO
 
 http://www.geeksforgeeks.org/backttracking-set-4-subset-sum/
 
+https://www.geeksforgeeks.org/subset-sum-problem-dp-25/
+
+https://www.geeksforgeeks.org/subset-sum-problem-osum-space/?ref=rp
+
 http://leetcode.com/2010/09/print-all-combinations-of-number-as-sum.html
 */
 

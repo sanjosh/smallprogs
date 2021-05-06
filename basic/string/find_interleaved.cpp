@@ -121,12 +121,14 @@ int main(int argc, char* argv[])
     char* b = argv[2];
     char* c = argv[3];
 
+/* fails for "a=xxx b=xxy c=xxyxxx" */
     bool ret = find_interleaved(a, b, c);
     //bool ret = find_dup(a, c);
     cout << ret << endl;
 }
 
-/* fails for "a=xxx b=xxy c=xxyxxx" */
+
+/*
 
 Given three strings A, B and C. Write a function that checks whether C is an interleaving of A and B. C is said to be interleaving A and B, if it contains all characters of A and B and order of all characters in individual strings is preserved.
 
@@ -137,6 +139,8 @@ a) If first character of C matches with first character of A, we move one charac
 b) If first character of C matches with first character of B, we move one character ahead in B and C and recursively check.
 
 If any of the above two cases is true, we return true, else false. Following is simple recursive implementation of this approach (Thanks to Frederic for suggesting this)
+*/
+
 // A simple recursive function to check whether C is an interleaving of A and B
 bool isInterleaved(char *A, char *B, char *C)
 {
@@ -154,9 +158,11 @@ bool isInterleaved(char *A, char *B, char *C)
            || ((*C == *B) && isInterleaved(A, B+1, C+1));
 }
 
+/*
 Dynamic Programming
 The worst case time complexity of recursive solution is O(2n). The above recursive solution certainly has many overlapping subproblems. For example, if wee consider A = “XXX”, B = “XXX” and C = “XXXXXX” and draw recursion tree, there will be many overlapping subproblems.
 Therefore, like other typical Dynamic Programming problems, we can solve it by creating a table and store results of subproblems in bottom up manner. Thanks to Abhinav Ramana for suggesting this method and implementation.
+*/
 // A Dynamic Programming based program to check whether a string C is
 // an interleaving of two other strings A and B.
 #include <iostream>
@@ -240,6 +246,7 @@ int main()
     return 0;
 }
 
+/*
 Output:
 
 XXZXXXY is not interleaved of XXY and XXZ
@@ -252,3 +259,4 @@ See this for more test cases.
 
 Time Complexity: O(MN)
 Auxiliary Space: O(MN)
+*/

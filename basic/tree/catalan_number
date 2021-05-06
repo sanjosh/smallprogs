@@ -1,5 +1,0 @@
-
-
-number of BST with N nodes
-
-C_n+1 = Sum (Ci.C_n-i) over all i=0,n

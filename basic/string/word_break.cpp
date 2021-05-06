@@ -15,7 +15,10 @@ Output: Yes
 The string can be segmented as "i like samsung" or "i like sam sung".
 
 Recursive implementation:
-The idea is simple, we consider each prefix and search it in dictionary. If the prefix is present in dictionary, we recur for rest of the string (or suffix). If the recursive call for suffix returns true, we return true, otherwise we try next prefix. If we have tried all prefixes and none of them resulted in a solution, we return false.
+The idea is simple, we consider each prefix and search it in dictionary. 
+If the prefix is present in dictionary, we recur for rest of the string (or suffix). 
+If the recursive call for suffix returns true, we return true, otherwise we try next prefix. 
+If we have tried all prefixes and none of them resulted in a solution, we return false.
 
 We strongly recommend to see substr function which is used extensively in following implementations.
 // A recursive program to test whether a given string can be segmented into
