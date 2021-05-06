@@ -26,8 +26,15 @@ advanced
 * approximation algo
 * randomized
 
-ladder of approaches
+ladder 
 1. transform the problem
-2. algorithmic with index
-3. recurrence ? dynamic programming
-4. nothing - backtracking
+2. does local choice work ? then greedy 
+2. divide and conquer ?
+3. if not, find recurrence 
+3. optimal substructure - dynamic programming
+4. nothing possible : use backtracking
+
+if recursion branches K ways - time is (K^n), where n is height of tree
+example
+1. knights tour - 8^n where n = height of tree which is 64 positions 
+2. subset sum - n.(2^n) where n = height of tree, and n = time to sum a subset

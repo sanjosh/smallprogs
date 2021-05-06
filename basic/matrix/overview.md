@@ -32,5 +32,5 @@ young's tableau
 
 heap
 
-kadane algo
+ kadane algo
 
