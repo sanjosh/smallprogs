@@ -145,7 +145,7 @@ sum of pair = sum of another pair in array
 subarray contiguous
 
 1. max sum (kadane)
-2. max sum modulo
+2. max sum modulo https://www.geeksforgeeks.org/maximum-subarray-sum-modulo-m/
 3. rotated array
 4. if it has negative (cormen rivest)
 5. rainwater trapped between two elements

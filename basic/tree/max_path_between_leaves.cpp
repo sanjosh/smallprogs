@@ -1,7 +1,9 @@
 
-SAME AS DIAMETER OF TREE
 
 /*
+
+SAME AS DIAMETER OF TREE
+
 http://www.geeksforgeeks.org/find-maximum-path-sum-two-leaves-binary-tree/
 */
 

@@ -7,11 +7,10 @@ Given nodes are B and C : Answer would be 2.
 Given nodes are A and E : Answer would be 0.
 Given nodes are D and G : Answer would be 4.
 
-We had an long discussion of 45 mins (approx.) on this problem.
+http://www.geeksforgeeks.org/print-binary-tree-vertical-order-set-2/
 
 */
 
-http://www.geeksforgeeks.org/print-binary-tree-vertical-order-set-2/
 
 Given a binary tree, print it vertically. The following example illustrates vertical order traversal.
 

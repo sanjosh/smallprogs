@@ -1,4 +1,5 @@
 
+/*
 Given an unsorted array, trim the array such that twice of minimum is greater than maximum in the trimmed array. Elements should be removed either end of the array.
 
 Number of removals should be minimum.
@@ -26,6 +27,7 @@ Output: 3
 We need to remove any three elements from ends
 like 20, 4, 1 or 4, 1, 3 or 20, 3, 1 or 20, 4, 1
 
+
 Naive Solution:
 A naive solution is to try every possible case using recurrence. Following is the naive recursive algorithm. Note that the algorithm only returns minimum numbers of removals to be made, it doesn’t print the trimmed array. It can be easily modified to print the trimmed array as well.
 
@@ -38,6 +40,8 @@ minRemovals(int arr[], int l, int h)
    and "minRemovals(arr, l, h-1) + 1"
 
 Following is C++ implementation of above algorithm.
+*/
+
 #include <iostream>
 using namespace std;
  
@@ -97,6 +101,7 @@ int main()
   return 0;
 }
 
+/*
 Output:
 
  4 
@@ -109,6 +114,8 @@ An upper bound on solution of above recurrence would be O(n x 2n).
 
 Dynamic Programming:
 The above recursive code exhibits many overlapping subproblems. For example minRemovals(arr, l+1, h-1) is evaluated twice. So Dynamic Programming is the choice to optimize the solution. Following is Dynamic Programming based solution.
+*/
+
 #include <iostream>
 using namespace std;
  
@@ -166,6 +173,7 @@ int main()
   cout << minRemovalsDP(arr, n);
   return 0;
 }
+/*
 
 Time Complexity: O(n3) where n is the number of elements in arr[].
 
@@ -179,6 +187,7 @@ A O(n^2) Solution
 The idea is to find the maximum sized subarray such that 2*min > max. We run two nested loops, the outer loop chooses a starting point and the inner loop chooses ending point for the current starting point. We keep track of longest subarray with the given property.
 
 Following is C++ implementation of the above approach. Thanks to Richard Zhang for suggesting this solution.
+*/
 // A O(n*n) solution to find the minimum of elements to
 // be removed
 #include <iostream>

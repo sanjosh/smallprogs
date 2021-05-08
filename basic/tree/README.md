@@ -46,13 +46,16 @@ no stack required if parent ptr exists
 * top view - vertical traversal
 * bottom view - vertical traversal
 * boundary view -
+
 ```
 {
 	if (root->left)
 	else if (root->right)
 }
 ```
+
 * left boundary - if left print else print right
+
 * diagonal view
 
 # find if property satisfied
