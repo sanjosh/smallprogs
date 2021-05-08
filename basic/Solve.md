@@ -26,15 +26,26 @@ advanced
 * approximation algo
 * randomized
 
-ladder 
-1. transform the problem
+# transform 
+
+1. finding submatrix : use cumulative sums to transform it into 1-dim problem
+
+# reverse the problem
+
+1. next greater element : instead of putting "next element" in stack , keep stack of "previous" whose "nge" this element is)
+2. min jump : instead of marking next jump, find if previous can jump to current
+
+# ladder 
+
 2. does local choice work ? then greedy 
-2. divide and conquer ?
+2. divide and conquer ? can combine ?
 3. if not, find recurrence 
-3. optimal substructure - dynamic programming
+3. optimal substructure ? dynamic programming
 4. nothing possible : use backtracking
 
-if recursion branches K ways - time is (K^n), where n is height of tree
+if recursion branches K ways, then time is (K^n), where n is height of tree
 example
 1. knights tour - 8^n where n = height of tree which is 64 positions 
 2. subset sum - n.(2^n) where n = height of tree, and n = time to sum a subset
+
+https://en.wikipedia.org/wiki/Bird%E2%80%93Meertens_formalism

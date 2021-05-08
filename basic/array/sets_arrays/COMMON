@@ -81,19 +81,42 @@ parent = remove last set bit = index + (index & -index)
 ========
 
 problems around smallest element in array
-1. next on right : no intersect between consecutive nearest(i), hence use stack
+1. nearest on right : no intersect between consecutive nearest(i), hence use stack
 2. farthest on right : there is intersect between consecutive nearest(i), hence use range array
 3. count of smallest to right (inversion table) : put in tree or use merge sort
 4. count of elem with at least one smaller to left and right : use stack + count
 
 max element to right of each element - use STACK
 
+next smaller = next greater (except change order in the stack)
+Next smaller : STACK contains previous element which are greater than current
+
+Next larger : 
+1. going from left to right, STACK contains elements whose nge could be current index
+2. going from right to left, STACK contains candidate nge for current index
+
 http://www.geeksforgeeks.org/next-greater-element/
+https://www.geeksforgeeks.org/next-greater-element-in-same-order-as-input/
+
 http://www.geeksforgeeks.org/number-nges-right/
+
+============
+
 http://www.geeksforgeeks.org/replace-every-element-with-the-greatest-on-right-side/
+
+https://www.geeksforgeeks.org/leaders-in-an-array/
+
+greater than all the elements to its right side.
+
+
+=============
 
 compute over fixed length moving window 
 1. drop first char in window
+
+https://www.geeksforgeeks.org/sliding-window-maximum-maximum-of-all-subarrays-of-size-k-using-stack-in-on-time/
+
+=============
 
 smallest window in which all elements occur
 1. detect first window
@@ -189,4 +212,9 @@ https://stackoverflow.com/questions/59335693/minimum-number-of-jumps-to-reach-en
 https://stackoverflow.com/questions/23301358/linear-time-algorithm-for-minimum-number-of-jumps-required-to-reach-end
 
 ----
+
+modify array
+https://www.geeksforgeeks.org/modify-array-to-another-given-array-by-replacing-with-the-sum-of-the-array/?ref=rp
+
+find the element which is greater than sum of others
 
