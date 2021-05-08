@@ -1,11 +1,14 @@
 
-Steps
+# Steps
+
 * write examples
 * smallest base case
 * identify decomposition into smaller parts
-* all cases to handle [ 0, 1, element equality, max length, max element ]
+* write all cases to handle [ 0, 1, element equality, max length, max element ]
 * write psuedo-code
 * write code
+
+# solving
 
 * identify loop invariant or permutation invariant
 * sort
@@ -21,21 +24,22 @@ Steps
 * change radix
 * keep multiple ptrs into input
 
-advanced
+##advanced
+
 * primal-dual
 * approximation algo
 * randomized
 
-# transform 
+## transform 
 
 1. finding submatrix : use cumulative sums to transform it into 1-dim problem
 
-# reverse the problem
+## reverse the problem
 
 1. next greater element : instead of putting "next element" in stack , keep stack of "previous" whose "nge" this element is)
 2. min jump : instead of marking next jump, find if previous can jump to current
 
-# ladder 
+# ladder of solutions
 
 2. does local choice work ? then greedy 
 2. divide and conquer ? can combine ?
@@ -43,9 +47,13 @@ advanced
 3. optimal substructure ? dynamic programming
 4. nothing possible : use backtracking
 
+# complexity
+
 if recursion branches K ways, then time is (K^n), where n is height of tree
 example
 1. knights tour - 8^n where n = height of tree which is 64 positions 
 2. subset sum - n.(2^n) where n = height of tree, and n = time to sum a subset
+
+# misc
 
 https://en.wikipedia.org/wiki/Bird%E2%80%93Meertens_formalism

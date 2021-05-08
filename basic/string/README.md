@@ -1,10 +1,14 @@
 
+## string search
+
 * Boyer-Moore
 * KMP
 * Factorization algo 
 * Suffix tree
 * Trie
 * Burrows-Wheeler
+
+## problems
 
 find substr & its anagram in longer string
 
@@ -30,15 +34,13 @@ edit distance
 
 longest common subsequence
 
-# pattern search
+## pattern search
 
 Three approaches
 
 1. prefix : KMP
 2. suffix : Boyer-Moore, Horspool
 3. factor match :
-
----
 
 strings
 
@@ -53,9 +55,7 @@ http://www-igm.univ-mlv.fr/~lecroq/string/index.html
 
     how to elim duplicates inplace (keep 2 ptrs)
 
----
-
-Boyer-Moore
+## Boyer-Moore
 
 bad character rule - form array which contains rightmost position of every char in pattern
 
@@ -67,19 +67,6 @@ http://somemoreacademic.blogspot.in/2012/09/boyer-moore-string-matching-algorith
 
 worst case when pattern has all same char
     
----
-
-## suffix tree
-
-## suffix array ( sorted on suffixes)
-
-## LCP array (longest common prefix between 2 entries in suffix array)
-
-Augmenting the suffix array with the LCP array allows one to efficiently simulate top-down and bottom-up 
-traversals of the suffix tree,[1][2] speeds up pattern matching on the suffix array[3] and is a 
-prerequisite for compressed suffix trees.[4]
-
----
 
 ## multiple patterns search (fixed len)
 
@@ -87,18 +74,49 @@ Rabin-Karp algo
 
 Commentz-Walter - used in gnu grep
 
----
 
 ## match based on reg exp - use FSA
 
----
 
 ## smallest window
 
 https://www.geeksforgeeks.org/find-the-smallest-window-in-a-string-containing-all-characters-of-another-string/
 
----
-
 ## longest common extension
 
 https://www.geeksforgeeks.org/longest-common-extension-lce-set-2-reduction-rmq/
+
+## misc ideas
+
+1. concat string to itself
+2. concat string to its reverse
+3. concat string + $ + pattern
+4. add $ between every two char (palindrome)
+
+# Data structures
+
+## suffix tree
+
+## suffix array ( sorted on suffixes)
+
+## inverse suffix array
+
+## LCP array (longest common prefix between 2 entries in suffix array)
+
+Augmenting the suffix array with the LCP array allows one to efficiently simulate top-down and bottom-up 
+traversals of the suffix tree,[1][2] speeds up pattern matching on the suffix array[3] and is a 
+prerequisite for compressed suffix trees.[4]
+
+## LPS array
+
+longest prefix which is also suffix - used in KMP
+
+## Z-array (prefix length array)
+
+Z[i] = Length of longest substring at current position (I) which is also a prefix of entire string
+
+Keep Z-box of [L, R]
+
+https://www.geeksforgeeks.org/z-algorithm-linear-time-pattern-searching-algorithm/
+
+
