@@ -8,8 +8,12 @@ cases:
 1. duplicates have distance of one or more
 1. some characters after last duplicate
 1. no characters after last duplicate
+
+other
 1. all duplicates
 1. no duplicates
+1. empty string
+1. string with one char
 
 insertPos can be different from location of previous duplicate, in case of consecutive duplicates
 
