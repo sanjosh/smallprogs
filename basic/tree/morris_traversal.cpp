@@ -1,4 +1,5 @@
 
+/*
 http://www.geeksforgeeks.org/inorder-tree-traversal-without-recursion-and-without-stack/
 
 http://stackoverflow.com/questions/5502916/explain-morris-inorder-tree-traversal-without-using-stacks-or-recursion
@@ -29,6 +30,7 @@ Using Morris Traversal, we can traverse the tree without using stack and recursi
       b) Go to this left child, i.e., current = current->left
 
 Although the tree is modified through the traversal, it is reverted back to its original shape after the completion. Unlike Stack based traversal, no extra space is required for this traversal.
+*/
 
 
 void MorrisTraversal(struct tNode *root)

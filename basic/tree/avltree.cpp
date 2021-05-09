@@ -22,8 +22,8 @@ struct Node
 {
     int data;
     int height;
-    Node* left;
-    Node* right;
+    Node* left = nullptr;
+    Node* right = nullptr;
 };
 
 void setMaxHeight(Node* n)
@@ -90,7 +90,7 @@ Node* InsertAVLTree(Node* root, Node* parent, int data)
         root = new Node;
         root->height = 0;
         root->data = data;
-        root->left = root->right = NULL;
+        root->left = root->right = nullptr;
         return root;
     }
     else if (data < root->data)

@@ -1,4 +1,8 @@
 
+/*
+
+IMP
+
 TODO http://www.geeksforgeeks.org/find-k-th-smallest-element-in-bst-order-statistics-in-bst/
 
 Given root of binary search tree and K as input, find K-th smallest element in BST.
@@ -16,16 +20,16 @@ Time complexity: O(n) where n is total nodes in tree..
 
 Algorithm:
 
-/* initialization */
+// initialization 
 pCrawl = root
 set initial stack element as NULL (sentinal)
 
-/* traverse upto left extreme */
+// traverse upto left extreme 
 while(pCrawl is valid )
    stack.push(pCrawl)
    pCrawl = pCrawl.left
 
-/* process other nodes */
+/// process other nodes 
 while( pCrawl = stack.pop() is valid )
    stop if sufficient number of elements are popped.
    if( pCrawl.right is valid )
@@ -35,6 +39,7 @@ while( pCrawl = stack.pop() is valid )
          pCrawl = pCrawl.left
 
 Implementation:
+*/
 #include <stdio.h>
 #include <stdlib.h>
  
@@ -228,11 +233,18 @@ int main(void)
     return 0;
 }
 
+/*
 Method 2: Augmented  Tree Data Structure.
 
-The idea is to maintain rank of each node. We can keep track of elements in a subtree of any node while building the tree. Since we need K-th smallest element, we can maintain number of elements of left subtree in every node.
+The idea is to maintain rank of each node. 
+We can keep track of elements in a subtree of any node while building the tree. 
+Since we need K-th smallest element, we can maintain number of elements of left subtree in every node.
 
-Assume that the root is having N nodes in its left subtree. If K = N + 1, root is K-th node. If K < N, we will continue our search (recursion) for the Kth smallest element in the left subtree of root. If K > N + 1, we continue our search in the right subtree for the (K – N – 1)-th smallest element. Note that we need the count of elements in left subtree only.
+Assume that the root is having N nodes in its left subtree. 
+If K = N + 1, root is K-th node. 
+If K < N, we will continue our search (recursion) for the Kth smallest element in the left subtree of root. 
+If K > N + 1, we continue our search in the right subtree for the (K – N – 1)-th smallest element. 
+Note that we need the count of elements in left subtree only.
 
 Time complexity: O(n) where n is total nodes in tree.
 
@@ -253,6 +265,8 @@ else
 stop:
 
 Implementation:
+
+*/
 #include <stdio.h>
 #include <stdlib.h>
  
@@ -399,4 +413,3 @@ int main(void)
     return 0;
 }
 
-Thanks to Venki for providing post. Please write comments if you find anything incorrect, or you want to share more information about the topic discussed above.

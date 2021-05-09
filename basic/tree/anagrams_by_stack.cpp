@@ -3,7 +3,8 @@ http://uva.onlinejudge.org/external/7/732.html
 
 http://stackoverflow.com/questions/2377286/c-c-java-anagrams-from-original-string-to-target/2377819#2377819
 
- How can anagrams result from sequences of stack operations? There are two sequences of stack operators which can convert TROT to TORT:
+ How can anagrams result from sequences of stack operations? 
+ There are two sequences of stack operators which can convert TROT to TORT:
 
 [
 i i i i o o o o

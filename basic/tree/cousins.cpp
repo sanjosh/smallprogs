@@ -1,4 +1,5 @@
 
+/*
 http://www.geeksforgeeks.org/check-two-nodes-cousins-binary-tree/
 
 Given the binary Tree and the two nodes say ‘a’ and ‘b’, determine whether the two nodes are cousins of each other or not.
@@ -23,6 +24,7 @@ Using the found level, check if ‘a’ and ‘b’ are at this level.
 If ‘a’ and ‘b’ are at given level, then finally check if they are not children of same parent.
 
 Following is C implementation of the above approach.
+*/
 // C program to check if two Nodes in a binary tree are cousins
 #include <stdio.h>
 #include <stdlib.h>
@@ -104,6 +106,8 @@ int main()
     return 0;
 }
 
+/*
+
 Ouput:
 
  Yes 
@@ -112,3 +116,4 @@ Time Complexity of the above solution is O(n) as it does at most three traversal
 
 This article is contributed by A:w
 
+*/

@@ -11,16 +11,13 @@ using namespace std;
 struct Node 
 {
     char value;
-    Node* left;
-    Node* right;
+    Node* left = nullptr;
+    Node* right = nullptr;
 
-    Node(char val) : value(val)
-    {
-        left = right = NULL;
-    }
+    Node(char val) : value(val) { }
 };
 
-void printpaths(Node* n, const string& path)
+void printpaths(const Node* n, const string& path)
 {
     string localpath = path + ":" + n->value;
     if (!n->left && !n->right) { cout << localpath << endl; return; }
@@ -29,7 +26,7 @@ void printpaths(Node* n, const string& path)
     if (n->right) printpaths(n->right, localpath);
 }
 
-void printInorder (Node* n, int level)
+void printInorder (const Node* n, int level)
 {
     if (!n) return;
     printInorder(n->left, level+1);

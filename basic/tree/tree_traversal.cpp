@@ -1,6 +1,7 @@
 #include <iostream>
 #include <errno.h>
 
+/*
 Therefore, following combination can uniquely identify a tree.
 
 Inorder and Preorder.
@@ -15,6 +16,7 @@ Postorder and Preorder.
 Preorder and Level-order.
 Postorder and Level-order.
 
+*/
 using namespace std;
 
 template <class T> class Tree;

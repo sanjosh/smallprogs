@@ -1,4 +1,5 @@
 
+/*
 http://dhruvbird.blogspot.in/2014/01/merging-avl-trees.html
 
 Problem Statement: Given two AVL trees T1 and T2, where the largest key in T1 is less than the smallest key in T2, Join(T1, T2) returns an AVL tree containing the union of the elements in T1 and T2. Give an algorithm (in pseudocode) for Join() that runs in time O(log n), where n is the size of the resulting AVL tree. Justify the correctness and efficiency of your algorithm.
@@ -33,3 +34,5 @@ v = root(T1)
     Now, as in the INSERT algorithm, we go up the tree, starting at u, fixing balance factors and perhaps doing a rotation. This takes O(h1) time. Note that the correctness follows from the condition at u before this process is begun is a condition that can arise during the INSERT algorithm.
 
     Since h1, h2 ∈ O(log n), the total time taken by this algorithm is in O(log n). 
+
+*/

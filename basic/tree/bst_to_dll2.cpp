@@ -1,5 +1,6 @@
 /*
     convert BST to Doubly linked list
+    IMP
 */
 
 #include <iostream>
@@ -8,13 +9,10 @@ using namespace std;
 struct Node
 {
     int value;
-    Node* left;
-    Node* right;
+    Node* left = nullptr;
+    Node* right = nullptr;
 
-    Node(int val) : value(val)
-    {
-        left = right = NULL;
-    }
+    Node(int val) : value(val) { }
 };
 
 void makeDLL(Node* n, Node*& gmin, Node*& gmax)
@@ -52,6 +50,22 @@ void makeDLL(Node* n, Node*& gmin, Node*& gmax)
     {
         gmax = n;
     }
+}
+
+void makeDLL2(Node* cur, Node*& prevNode)
+{
+    if (cur == nullptr) {
+        return;
+    }
+    makeDLL2(cur->left, prevNode);
+    if (prevNode)
+    {
+        prevNode->right = cur;
+        cur->left = prevNode;
+        cout << prevNode->value << ":" << cur->value  << endl;
+    }
+    prevNode = cur;
+    makeDLL2(cur->right, prevNode);
 }
 
 void printInorder (Node* n, int level)
@@ -105,21 +119,13 @@ int main(int argc, char* argv[])
 
     Node* min = NULL;
     Node* max = NULL;
-    makeDLL(root, min, max);
-
-    cout << "----PRINT DLL FROM LEFT TO RIGHT-----------" << endl;
-    Node* n = min;
-    for (; n; n = n->right)
-    {
-        cout << n->value << " ";
-    }
-    cout << endl << "-------------------" << endl;
+    makeDLL2(root, min);
 
     cout << "----PRINT DLL FROM RIGHT TO LEFT-----------" << endl;
-    n = max;
+    Node *n = min;
     for (; n; n = n->left)
     {
-        cout << n->value << " ";
+        cout << n->value << "," << ((n->right) ? n->right->value : -1) << ":";
     }
     cout << endl << "-------------------" << endl;
 }

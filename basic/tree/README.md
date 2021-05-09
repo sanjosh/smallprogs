@@ -1,4 +1,13 @@
 
+# techniques 
+
+1. traversal : pass ptr to modify in stack if computing min/max across all nodes (e.g. max node value)
+2. traversal : return as value from function if you have to compare left and right (e.g. distance between nodes)
+3. traversal : pass by value if child is going to add to it (e.g. print path to all leafs)
+4. increment before passing to parent
+5. detect leaf condition : nullptr
+
+
 # Inorder preorder postorder 
 
 inorder_predecessor

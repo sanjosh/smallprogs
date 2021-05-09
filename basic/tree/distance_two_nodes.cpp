@@ -3,12 +3,30 @@
 
 https://www.geeksforgeeks.org/find-distance-between-two-nodes-of-a-binary-tree/
 
+both are in same subtree ? dist = N1 + n2
+if one found in subtree and other is the current node ? dist = N1
+
+two options for distance
+1. pass level down and node notes its level
+1. let node set dist = 0 and then increment it on every pop
+
+what should node do ? initialize
+what should parent do ? increment by 1 and pass to parent
+
 */
 
 #include <iostream>
 #include <stdlib.h>
  
 using namespace std;
+
+struct Algo
+{
+    int left_data;
+    int right_data;
+
+    Algo(int l, int r) : left_data(l), right_data(r) {}
+};
  
 struct Node
 {
@@ -19,76 +37,55 @@ struct Node
    Node(int d) : data(d) { }
 };
 
-struct Algo
+struct ReturnVal
 {
-    int left_data;
-    int right_data;
-    int leftDistance = -1;
-    int rightDistance = -1;
-
-    Algo(int l, int r) : left_data(l), right_data(r) {}
-
-    void predicate(const Node* n, bool& l, bool& r)
-    {
-        if (n->data == this->left_data) {
-           leftDistance = 0;
-           l = true;
-           cout << "left found" << endl;
-        } else if (n->data == this->right_data) {
-           rightDistance = 0;
-           r = true;
-           cout << "right found" << endl;
-        }
-    }
-
-    void postProcessLeft()
-    {
-        if (leftDistance != -1) {
-            leftDistance ++;
-            cout << leftDistance << "L" << endl;
-        }
-    }
-
-    void postProcessRight()
-    {
-        if (rightDistance != -1) {
-            rightDistance ++;
-            cout << rightDistance << "R" << endl;
-        }
-    }
-
-    void postProcess(const Node* current) {
-        if ((leftDistance != -1) && (rightDistance != -1))
-        {
-            cout << current->data << ":" << leftDistance + rightDistance << endl;
-            leftDistance = -1;
-            rightDistance = -1;
-        }
-    }
+    int r = -1;
+    int l = -1;
 };
 
-bool preorder(const Node* current, int level, int &left_level, int& right_level, Algo& a)
+ReturnVal preorder(const Node* current, const Algo& a)
 {
+    ReturnVal v;
     if (current == nullptr)
     {
-        return false;
+        return v;
     }
 
-    if (current->data = a.left_data)
+    if (current->data == a.left_data)
     {
-        left_level = level;
+        cout << "l" << current->data << endl;
+        v.l = 0;
     }
-    else if (current->data = a.right_data)
+    else if (current->data == a.right_data)
     {
-        right_level = level;
+        cout << "r" << current->data << endl;
+        v.r = 0;
     }
-    preorder(current->left, level + 1, left_level, right_level, a);
-    preorder(current->right, level + 1, left_level, right_level, a);
-    if (left_level && right_level) {
-        cout << "distance 
+    auto ret_left = preorder(current->left, a);
+    auto ret_right = preorder(current->right, a);
+
+    if (ret_left.l != -1) {
+       v.l = ret_left.l + 1;
+    } else if (ret_left.r != -1) {
+       v.r = ret_left.r + 1;
     }
+
+    if (ret_right.l != -1) {
+       v.l = ret_right.l + 1;
+    } else if (ret_right.r != -1) {
+       v.r = ret_right.r + 1;
+    }
+
+    if (v.r >= 0 && v.l >= 0) {
+        cout << "distance " << v.l << "," << v.r << endl;
+        v.r = -1;
+        v.l = -1;
+    } 
+    else {
+        cout << current->data << " v " << v.l << "," << v.r << endl;
+    }
+    return v;
 }
-
 
 
 int main()
@@ -102,8 +99,10 @@ int main()
     root->left->right = new Node(5);
     root->left->left->left  = new Node(7);
 
-    Algo a(2, 5);
- 
+    int left_distance = -1;
+    int right_distance = -1;
+
+    Algo a(1, 4);
     preorder(root, a);
 }
 
