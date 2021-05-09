@@ -1,15 +1,16 @@
 
+/*
 http://www.geeksforgeeks.org/median-of-two-sorted-arrays/
 
 if A[n] < B[0]
     median =  n+m/2;    
 if B[m] < A[0]
     median =  n+m/2;    
+*/
 
-#include<stdio.h>
+
+#include <stdio.h>
  
-int max(int, int); /* to get maximum of two integers */
-int min(int, int); /* to get minimum of two integeres */
 int median(int [], int); /* to get median of a sorted array */
  
 /* This function returns median of ar1[] and ar2[].
@@ -29,7 +30,7 @@ int getMedian(int ar1[], int ar2[], int n)
         return (ar1[0] + ar2[0])/2;
  
     if (n == 2)
-        return (max(ar1[0], ar2[0]) + min(ar1[1], ar2[1])) / 2;
+        return (std::max(ar1[0], ar2[0]) + std::min(ar1[1], ar2[1])) / 2;
  
     m1 = median(ar1, n); /* get the median of the first array */
     m2 = median(ar2, n); /* get the median of the second array */
@@ -82,20 +83,3 @@ int main()
     return 0;
 }
  
-/* Utility functions */
-int max(int x, int y)
-{
-    return x > y? x : y;
-}
- 
-int min(int x, int y)
-{
-    return x > y? y : x;
-}
-
-
-
-
-
-    
-    

@@ -1,11 +1,14 @@
 
-Given a binary tree having 3 pointers, left, right and sibling out of which all the left and the right child pointers are already filled, you need to fill the sibling pointers with the addresses of the next node on the same level. If it is the last node of a level, fill NULL.
-
-I first told him an approach using a level order traversal with a queue. Then he asked me to do it without a queue using recursion. I told him the approach and when he was satisfied, he asked me to write a code on paper with all the corner cases covered.
+/*
+Given a binary tree having 3 pointers, left, right and sibling out of which 
+all the left and the right child pointers are already filled, 
+you need to fill the sibling pointers with the addresses of the 
+next node on the same level. If it is the last node of a level, fill NULL.
 
 create linked list of sibling ptr 
 
 TODO
+*/
 
 Traverse(Node* node, Node* head)
 {

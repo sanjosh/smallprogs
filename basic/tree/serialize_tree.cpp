@@ -1,4 +1,5 @@
 
+/*
 Flajolet Sedgewick analysis of Algo page 268:
 
 For binary trees, nodes have either 2 or zero children.  if we list, for each node, one less than
@@ -28,7 +29,8 @@ on other side, you follow algo "create tree from linked list"
 
 ==============
 
- I implemented an array-based approach where the children of node i (numbering in level-order traversal) were at the 2*i index for the left child and 2*i + 1 for the right child.
+ I implemented an array-based approach where the children of node i (numbering in level-order traversal) 
+ were at the 2*i index for the left child and 2*i + 1 for the right child.
 
 BST
 http://leetcode.com/2010/09/saving-binary-search-tree-to-file.html
@@ -51,7 +53,11 @@ void writeBinaryTree(BinaryTree *p, ostream &out) {
 
 Deserializing a Binary Tree:
 
-Reading the binary tree from the file is similar. We read tokens one at a time using pre-order traversal. If the token is a sentinel, we ignore it. If the token is a number, we insert it to the current node, and traverse to its left child, then its right child.
+Reading the binary tree from the file is similar. 
+We read tokens one at a time using pre-order traversal. 
+If the token is a sentinel, we ignore it. 
+If the token is a number, we insert it to the current node, and traverse to its left child, then its right child.
+
 void readBinaryTree(BinaryTree *&p, ifstream &fin) { int token; bool isNumber; if (!readNextToken(token, fin, isNumber)) return; if (isNumber) { p = new BinaryTree(token); readBinaryTree(p->left, fin); readBinaryTree(p->right, fin); } }
     
 void readBinaryTree(BinaryTree *&p, ifstream &fin) {
@@ -72,6 +78,7 @@ http://stackoverflow.com/questions/2675756/efficient-array-storage-for-binary-tr
 ===================
 
 http://www.geeksforgeeks.org/serialize-deserialize-binary-tree/
+*/
 
 // A C++ program to demonstrate serialization and deserialiation of
 // Binary Tree
