@@ -86,14 +86,16 @@ https://www.geeksforgeeks.org/find-the-smallest-window-in-a-string-containing-al
 
 https://www.geeksforgeeks.org/longest-common-extension-lce-set-2-reduction-rmq/
 
+# Data structures
+
 ## misc ideas
 
 1. concat string to itself
 2. concat string to its reverse
 3. concat string + $ + pattern
 4. add $ between every two char (palindrome)
-
-# Data structures
+5. for counting, use length 256 array 
+6. two pointers
 
 ## suffix tree
 

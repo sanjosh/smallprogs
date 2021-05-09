@@ -3,8 +3,9 @@ use stack of open problems  - as in max area of histogram - see karumanchi chap5
 
 ## Solution
 
-1. keep prefix sums over each range (0, i) where i = 1..N
+1. keep stack of previous elements
 1. keep min over each range (i, N) where i = 1..N
+1. keep prefix sums over each range (0, i) where i = 1..N
 
 (Karumanchi page 275 notes)
 
@@ -72,7 +73,6 @@ for any computation (min, gcd, lcm) over ranges
 3. precompute over square root decomposition
 4. keep sparse table over for each [i, i + 2^j]  for all j < log(n)
 
-http://www.geeksforgeeks.org/longest-subarray-not-k-distinct-elements/
 
 ## inversions
 
@@ -148,13 +148,19 @@ https://www.geeksforgeeks.org/leaders-in-an-array/
 
 greater than all the elements to its right side.
 
-## compute over fixed length moving window 
+## Window related problems
+
+### compute over fixed length moving window 
 
 1. drop first char in window
 
 https://www.geeksforgeeks.org/sliding-window-maximum-maximum-of-all-subarrays-of-size-k-using-stack-in-on-time/
 
-## smallest window in which all elements occur
+### max window with less than k distinct
+
+http://www.geeksforgeeks.org/longest-subarray-not-k-distinct-elements/
+
+### smallest window in which all elements occur
 
 1. detect first window
 2. if start of window changes, do update 

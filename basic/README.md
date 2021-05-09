@@ -4,6 +4,8 @@
 * write examples
 * smallest base case
 * identify decomposition into smaller parts
+* how to combine
+* what is intrinsic optimal criterion
 * write all cases to handle [ 0, 1, element equality, max length, max element ]
 * write psuedo-code
 * write code
@@ -24,7 +26,7 @@
 * change radix
 * keep multiple ptrs into input
 
-##advanced
+## advanced
 
 * primal-dual
 * approximation algo
@@ -36,8 +38,8 @@
 
 ## reverse the problem
 
-1. next greater element : instead of putting "next element" in stack , keep stack of "previous" whose "nge" this element is)
-2. min jump : instead of marking next jump, find if previous can jump to current
+1. next greater element : instead of putting "next element" in stack , keep stack of "previous" whose "nge" this element is
+2. min jump : instead of marking till what point to jump, find if previous slot can jump to current
 
 # ladder of solutions
 
@@ -46,6 +48,12 @@
 3. if not, find recurrence 
 3. optimal substructure ? dynamic programming
 4. nothing possible : use backtracking
+
+# backtracking or recursive solutions
+
+1. beware of infinite loops - use visitedSet, use visitedPath, use ranking to move in right direction
+2. leaf condition
+3. bounds checks
 
 # complexity
 
