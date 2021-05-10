@@ -7,41 +7,30 @@ using namespace std;
 
 class Graph
 {
-    static constexpr int32_t kMaxV = 20;
-    std::vector<int32_t> adj_list_[kMaxV];
+    int32_t maxV_ = 0;
+    std::vector<std::set<int32_t>> adj_list_;
 
     public:
 
-    explicit Graph() 
+    explicit Graph(int32_t maxV) : maxV_(maxV)
     {
-        for (int32_t i = 0; i < kMaxV; i++)
-        {
-            this->adj_list_[i].resize(kMaxV);
-        }
+        adj_list_.resize(maxV);
     }
 
     void AddEdge(int32_t v, int32_t w)
     {
-        this->adj_list_[v][w] = 1;
-        this->adj_list_[w][v] = 1;
+        adj_list_[v].insert(w);
+        adj_list_[w].insert(v);
     }
 
     bool IsAdjacent(int32_t v, int32_t w) const
     {
-        return (this->adj_list_[v][w] == 1);
+        return (adj_list_[v].count(w) > 0);
     }
 
-    std::vector<int32_t> GetAdjacent(int32_t v) const 
+    const std::set<int32_t> GetAdjacent(int32_t v) const 
     {
-        std::vector<int32_t> adj;
-
-        for (int32_t i = 0; i < kMaxV; i++)
-        {
-            if (this->adj_list_[v][i]) {
-                adj.push_back(i);
-            }
-        }
-        return adj;
+        return adj_list_[v];
     }
 
     void BFS() const {
@@ -56,9 +45,9 @@ class Graph
             auto cur = q.front();
             q.pop();
             visited.insert(cur);
-            cout << "visiting " << cur << endl;
+            cout << "bfs visiting " << cur << endl;
 
-            auto v_list = this->GetAdjacent(cur);
+            auto v_list = GetAdjacent(cur);
             for (auto v : v_list) {
                 if (visited.find(v) == visited.end()) {
                     q.push(v);
@@ -66,11 +55,32 @@ class Graph
             }
         }
     }
+
+    std::set<int32_t> visited_;
+
+    void InitDFS() {
+        visited_.clear();
+    }
+
+    bool DFS(int32_t cur) {
+
+        visited_.insert(cur);
+        cout << "dfs visiting " << cur << endl;
+        auto adj_list = GetAdjacent(cur);
+        for (auto v : adj_list) {
+            if (visited_.count(v) == 0) {
+                if (DFS(v) == true) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 };
 
 int main()
 {
-    auto g = Graph();
+    auto g = Graph(20);
 
     g.AddEdge(0, 3);
     g.AddEdge(0, 9);
@@ -80,7 +90,10 @@ int main()
     g.AddEdge(3, 12);
     g.AddEdge(3, 16);
 
-    cout << g.IsAdjacent(2, 3) << endl;
+    cout << g.IsAdjacent(8, 3) << endl;
 
     g.BFS();
+
+    g.InitDFS();
+    cout << g.DFS(0) << endl;
 }

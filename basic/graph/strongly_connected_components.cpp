@@ -1,9 +1,15 @@
 
-A directed graph is strongly connected if there is a path between all pairs of vertices. A strongly connected component (SCC) of a directed graph is a maximal strongly connected subgraph. For example, there are 3 SCCs in the following graph.
+/*
 
-SCC
+https://www.geeksforgeeks.org/tarjan-algorithm-find-strongly-connected-components/
 
-We have discussed Kosaraju’s algorithm for strongly connected components. The previously discussed algorithm requires two DFS traversals of a Graph. In this post, Tarjan’s algorithm is discussed that requires only one DFS traversal.
+A directed graph is strongly connected if there is a path between all pairs of vertices. 
+A strongly connected component (SCC) of a directed graph is a maximal strongly connected subgraph. 
+For example, there are 3 SCCs in the following graph.
+
+We have discussed Kosaraju’s algorithm for strongly connected components. 
+The previously discussed algorithm requires two DFS traversals of a Graph. 
+In this post, Tarjan’s algorithm is discussed that requires only one DFS traversal.
 
 Tarjan Algorithm is based on following facts:
 1. DFS search produces a DFS tree/forest
@@ -11,15 +17,21 @@ Tarjan Algorithm is based on following facts:
 3. If we can find head of such subtrees, we can print/store all the nodes in that subtree (including head) and that will be one SCC.
 4. There is no back edge from one SCC to another (There can be cross edges, but cross edges will not be used while processing the graph).
 
-To find head of a SCC, we calculate desc and low array (as done for articulation point, bridge, biconnected component). As discussed in the previous posts, low[u] indicates earliest visited vertex (the vertex with minimum discovery time) that can be reached from subtree rooted with u. A node u is head if disc[u] = low[u].
+To find head of a SCC, we calculate desc and low array (as done for articulation point, bridge, biconnected component). 
+As discussed in the previous posts, low[u] indicates earliest visited vertex (the vertex with minimum discovery time) 
+that can be reached from subtree rooted with u. A node u is head if disc[u] = low[u].
 
-To track the subtree rooted at head, we can use a stack (keep pushing node while visiting). When a head node found, pop all nodes from stack till you get head out of stack.
+To track the subtree rooted at head, we can use a stack (keep pushing node while visiting). 
+When a head node found, pop all nodes from stack till you get head out of stack.
 
-To make sure, we don’t consider cross edges, when we reach a node which is already visited, we should process the visited node only if it is present in stack, else ignore the node.
+To make sure, we don’t consider cross edges, when we reach a node which is already visited, 
+we should process the visited node only if it is present in stack, else ignore the node.
 
 Following is C++ implementation of Tarjan’s algorithm to print all SCCs.
+*/
 // A C++ program to find strongly connected components in a given
 // directed graph using Tarjan's algorithm (single DFS)
+
 #include<iostream>
 #include <list>
 #include <stack>
@@ -195,6 +207,7 @@ int main()
  
     return 0;
 }
+/*
 
 Output:
 
@@ -231,3 +244,4 @@ Time Complexity: The above algorithm mainly calls DFS, DFS takes O(V+E) for a gr
 References:
 http://en.wikipedia.org/wiki/Tarjan%27s_strongly_connected_components_algorithm
 http://www.ics.uci.edu/~eppstein/161/960220.html#sca
+*/

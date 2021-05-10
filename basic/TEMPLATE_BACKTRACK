@@ -37,7 +37,6 @@ boolean solve(Node n) {
             if the node at the top of the stack has untried children
                 push the next untried child onto the stack
             else pop the node off the stack
-
     }
     return false
 }
@@ -73,15 +72,15 @@ bool Solve(configuration conf)
 
     for (all available choices) 
     {
-        try one choice c;
+        if (is safe)
+           try the choice c;
         // recursively solve after making choice
-        ok = Solve(conf with choice c made);
-        if (ok)
-            return true;
-        else
-            unmake choice c;
+           ok = Solve(conf with choice c made);
+           if (ok)
+               return true;
+           else
+               unmake choice c;
     }
-		return false
+    return false
 }
-ret
 

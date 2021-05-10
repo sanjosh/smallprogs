@@ -21,6 +21,7 @@ Boruvka : parallel - http://en.wikipedia.org/wiki/Bor%C5%AFvka%27s_algorithm
 
 #include <iostream>
 #include <map>
+#include <set>
 #include <stdlib.h>
 
 using namespace std;
@@ -29,16 +30,17 @@ struct Edge
 {
     int a;
     int b;
-    bool used;
+    int wt;
 
-    Edge(int _a, int _b) : a(_a), b(_b) {used = false;}
+    explicit Edge(int _a, int _b, int w) : a(_a), b(_b), wt(w) {}
 };
 
-typedef map<int, Edge> EdgeWt; // wt, edge
-typedef map<int, bool> MST; // vertex, exist
+auto comp = [](Edge& a, Edge& b) { return a.wt < b.wt; };
+
+set<Edge, decltype(comp)> edgeWt; // wt, edge
+typedef set<int> MST; // vertex, exist
 
 MST mst;
-EdgeWt edgeWt;
 
 int main(int argc, char* argv[])
 {
@@ -57,15 +59,14 @@ int main(int argc, char* argv[])
         } while (a==b);
 
         int wt = (rand_r(&seed) % 100) + 1;
-        Edge e(a, b);
-        edgeWt.insert(make_pair(wt, e));
+        Edge e(a, b, wt);
+        edgeWt.insert(e);
     }
 
-    EdgeWt::iterator iter;
-    for (iter = edgeWt.begin(); iter != edgeWt.end(); ++iter)
+    for (auto iter : edgeWt) 
     {
-        bool a = (mst.find(iter->second.a) != mst.end());
-        bool b = (mst.find(iter->second.b) != mst.end());
+        bool a = (mst.find(iter.a) != mst.end());
+        bool b = (mst.find(iter.b) != mst.end());
 
         if (a & b)
         {
@@ -73,24 +74,15 @@ int main(int argc, char* argv[])
         }
         else
         {
-            if (!a) mst.insert(make_pair(iter->second.a, true));
-            if (!b) mst.insert(make_pair(iter->second.b, true));
-            iter->second.used = true;
+            cout << "using edge " << iter.a << "," << iter.b << ", " << iter.wt << endl;
+            if (!a) mst.insert(iter.a);
+            if (!b) mst.insert(iter.b);
             if (mst.size() == numVertices) break;
         }
     } 
 
-    for (iter = edgeWt.begin(); iter != edgeWt.end(); ++iter)
-    {
-        if (iter->second.used)
-        {
-            cout << "wt=" << iter->first << ":edge " << iter->second.a << " to " << iter->second.b << " used=" << iter->second.used << endl;
-        }
-    }
-
-    MST::iterator mstIter;
-    for (mstIter = mst.begin(); mstIter != mst.end(); ++mstIter)
+    for (auto iter : mst)
     {   
-        cout << mstIter->first << endl;
+        cout << iter << endl;
     }
 }

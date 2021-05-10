@@ -4,8 +4,7 @@
 #include<stdio.h>
 #define N 8
  
-int solveKTUtil(int x, int y, int movei, int sol[N][N], int xMove[],
-                int yMove[]);
+int solveKTUtil(int x, int y, int movei);
  
 /* A utility function to check if i,j are valid indexes for N*N chessboard */
 int isSafe(int x, int y, int sol[N][N])
@@ -29,8 +28,11 @@ void printSolution(int sol[N][N])
     /* xMove[] and yMove[] define next move of Knight.
        xMove[] is for next value of x coordinate
        yMove[] is for next value of y coordinate */
-    int xMove[8] = {  2, 1, -1, -2, -2, -1,  1,  2 };
-    int yMove[8] = {  1, 2,  2,  1, -1, -2, -2, -1 };
+    int xMove[N] = {  2, 1, -1, -2, -2, -1,  1,  2 };
+    int yMove[N] = {  1, 2,  2,  1, -1, -2, -2, -1 };
+
+int sol[N][N];
+
 
 /* This function solves the Knight Tour problem using Backtracking.  This
 function mainly uses solveKTUtil() to solve the problem. It returns false if
@@ -39,7 +41,6 @@ Please note that there may be more than one solutions, this function
 prints one of the feasible solutions.  */
 bool solveKT()
 {
-    int sol[N][N];
  
     /* Initialization of solution matrix */
     for (int x = 0; x < N; x++)
@@ -51,7 +52,7 @@ bool solveKT()
     sol[0][0]  = 0;
  
     /* Start from 0,0 and explore all tours using solveKTUtil() */
-    if(solveKTUtil(0, 0, 1, sol, xMove, yMove) == false)
+    if (solveKTUtil(0, 0, 1) == false)
     {
         printf("Solution does not exist");
         return false;
@@ -61,10 +62,10 @@ bool solveKT()
  
     return true;
 }
+
  
 /* A recursive utility function to solve Knight Tour problem */
-int solveKTUtil(int x, int y, int movei, int sol[N][N], int xMove[N],
-                int yMove[N])
+int solveKTUtil(int x, int y, int movei)
 {
    int k, next_x, next_y;
 
@@ -82,7 +83,7 @@ int solveKTUtil(int x, int y, int movei, int sol[N][N], int xMove[N],
        if (isSafe(next_x, next_y, sol))
        {
          sol[next_x][next_y] = movei;
-         if (solveKTUtil(next_x, next_y, movei+1, sol, xMove, yMove) == true)
+         if (solveKTUtil(next_x, next_y, movei+1) == true)
              return true;
          else
              sol[next_x][next_y] = -1;// backtracking

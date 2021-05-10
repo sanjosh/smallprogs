@@ -3,8 +3,8 @@ use stack of open problems  - as in max area of histogram - see karumanchi chap5
 
 ## Solution
 
-1. keep stack of previous elements
-1. keep min over each range (i, N) where i = 1..N
+1. greedy : keep stack of previous elements
+1. divide and conquer : keep min over each range (i, N) where i = 1..N
 1. keep prefix sums over each range (0, i) where i = 1..N
 
 (Karumanchi page 275 notes)
@@ -26,6 +26,12 @@ use stack of open problems  - as in max area of histogram - see karumanchi chap5
 1. Divide Array into bins - Pigeonhole - to find duplicate elems 
 1. Binary search / Fibonnaci search
 1. swap using (x + y * sz)/sz = y and (x + y * sz)%sz = x
+
+Segment tree - internal node = sum(left + right) with range (left, right)
+https://www.geeksforgeeks.org/segment-tree-set-1-sum-of-given-range/
+
+Fenwick or BIT
+https://www.geeksforgeeks.org/binary-indexed-tree-or-fenwick-tree-2/
 
 
 
@@ -69,7 +75,7 @@ trie
 
 for any computation (min, gcd, lcm) over ranges
 1. precompute 2D array 
-2. segment tree
+2. segment tree (tree which stores compute value over every decreasing sub-range)
 3. precompute over square root decomposition
 4. keep sparse table over for each [i, i + 2^j]  for all j < log(n)
 
@@ -127,6 +133,8 @@ then do binary search on this array
 ### max rainwater trapped between two elements
 
 keep absolute max on left or right
+
+maxLeft[i] = max( maxLeft[i-1], arr[i])
 
 https://www.geeksforgeeks.org/trapping-rain-water/
 

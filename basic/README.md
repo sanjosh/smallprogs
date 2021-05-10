@@ -57,10 +57,18 @@
 
 # complexity
 
+go line-by-line
+
+consider string length
+
 if recursion branches K ways, then time is (K^n), where n is height of tree
 example
 1. knights tour - 8^n where n = height of tree which is 64 positions 
 2. subset sum - n.(2^n) where n = height of tree, and n = time to sum a subset
+
+backtracking
+1. time to generate next move
+2. number satisfying constrains
 
 # misc
 
