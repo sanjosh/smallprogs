@@ -13,7 +13,8 @@ https://stackoverflow.com/questions/23301358/linear-time-algorithm-for-minimum-n
 
 int minJumpsUpdated(int arr[], int n)
 {
-  int *jumps = (int*)malloc(n * sizeof(int));  // jumps[n-1] will hold the result
+  //int *jumps = (int*)malloc(n * sizeof(int));  // jumps[n-1] will hold the result
+  int jumps[n];
   int i =1, j = 0;
 
   jumps[0] = 0;
@@ -43,6 +44,7 @@ int minJumpsUpdated(int arr[], int n)
   for (i = 0; i < n; i++) {
     printf("%d, ", jumps[i]);
   }
+  printf("\n");
   return jumps[n - 1];
 }
 

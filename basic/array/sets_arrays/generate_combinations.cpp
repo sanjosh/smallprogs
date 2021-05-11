@@ -5,6 +5,10 @@
  * generate combinations C(n, r)
 
  * same as path between diagonals in a square matrix (0 indicating go right, 1 indicating go up)
+ https://www.geeksforgeeks.org/print-all-possible-combinations-of-r-elements-in-a-given-array-of-size-n/
+
+ C(n, r) = C(n-1, r) + C(n-1, r-1)
+
  */
 
 int n = 5;

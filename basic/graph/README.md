@@ -9,6 +9,34 @@
 
 path exploration variables should be on stack
 
+
+# BFS
+
+1. vertices discovered in increasing order of distance from root
+1. the shortest path tree is only useful if BFS was performed with x as the root of the search. 
+1. Second, BFS only gives the shortest path if the graph is unweighted.
+
+# DFS
+
+The difference between the exit and entry times for v tells us how many descendents v has in the DFS tree. 
+
+The clock gets incremented on each vertex entry and vertex exit, so half the time difference 
+denotes the number of descendents of v
+
+used by Tarjan strongly connected (lowestIndex and discoveryIndex array)
+
+It partitions the edges of an undirected graph into exactly two classes: 
+1. tree edges and 
+2. back edges.  (edge is not processed but other vertex is discovered but not processed)
+
+The tree edges discover new vertices, and are those encoded in the parent relation. 
+
+Back edges are those whose other endpoint is an ancestor of the vertex being expanded,
+so they point back into the tree.
+
+
+(Skiena Algo design manual)
+
 # strongly connected components Tarjan
 
 detect back edge
@@ -50,6 +78,19 @@ single strongly connected component
 augmenting path : initial and final vertex not in matching
 
 alternating path : edges belong alternately to matching
+
+# topological sorting
+
+BFS
+
+for every edge, decrement indegree on every incoming edge
+
+when indegree of vertex is zero, add to queue
+
+pop from queue and add vertex to sorted list
+
+(Skiena)
+
 
 # shortest path
 

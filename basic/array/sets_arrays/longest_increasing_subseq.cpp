@@ -1,11 +1,11 @@
+    /*
     L(i) = 1 + max [L(j)] for all j < i and arr[j] < arr[i]
 
 1) O(n^2) soln Dynamic Programming
 2) n.log(n) soln using pred[i] and max[i]
-3) solve using longest common subseq between the set and its sorted version
+3) longest common subseq (set , its sorted version)
 
 Related to Young's tableau - Schensted
-
 
 http://www.geeksforgeeks.org/dynamic-programming-set-3-longest-increasing-subsequence/
 
@@ -20,7 +20,10 @@ So the LIS problem has optimal substructure property as the main problem can be 
 
 Overlapping Subproblems:
 Following is simple recursive implementation of the LIS problem. The implementation simply follows the recursive structure mentioned above. The value of lis ending with every element is returned using max_ending_here. The overall lis is returned using pointer to a variable max.
+*/
+
 /* A Naive recursive implementation of LIS problem */
+
 #include<stdio.h>
 #include<stdlib.h>
  
@@ -31,6 +34,7 @@ Following is simple recursive implementation of the LIS problem. The implementat
       max_ref is used this purpose.
 The value of LIS of full array of size n is stored in *max_ref which is our final result
 */
+
 int _lis( int arr[], int n, int *max_ref)
 {
     /* Base case */
@@ -81,6 +85,7 @@ int main()
     return 0;
 }
 
+/*
 Considering the above implementation, following is recursion tree for an array of size 4. lis(n) gives us the length of LIS for arr[].
 
     
@@ -93,6 +98,8 @@ Considering the above implementation, following is recursion tree for an array o
 lis(1) 
 
 We can see that there are many subproblems which are solved again and again. So this problem has Overlapping Substructure property and recomputation of same subproblems can be avoided by either using Memoization or Tabulation. Following is a tabluated implementation for the LIS problem.
+
+*/
 /* Dynamic Programming implementation of LIS problem */
 #include<stdio.h>
 #include<stdlib.h>
@@ -136,6 +143,7 @@ int main()
   return 0;
 }
 
+/*
 Note that the time complexity of the above Dynamic Programmig (DP) solution is O(n^2) and there is a O(nLogn) solution for the LIS problem (see this). We have not discussed the nLogn solution here as the purpose of this post is to explain Dynamic Programmig with a simple example. 
 
 The algorithm outlined below solves the longest increasing subsequence problem efficiently with arrays and binary searching. It processes the sequence elements in order, maintaining the longest increasing subsequence found so far. Denote the sequence values as X[0], X[1], etc. Then, after processing X[i], the algorithm will have stored values in two arrays:
@@ -199,12 +207,20 @@ The algorithm, then, proceeds as follows:
 Because the algorithm performs a single binary search per sequence element, its total time can be expressed using Big O notation as O(n log n). Fredman (1975) discusses a variant of this algorithm, which he credits to Donald Knuth; in the variant that he studies, the algorithm tests whether each value X[i] can be used to extend the current longest increasing sequence, in constant time, prior to doing the binary search. With this modification, the algorithm uses at most n log2 n − n log2log2 n + O(n) comparisons in the worst case, which is optimal for a comparison-based algorithm up to the constant factor in the O(n) term.[5]:w
 
 =================
+*/
 
+/*
 http://www.geeksforgeeks.org/dynamic-programming-set-14-variations-of-lis/
 
-We have discussed Dynamic Programming solution for Longest Increasing Subsequence problem in this post and a O(nLogn) solution in this post. Following are commonly asked variations of the standard LIS problem.
+We have discussed Dynamic Programming solution for Longest Increasing Subsequence problem in this post and a O(nLogn) solution in this post. 
+Following are commonly asked variations of the standard LIS problem.
 
-1. Building Bridges: Consider a 2-D map with a horizontal river passing through its center. There are n cities on the southern bank with x-coordinates a(1) … a(n) and n cities on the northern bank with x-coordinates b(1) … b(n). You want to connect as many north-south pairs of cities as possible with bridges such that no two bridges cross. When connecting cities, you can only connect city i on the northern bank to city i on the southern bank.
+1. Building Bridges: Consider a 2-D map with a horizontal river passing through its center. 
+There are n cities on the southern bank with x-coordinates a(1) … a(n) 
+and n cities on the northern bank with x-coordinates b(1) … b(n). 
+
+You want to connect as many north-south pairs of cities as possible with bridges such that no two bridges cross. 
+When connecting cities, you can only connect city i on the northern bank to city i on the southern bank.
 
 8     1     4     3     5     2     6     7  
 <---- Cities on the other bank of river---->
@@ -217,17 +233,15 @@ We have discussed Dynamic Programming solution for Longest Increasing Subsequenc
 Source: Dynamic Programming Practice Problems. The link also has well explained solution for the problem.
 
 
-
 2. Maximum Sum Increasing Subsequence: Given an array of n positive integers. Write a program to find the maximum sum subsequence of the given array such that the intgers in the subsequence are sorted in increasing order. For example, if input is {1, 101, 2, 3, 100, 4, 5}, then output should be {1, 2, 3, 100}. The solution to this problem has been published here.
-
 
 
 3. The Longest Chain You are given pairs of numbers. In a pair, the first number is smaller with respect to the second number. Suppose you have two sets (a, b) and (c, d), the second set can follow the first set if b < c. So you can form a long chain in the similar fashion. Find the longest chain which can be formed. The solution to this problem has been published here.
 
-
-
 4. Box Stacking You are given a set of n types of rectangular 3-D boxes, where the i^th box has height h(i), width w(i) and depth d(i) (all real numbers). You want to create a stack of boxes which is as tall as possible, but you can only stack a box on top of another box if the dimensions of the 2-D base of the lower box are each strictly larger than those of the 2-D base of the higher box. Of course, you can rotate a box so that any side functions as its base. It is also allowable to use multiple instances of the same type of box.
 Source: Dynamic Programming Practice Problems. The link also has well explained solution for the problem.
+
+*/
 
 
 
