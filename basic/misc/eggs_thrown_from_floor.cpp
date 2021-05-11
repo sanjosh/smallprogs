@@ -1,4 +1,5 @@
 
+/*
 IMPORTANT
 TODO
 
@@ -97,6 +98,8 @@ Since we need to minimize the number of trials in worst case, we take the maximu
 
 2) Overlapping Subproblems
 Following is recursive implementation that simply follows the recursive structure mentioned above.
+*/
+
 # include <stdio.h>
 # include <limits.h>
  
@@ -139,6 +142,7 @@ int main()
     return 0;
 }
 
+/*
 Output:
 Minimum number of trials in worst case with 2 eggs and 10 floors is 4
 
@@ -166,6 +170,8 @@ Partial recursion tree for 2 eggs and 4 floors.
 Since same suproblems are called again, this problem has Overlapping Subprolems property. So Egg Dropping Puzzle has both properties (see this and this) of a dynamic programming problem. Like other typical Dynamic Programming(DP) problems, recomputations of same subproblems can be avoided by constructing a temporary array eggFloor[][] in bottom up manner.
 
 Dynamic Programming Solution
+*/
+
 Following is C/C++ implementation for Egg Dropping problem using Dynamic Programming.
 # include <stdio.h>
 # include <limits.h>
@@ -223,6 +229,7 @@ int main()
     return 0;
 }
 
+/*
 Output:
 Minimum number of trials in worst case with 2 eggs and 36 floors is 8
 
@@ -233,3 +240,4 @@ As an exercise, you may try modifying the above DP solution to print all interme
 
 References:
 http://archive.ite.journal.informs.org/Vol4No1/Sniedovich/index.php
+*/

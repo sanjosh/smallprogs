@@ -49,6 +49,11 @@
 3. optimal substructure ? dynamic programming
 4. nothing possible : use backtracking
 
+# dynamic programming
+
+1. recursion - start from maxElem and then reduce down, instead of maxElem = 1 and increase
+1. return 1 on reaching leaf node, to indicate valid solution
+
 # backtracking or recursive solutions
 
 1. beware of infinite loops - use visitedSet, use visitedPath, use ranking to move in right direction

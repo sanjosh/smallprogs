@@ -1,5 +1,7 @@
 
+/*
 http://www.geeksforgeeks.org/program-nth-catalan-number/
+*/
 
 // A recursive function to find nth catalan number
 unsigned long int catalan(unsigned int n)
@@ -15,8 +17,14 @@ unsigned long int catalan(unsigned int n)
     return res;
 }
 
+/*
 Dynamic Programming Solution
-We can observe that the above recursive implementation does a lot of repeated work (we can the same by drawing recursion tree). Since there are overlapping subproblems, we can use dynamic programming for this. Following is a Dynamic programming based implementation in C++.
+We can observe that the above recursive implementation does 
+a lot of repeated work (we can the same by drawing recursion tree). 
+Since there are overlapping subproblems, we can use dynamic 
+programming for this. Following is a Dynamic programming based implementation in C++.
+
+*/
 #include<iostream>
 using namespace std;
  
@@ -42,11 +50,8 @@ unsigned long int catalanDP(unsigned int n)
     return catalan[n];
 }
 
+/*
 http://www.geeksforgeeks.org/dynamic-programming-set-37-boolean-parenthesization-problem/
-
-
-
-
 
 Symbols
     'T' ---> true 
@@ -76,11 +81,13 @@ Output: 1 which is (),
     I gave a complex solution involving segment tree in which he pointed out the mistakes and then asked to write a code to check if a given expression is balanced or not.
 
 Solution:
-Let T(i, j) represents the number of ways to parenthesize the symbols between i and j (both inclusive) such that the subexpression between i and j evaluates to true.
+Let T(i, j) represents the number of ways to parenthesize the symbols between i and j (both inclusive) 
+such that the subexpression between i and j evaluates to true.
 
 trueeq
 
-Let F(i, j) represents the number of ways to parenthesize the symbols between i and j (both inclusive) such that the subexpression between i and j evaluates to false.
+Let F(i, j) represents the number of ways to parenthesize the symbols between i and j (both inclusive) 
+such that the subexpression between i and j evaluates to false.
 
 falseeq
 
@@ -92,7 +99,14 @@ T(i, i) = 0 if symbol[i] = 'F'
 F(i, i) = 1 if symbol[i] = 'F' 
 F(i, i) = 0 if symbol[i] = 'T'
 
-If we draw recursion tree of above recursive solution, we can observe that it many overlapping subproblems. Like other dynamic programming problems, it can be solved by filling a table in bottom up manner. Following is C++ implementation of dynamic programming solution.
+If we draw recursion tree of above recursive solution, 
+we can observe that it many overlapping subproblems. 
+
+Like other dynamic programming problems, it can be solved by filling a table in bottom up manner. 
+Following is C++ implementation of dynamic programming solution.
+
+*/
+
 #include<iostream>
 #include<cstring>
 using namespace std;
@@ -167,6 +181,7 @@ int main()
     return 0;
 }
 
+/*
 Output:
 
 4
@@ -176,16 +191,25 @@ Auxiliary Space: O(n2)
 
 http://www.geeksforgeeks.org/check-for-balanced-parentheses-in-an-expression/
 
-Given an expression string exp, write a program to examine whether the pairs and the orders of “{“,”}”,”(“,”)”,”[","]” are correct in exp. For example, the program should print true for exp = “[()]{}{[()()]()}” and false for exp = “[(])”
+Given an expression string exp, write a program to examine whether the pairs 
+and the orders of “{“,”}”,”(“,”)”,”[","]” are correct in exp. 
+
+For example, the program should print true for exp = “[()]{}{[()()]()}” and false for exp = “[(])”
 
 Algorithm:
+
 1) Declare a character stack S.
+
 2) Now traverse the expression string exp.
     a) If the current character is a starting bracket (‘(‘ or ‘{‘ or ‘[') then push it to stack.
-    b) If the current character is a closing bracket (')' or '}' or ']‘) then pop from stack and if the popped character is the matching starting bracket then fine else parenthesis are not balanced.
+    b) If the current character is a closing bracket (')' or '}' or ']‘) then pop from stack 
+       and if the popped character is the matching starting bracket then fine else parenthesis are not balanced.
+
 3) After complete traversal, if there is some starting bracket left in stack then “not balanced”
 
 Implementation:
+
+*/
 #include<stdio.h>
 #include<stdlib.h>
 #define bool int
@@ -317,6 +341,7 @@ int pop(struct sNode** top_ref)
   }
 }
 
+/*
 Time Complexity: O(n)
 Auxiliary Space: O(n) for stack.
 
@@ -333,9 +358,17 @@ for n=2
 {{}}
 
 Algorithm:
-Keep track of counts of open and close brackets. Initialize these counts as 0. Recursively call the _printParenthesis() function until open bracket count is less than the given n. If open bracket count becomes more than the close bracket count, then put a closing bracket and recursively call for the remaining brackets. If open bracket count is less than n, then put an opening bracket and call _printParenthesis() for the remaining brackets.
+Keep track of counts of open and close brackets. 
+Initialize these counts as 0. 
+Recursively call the _printParenthesis() function until open bracket count is less than the given n. 
+
+If open bracket count becomes more than the close bracket count, then put a closing bracket and recursively call for the remaining brackets. 
+
+If open bracket count is less than n, then put an opening bracket and call _printParenthesis() for the remaining brackets.
 
 Thanks to Shekhu for providing the below code.
+*/
+
 # include<stdio.h>
 # define MAX_SIZE 100
  

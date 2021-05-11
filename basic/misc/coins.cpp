@@ -14,7 +14,6 @@ http://en.wikipedia.org/wiki/Change-making_problem
 
 http://en.wikipedia.org/wiki/Package-merge_algorithm#The_coin_collector.27s_problem
 
-http://www.geeksforgeeks.org/dynamic-programming-set-7-coin-change/
 http://www.algorithmist.com/index.php/Coin_Change
 
 */
@@ -96,7 +95,7 @@ int main()
 }
 
 
-
+/*
 ========
 
 Given a value N, if we want to make change for N cents, and we have infinite supply of each of S = { S1, S2, .. , Sm} valued coins, how many ways can we make the change? The order of coins doesn’t matter.
@@ -104,6 +103,7 @@ Given a value N, if we want to make change for N cents, and we have infinite sup
 For example, for N = 4 and S = {1,2,3}, there are four solutions: {1,1,1,1},{1,1,2},{2,2},{1,3}. So output should be 4. For N = 10 and S = {2, 5, 3, 6}, there are five solutions: {2,2,2,2,2}, {2,2,3,3}, {2,2,6}, {2,3,5} and {5,5}. So the output should be 5.
 
 1) Optimal Substructure
+
 To count total number solutions, we can divide all set solutions in two sets.
 1) Solutions that do not contain mth coin (or Sm).
 2) Solutions that contain at least one Sm.
@@ -113,6 +113,8 @@ Therefore, the problem has optimal substructure property as the problem can be s
 
 2) Overlapping Subproblems
 Following is a simple recursive implementation of the Coin Change problem. The implementation simply follows the recursive structure mentioned above.
+*/
+
 #include<stdio.h>
  
 // Returns the count of ways we can sum  S[0...m-1] coins to get sum n
@@ -145,6 +147,7 @@ int main()
     return 0;
 }
 
+/*
 It should be noted that the above function computes the same subproblems again and again. See the following recursion tree for S = {1, 2, 3} and n = 5.
 The function C({1}, 3) is called two times. If we draw the complete tree, then we can see that there are many subproblems being called more than once.
 
@@ -169,6 +172,7 @@ C({1,2,3}, -1)  C({1,2}, 2)        C({1,2}, 3)    C({1}, 5)
 Since same suproblems are called again, this problem has Overlapping Subprolems property. So the Coin Change problem has both properties (see this and this) of a dynamic programming problem. Like other typical Dynamic Programming(DP) problems, recomputations of same subproblems can be avoided by constructing a temporary array table[][] in bottom up manner.
 
 Dynamic Programming Solution
+*/
 #include<stdio.h>
  
 int count( int S[], int m, int n )
@@ -211,6 +215,7 @@ int main()
     return 0;
 }
 
+/*
 Time Complexity: O(mn)
 
 Following is a simplified version of method 2. The auxiliary space required here is O(n) only.
@@ -240,3 +245,4 @@ int count( int S[], int m, int n )
 Thanks to Rohan Laishram for suggesting this space optimized version.
 
 Please write comments if you find anything incorrect, or you want to share more information about the topic discussed above.
+*/

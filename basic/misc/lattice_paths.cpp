@@ -104,11 +104,16 @@ main()
 
 //=====================
 
+/*
+
+
 The problem is to print all the possible paths from top left to bottom right of a mXn matrix with the constraints that from each cell you can either move only to right or down.
 
 The algorithm is a simple recursive algorithm, from each cell first print all paths by going down and then print all paths by going right. Do this recursively for each cell encountered.
 
 Following is C++ implementation of the above algorithm.
+*/
+
 #include<iostream>
 using namespace std;
  
@@ -173,6 +178,7 @@ int main()
     return 0;
 }
 
+/*
 Output:
 
 1 4 5 6
@@ -180,3 +186,4 @@ Output:
 1 2 3 6
 
 Note that in the above code, the last line of printAllPathsUtil() is commented, If we uncomment this line, we get all the paths from the top left to bottom right of a nXm matrix if the diagonal movements are also allowed. And also if moving to some of the cells are not permitted then the same code can be improved by passing the restriction array to the above function and that is left as an exercise.
+*/

@@ -1,4 +1,5 @@
  
+/*
 http://www.geeksforgeeks.org/count-ways-reach-nth-stair/
 
 There are n stairs, a person standing at the bottom wants to reach the top. The person can climb either 1 stair or 2 stairs at a time. Count the number of ways, the person can reach the top.
@@ -35,6 +36,7 @@ ways(2) = fib(3) = 2
 ways(3) = fib(4) = 3
 
 So we can use function for fibonacci numbers to find the value of ways(n). Following is C++ implementation of the above idea.
+*/
 // A C program to count number of ways to reach n't stair when
 // a person can climb 1, 2, ..m stairs at a time.
 #include<stdio.h>
@@ -62,6 +64,7 @@ int main ()
   return 0;
 }
 
+/*
 Output:
 
 Number of ways = 5
@@ -76,6 +79,7 @@ We can write the recurrence as following.
    ways(n, m) = ways(n-1, m) + ways(n-2, m) + ... ways(n-m, m) 
 
 Following is C++ implementation of above recurrence.
+*/
 // A C program to count number of ways to reach n't stair when
 // a person can climb either 1 or 2 stairs at a time
 #include<stdio.h>
@@ -105,11 +109,13 @@ int main ()
     return 0;
 }
 
+/*
 Output:
 
 Number of ways = 5
 
 The time complexity of above solution is exponential. It can be optimized to O(mn) by using dynamic programming. Following is dynamic programming based solution. We build a table res[] in bottom up manner.
+*/
 // A C program to count number of ways to reach n't stair when
 // a person can climb 1, 2, ..m stairs at a time
 #include<stdio.h>
@@ -142,6 +148,8 @@ int main ()
     return 0;
 }
 
+/*
 Output:
 
 Number of ways = 5
+*/
