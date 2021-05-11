@@ -189,3 +189,27 @@ int mid = low + (high - low) / 2
 instead of
 int mid = low + high/2
 ```
+
+
+# Trees
+
+Cartesian tree https://www.geeksforgeeks.org/cartesian-tree/
+
+Skip list 
+
+Treap
+
+Ternary search tree
+
+Interval tree
+
+Tournament tree
+
+Gomory-Hu tree https://www.geeksforgeeks.org/gomory-hu-tree-introduction/
+
+Merkle tree
+
+Suffix tree
+
+Trie
+

@@ -30,9 +30,24 @@ find if string is interleaving of 2 other strings
 
 reverse min number of elem to get lexicographically smaller string
 
-edit distance
+### edit distance
 
-longest common subsequence
+### longest common subsequence
+
+
+### all unique substrings
+
+all paths in suffix tree
+
+
+### longest repeated substring
+
+Build Suffix tree :
+
+for repeat = 2, look for internal node which is deepest
+For repeat = k, look for internal node which has k leafs
+
+
 
 ## pattern search
 
@@ -54,6 +69,18 @@ http://www-igm.univ-mlv.fr/~lecroq/string/index.html
     longest subsequence
 
     how to elim duplicates inplace (keep 2 ptrs)
+
+## pattern search with z-array
+
+
+Concat string and pattern = pattern$text
+
+Then use Z array to find all text which has pattern
+
+ In Z array, if Z value at any point is equal to pattern length, then pattern is present at that point.
+
+https://www.geeksforgeeks.org/z-algorithm-linear-time-pattern-searching-algorithm/
+
 
 ## Boyer-Moore
 
@@ -81,6 +108,11 @@ Commentz-Walter - used in gnu grep
 ## smallest window
 
 https://www.geeksforgeeks.org/find-the-smallest-window-in-a-string-containing-all-characters-of-another-string/
+
+Detect first window when all characters found
+
+Change window if new character was previous minimum
+
 
 ## longest common extension
 

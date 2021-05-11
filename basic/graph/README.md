@@ -9,12 +9,11 @@
 
 path exploration variables should be on stack
 
-
 # BFS
 
 1. vertices discovered in increasing order of distance from root
 1. the shortest path tree is only useful if BFS was performed with x as the root of the search. 
-1. Second, BFS only gives the shortest path if the graph is unweighted.
+1. BFS only gives the shortest path if the graph is unweighted.
 
 # DFS
 
