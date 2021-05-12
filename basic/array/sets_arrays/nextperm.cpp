@@ -19,6 +19,21 @@ Swap s[i] with s[j].
 
 Reverse the order of all of the elements [i + 1, N]
 
+[ 35421 ]
+  ^
+  |
+  pivot
+
+[ 35421 ]
+    ^
+    |
+   farthest to right which is greater than pivot
+
+[ 45321 ] swap
+
+[ 41235] reverse all in (i + 1, N) range
+
+
 https://stackoverflow.com/questions/1622532/algorithm-to-find-next-greater-permutation-of-a-given-string
 
 */
