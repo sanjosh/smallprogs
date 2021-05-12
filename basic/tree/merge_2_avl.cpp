@@ -2,11 +2,18 @@
 /*
 http://dhruvbird.blogspot.in/2014/01/merging-avl-trees.html
 
-Problem Statement: Given two AVL trees T1 and T2, where the largest key in T1 is less than the smallest key in T2, Join(T1, T2) returns an AVL tree containing the union of the elements in T1 and T2. Give an algorithm (in pseudocode) for Join() that runs in time O(log n), where n is the size of the resulting AVL tree. Justify the correctness and efficiency of your algorithm.
+Problem Statement: Given two AVL trees T1 and T2, where the largest key in T1 is less than the smallest key in T2, 
+Join(T1, T2) returns an AVL tree containing the union of the elements in T1 and T2. 
+Give an algorithm (in pseudocode) for Join() that runs in time O(log n), where n is the size of the resulting AVL tree. 
+
+Justify the correctness and efficiency of your algorithm.
 
 Problem statement and solution stolen from these assignment solutions.
 
-Solution: Begin by computing the heights h1 of T1 and h2 of T2. This takes time O(h1 + h2). You simply traverse a path from the root, going to left child if the balance factor is -1, to the right child if it is positive, and to any of the children if the balance factor is 0, until you reach a leaf. Assume that h1 > h2; the other case is symmetric.
+Solution: Begin by computing the heights h1 of T1 and h2 of T2. 
+This takes time O(h1 + h2). 
+You simply traverse a path from the root, going to left child if the balance factor is -1, to the right child if it is positive, 
+and to any of the children if the balance factor is 0, until you reach a leaf. Assume that h1 > h2; the other case is symmetric.
 
 Next, DELETE the smallest element x from T2, leaving T'2 of height h. This takes O(h2) time.
 
@@ -23,7 +30,10 @@ v = root(T1)
 
     This takes O(h1) time.
 
-    The reason we choose a node with height h or h + 1 is because if we are at a node of height h, and we move to its parent node, then the height of the new (parent) node might increase by 2 (to h + 1), since the sibling of node from which we moved up might have a height greater (by 1) than its sibling.
+    The reason we choose a node with height h or h + 1 is because 
+    if we are at a node of height h, and we move to its parent node, 
+    then the height of the new (parent) node might increase by 2 (to h + 1), 
+    since the sibling of node from which we moved up might have a height greater (by 1) than its sibling.
 
     Let u denote the parent of v.
 

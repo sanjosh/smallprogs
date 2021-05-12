@@ -3,6 +3,7 @@
 http://www.geeksforgeeks.org/transform-bst-sum-tree/
 
 Method 2 (Using only one traversal)
+
 By leveraging the fact that the tree is a BST, we can find an O(n) solution. 
 The idea is to traverse BST in reverse inorder. 
 Reverse inorder traversal of a BST gives us keys in decreasing order. 

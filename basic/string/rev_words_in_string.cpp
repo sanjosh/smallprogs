@@ -1,4 +1,5 @@
 
+/*
 TODO
 That is, given a sentence like this
 
@@ -29,6 +30,7 @@ boy good a am I
 
 
 Here is some C code to do the same ....
+*/
 
 
 /*
@@ -90,6 +92,7 @@ t = *l;
 
 
 
+/*
 
 Method2
 Another way to do it is, allocate as much memory as the input for the final output. Start from the right of the string and copy the words one by one to the output.
@@ -124,3 +127,4 @@ Create a linked list like
 
 
 Now its a simple question of reversing the linked list!. There are plenty of algorithms to reverse a linked list easily. This also keeps track of the number of spaces between the words. Note that the linked list algorithm, though inefficient, handles multiple spaces between the words really well. 
+*/

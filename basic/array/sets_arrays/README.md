@@ -26,6 +26,8 @@ use stack of open problems  - as in max area of histogram - see karumanchi chap5
 1. Divide Array into bins - Pigeonhole - to find duplicate elems 
 1. Binary search / Fibonnaci search
 1. swap using (x + y * sz)/sz = y and (x + y * sz)%sz = x
+1. quickselect - order statistics
+1. Mo's algorithm - sort queries in order and execute
 
 ## trees
 
@@ -36,7 +38,7 @@ https://www.geeksforgeeks.org/segment-tree-set-1-sum-of-given-range/
 ### Fenwick or BIT
  
  leftmost bit (i) = i & -i
- add and sub this to get paretn
+ add and sub this to get parent
 
 https://www.geeksforgeeks.org/binary-indexed-tree-or-fenwick-tree-2/
 
@@ -50,11 +52,17 @@ isomorphic cartesian tree
 
 Build a Cartesian tree for the first element, then the first two, then the first three, then the first four
 
-
 ### sparse table RMQ
 
-## inversion table
+store ranges 
+(0, 1), (0, 2), (0, 4)
+(1, 1), (1, 2), (1, 4)
 
+to compute (3, 8) - min(3, 4) and (7, 4)
+
+for query [L, R] - min ([L, largest range less than R], [smallest offset greater than L, R])
+
+## inversion table
 
 1) Inversion table uniquely determines permutation (Marshall Hall in Knuth vol 3)
 
@@ -269,7 +277,7 @@ https://www.geeksforgeeks.org/longest-increasing-subsequence-dp-3/
 
 https://www.geeksforgeeks.org/longest-monotonically-increasing-subsequence-size-n-log-n/
 
-## Max Sum subsequence with at least k distinct -
+## Max Sum subsequence with at least k distant
 
 http://www.geeksforgeeks.org/maximum-sum-subsequence-least-k-distant-elements/
 

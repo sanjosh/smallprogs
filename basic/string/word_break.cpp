@@ -1,4 +1,5 @@
 
+/*
 Given an input string and a dictionary of words, find out if the input string can be segmented into a space-separated sequence of dictionary words. See following examples for more details.
 This is a famous Google interview question, also being asked by many other companies now a days.
 
@@ -21,6 +22,8 @@ If the recursive call for suffix returns true, we return true, otherwise we try 
 If we have tried all prefixes and none of them resulted in a solution, we return false.
 
 We strongly recommend to see substr function which is used extensively in following implementations.
+*/
+
 // A recursive program to test whether a given string can be segmented into
 // space separated words in dictionary
 #include <iostream>
@@ -176,6 +179,7 @@ int main()
     return 0;
 }
 
+/*
 Output:
 
 Yes
@@ -201,3 +205,4 @@ Input: ilikesamsungmobile
 Output:
 i like sam sung mobile
 i like samsung mobile
+*/

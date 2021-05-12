@@ -1,4 +1,5 @@
 
+/*
 // http://www.geeksforgeeks.org/level-order-traversal-in-spiral-form/
 Write a function to print spiral order traversal of a tree. For below tree, function should print 1, 2, 3, 4, 5, 6, 7.
 
@@ -15,7 +16,7 @@ printSpiral(tree)
   bool ltr = 0;
   for d = 1 to height(tree)
      printGivenLevel(tree, d, ltr);
-     ltr ~= ltr /*flip ltr*/
+     ltr ~= ltr //flip ltr
 
 Function to print all nodes at a given level
 
@@ -32,6 +33,7 @@ else if level greater than 1, then
         printGivenLevel(tree->right, level-1, ltr);
 
 Following is C implementation of above algorithm.
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -139,6 +141,7 @@ int main()
     return 0;
 }
 
+/*
 Output:
 
 Spiral Order traversal of binary tree is
@@ -149,7 +152,13 @@ Time Complexity: Worst case time complexity of the above method is O(n^2). Worst
 
 
 Method 2 (Iterative)
-We can print spiral order traversal in O(n) time and O(n) extra space. The idea is to use two stacks. We can use one stack for printing from left to right and other stack for printing from right to left. In every iteration, we have nodes of one level in one of the stacks. We print the nodes, and push nodes of next level in other stack.
+We can print spiral order traversal in O(n) time and O(n) extra space. 
+The idea is to use two stacks. 
+We can use one stack for printing from left to right and other stack for printing from right to left. 
+In every iteration, we have nodes of one level in one of the stacks. We print the nodes, and push nodes of next level in other stack.
+
+*/
+
 // C++ implementation of a O(n) time method for spiral order traversal
 #include <iostream>
 #include <stack>
@@ -234,6 +243,8 @@ int main()
     return 0;
 }
 
+/*
 Output:
 
 Spiral Order traversal of binary tree is 1 2 3 4 5 6 7
+*/

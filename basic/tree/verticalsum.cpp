@@ -1,4 +1,5 @@
 
+/*
 find vertical sum
 
 Given a Binary Tree, find vertical sum of the nodes that are in same vertical line. Print all sums through different vertical lines.
@@ -26,6 +27,7 @@ We need to check the Horizontal Distances from root for all nodes. If two nodes 
 We can do inorder traversal of the given Binary Tree. While traversing the tree, we can recursively calculate HDs. We initially pass the horizontal distance as 0 for root. For left subtree, we pass the Horizontal Distance as Horizontal distance of root minus 1. For right subtree, we pass the Horizontal Distance as Horizontal Distance of root plus 1.
 
 Following is Java implementation for the same. HashMap is used to store the vertical sums for different horizontal distances. Thanks to Nages for suggesting this method.
+*/
 import java.util.HashMap;
   
 // Class for a tree node
@@ -126,6 +128,8 @@ public class Main {
     }
 }
 
+/*
 See this for a sample run.
 
 Time Complexity: O(n)
+*/

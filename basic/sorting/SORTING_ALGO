@@ -36,6 +36,16 @@ do merge sort on them in k-ary fashion
 
 8) Timsort : sort the small pieces using insertion sort, then merge pieces using merge sort
 
+9) Counting sort : if elem in range n (CDF)
+
+keep count of each elements
+cumulative count indicates position in array
+
+10) Radix sort : if elem in range 1 to n^2
+
+from lsb to msb, sort array using counting sort as subroutine
+
+
 quick sort vs merge sort
 
 1) quick sort is space constant; merge requires 2N + 

@@ -2,11 +2,11 @@
 ## string search
 
 * Boyer-Moore
-* KMP
+* KMP (longest prefix array on pattern; shift forward on mismatch)
 * Factorization algo 
-* Suffix tree
+* binary search for prefix in suffix array/suffix tree
 * Trie
-* Burrows-Wheeler
+* Burrows-Wheeler (all rotations of string, sort and take last column)
 
 ## problems
 
@@ -133,19 +133,40 @@ https://www.geeksforgeeks.org/longest-common-extension-lce-set-2-reduction-rmq/
 
 ## suffix array ( sorted on suffixes)
 
+position of each suffix, stored in sorted order
+
+binary search on suffix array
+
 ## inverse suffix array
 
+lexicographic rank of each suffix 
+
+SA-inverse[SA[i]] = i
+
 ## LCP array (longest common prefix between 2 entries in suffix array)
+
+LCP[i] = longest common prefix of suffixes indexed at i and (i+1)
+
+Kasai algo
+
+https://www.geeksforgeeks.org/%C2%AD%C2%ADkasais-algorithm-for-construction-of-lcp-array-from-suffix-array/
 
 Augmenting the suffix array with the LCP array allows one to efficiently simulate top-down and bottom-up 
 traversals of the suffix tree,[1][2] speeds up pattern matching on the suffix array[3] and is a 
 prerequisite for compressed suffix trees.[4]
 
-## LPS array
+## LPS (palindromic) array used in palindrome
+
+at each index, how many elements form a mirror
+
+## LPS (prefix) array
 
 longest prefix which is also suffix - used in KMP
 
 ## Z-array (prefix length array)
+
+during computation, Keep window [L, R] over which prefix is matched
+if cur > L, then compute prefix match going forward
 
 Z[i] = Length of longest substring at current position (I) which is also a prefix of entire string
 
