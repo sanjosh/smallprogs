@@ -194,6 +194,9 @@ int mid = low + high/2
 # Trees
 
 Cartesian tree https://www.geeksforgeeks.org/cartesian-tree/
+1. The tree obeys in the min (or max) heap property – each node is less (or greater) than its children.
+2. An inorder traversal of the nodes yields the values in the same order in which they appear in the initial sequence.
+
 
 Skip list 
 
@@ -212,4 +215,11 @@ Merkle tree
 Suffix tree
 
 Trie
+
+van Emde Boas tree 
+1. only integers, n = 2^k
+1. no duplicates
+1. tiered bitvectors 
+1. search, successor, predecessor, insert and delete operations in O(lglgN) 
+1. keeps min and max
 

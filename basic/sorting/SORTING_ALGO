@@ -45,6 +45,9 @@ cumulative count indicates position in array
 
 from lsb to msb, sort array using counting sort as subroutine
 
+11) Cartesian tree sorting (when input almost sorted)
+
+https://www.geeksforgeeks.org/cartesian-tree-sorting/
 
 quick sort vs merge sort
 

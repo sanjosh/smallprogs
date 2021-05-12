@@ -46,6 +46,16 @@ Counterexample - 4/4 = 6/6
 
 if both sets equal, sum is equal
 
+https://www.geeksforgeeks.org/partition-an-array-of-non-negative-integers-into-two-subsets-such-that-average-of-both-the-subsets-is-equal/
+
+since subsetSum/X = TotalSum/N
+
+Find Subset of Size X such that subsetSum = X * TotalSum/N
+
+either excluding or including each element
+
+partition(ind, curr_sum, curr_size) = partition(ind+1, curr_sum, curr_size) || partition(ind+1, curr_sum – val[ind], curr_size-1).
+
 
 */
 

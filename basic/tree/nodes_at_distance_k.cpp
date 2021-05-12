@@ -9,20 +9,33 @@ he asked for error-free code.
 
 http://www.geeksforgeeks.org/print-nodes-distance-k-given-node-binary-tree/
 
-*/
 
 
 We strongly recommend to minimize the browser and try this yourself first.
 
 There are two types of nodes to be considered.
-1) Nodes in the subtree rooted with target node. For example if the target node is 8 and k is 2, then such nodes are 10 and 14.
-2) Other nodes, may be an ancestor of target, or a node in some other subtree. For target node 8 and k is 2, the node 22 comes in this category.
 
-Finding the first type of nodes is easy to implement. Just traverse subtrees rooted with the target node and decrement k in recursive call. When the k becomes 0, print the node currently being traversed (See this for more details). Here we call the function as printkdistanceNodeDown().
+1) Nodes in the subtree rooted with target node. 
+For example if the target node is 8 and k is 2, then such nodes are 10 and 14.
 
-How to find nodes of second type? For the output nodes not lying in the subtree with the target node as the root, we must go through all ancestors. For every ancestor, we find its distance from target node, let the distance be d, now we go to other subtree (if target was found in left subtree, then we go to right subtree and vice versa) of the ancestor and find all nodes at k-d distance from the ancestor.
+2) Other nodes, may be an ancestor of target, or a node in some other subtree. 
+For target node 8 and k is 2, the node 22 comes in this category.
+
+Finding the first type of nodes is easy to implement. 
+Just traverse subtrees rooted with the target node and decrement k in recursive call. 
+When the k becomes 0, print the node currently being traversed (See this for more details). 
+Here we call the function as printkdistanceNodeDown().
+
+How to find nodes of second type? 
+For the output nodes not lying in the subtree with the target node as the root, 
+we must go through all ancestors. 
+For every ancestor, we find its distance from target node, let the distance be d, 
+now we go to other subtree (if target was found in left subtree, then we go to right subtree and vice versa) 
+of the ancestor and find all nodes at k-d distance from the ancestor.
 
 Following is C++ implementation of the above approach.
+
+*/
 #include <iostream>
 using namespace std;
  

@@ -2,9 +2,12 @@
 /*
 http://www.geeksforgeeks.org/full-and-complete-binary-tree-from-given-preorder-and-postorder-traversals/
 
-It is not possible to construct a general Binary Tree from preorder and postorder traversals (See this). But if know that the Binary Tree is Full, we can construct the tree without ambiguity. Let us understand this with the help of following example.
+It is not possible to construct a general Binary Tree from preorder and postorder traversals (See this). 
+But if know that the Binary Tree is Full, we can construct the tree without ambiguity. 
+Let us understand this with the help of following example.
 
 FUll -- every node has 0 or 2 nodes
+
 */
 
 #include <stdio.h>

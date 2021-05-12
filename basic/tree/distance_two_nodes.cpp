@@ -13,6 +13,8 @@ two options for distance
 what should node do ? initialize
 what should parent do ? increment by 1 and pass to parent
 
+find LCA
+
 */
 
 #include <iostream>
