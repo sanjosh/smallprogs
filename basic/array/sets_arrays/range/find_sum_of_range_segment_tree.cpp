@@ -1,4 +1,5 @@
 
+/*
 http://www.geeksforgeeks.org/segment-tree-set-1-sum-of-given-range/
 
 We have an array arr[0 . . . n-1]. We should be able to
@@ -41,6 +42,7 @@ Like tree construction and query operations, update can also be done recursively
 
 Implementation:
 Following is implementation of segment tree. The program implements construction of segment tree for any given array. It also implements query and update operations.
+*/
 // Program to show segment tree operations like construction, query and update
 #include <stdio.h>
 #include <math.h>
@@ -191,7 +193,9 @@ int main()
     return 0;
 }
 
+/*
 Output:
+
 
  
 Sum of values in given range = 15
@@ -203,3 +207,4 @@ Time Complexity for tree construction is O(n). There are total 2n-1 nodes, and v
 Time complexity to query is O(Logn). To query a sum, we process at most four nodes at every level and number of levels is O(Logn).
 
 The time complexity of update is also O(Logn). To update a leaf value, we process one node at every level and number of levels is O(Logn).
+*/

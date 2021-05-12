@@ -70,7 +70,8 @@ store array of ranges for each starting point and power-of-two size
 * size = 2^j for j = 0 to Log(n))
 
 ```
-table[0][3] = min(0, 7)
+row 0 = (0, 0), (0, 1), (0, 3), (0, 7) [ start, size]
+row 1 = (1, 0), (1, 1), (1, 3), (1, 7)
 ```
 
 to fill (L, R) entry, get min of (L, R-1) and (L + 2^j-1, R-1)
@@ -91,5 +92,6 @@ if range within query
 else
   return min of both nodes
 
+ O(1) time with O(n Log n) preprocessing time and O(n Log n) space
 
 https://www.geeksforgeeks.org/range-minimum-query-for-static-array/

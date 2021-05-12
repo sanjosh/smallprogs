@@ -27,12 +27,33 @@ use stack of open problems  - as in max area of histogram - see karumanchi chap5
 1. Binary search / Fibonnaci search
 1. swap using (x + y * sz)/sz = y and (x + y * sz)%sz = x
 
-Segment tree - internal node = sum(left + right) with range (left, right)
+## trees
+
+### Segment tree - internal node = sum(left + right) with range (left, right)
+
 https://www.geeksforgeeks.org/segment-tree-set-1-sum-of-given-range/
 
-Fenwick or BIT
+### Fenwick or BIT
+ 
+ leftmost bit (i) = i & -i
+ add and sub this to get paretn
+
 https://www.geeksforgeeks.org/binary-indexed-tree-or-fenwick-tree-2/
 
+### cartesian tree
+
+The Cartesian tree for an array is a binary tree obeying the min-heap property whose inorder traversal gives back the original array.
+
+https://web.stanford.edu/class/cs166/lectures/01/Small01.pdf
+
+isomorphic cartesian tree
+
+Build a Cartesian tree for the first element, then the first two, then the first three, then the first four
+
+
+### sparse table RMQ
+
+## inversion table
 
 
 1) Inversion table uniquely determines permutation (Marshall Hall in Knuth vol 3)
@@ -70,15 +91,13 @@ moving average is a filter
 
 trie
 
-
 ## RMQ
 
 for any computation (min, gcd, lcm) over ranges
 1. precompute 2D array 
 2. segment tree (tree which stores compute value over every decreasing sub-range)
-3. precompute over square root decomposition
-4. keep sparse table over for each [i, i + 2^j]  for all j < log(n)
-
+3. precompute over square root decomposition (O sq n space, O sq n time)
+4. keep sparse table over for each [i, i + 2^j]  for all j < log(n) [ space = nlogn, time = O(1) time with O(n Log n) preprocessing time and O(n Log n) space
 
 ## inversions
 

@@ -64,4 +64,3 @@ for each element
 
 */
 
-int getAscendingList(
