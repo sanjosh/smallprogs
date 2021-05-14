@@ -1,5 +1,6 @@
 
 
+/*
 http://www.geeksforgeeks.org/find-edge-disjoint-paths-two-vertices/
 Max flow
 
@@ -15,6 +16,7 @@ This problem can be solved by reducing it to maximum flow problem. Following are
 When we run Ford-Fulkerson, we reduce the capacity by a unit. Therefore, the edge can not be used again. So the maximum flow is equal to the maximum number of edge-disjoint paths.
 
 Following is C++ implementation of the above algorithm. Most of the code is taken from here.
+*/
 // C++ program to find maximum number of edge disjoint paths
 #include <iostream>
 #include <limits.h>
@@ -136,8 +138,10 @@ int main()
     return 0;
 }
 
+/*
 Output:
 
 There can be maximum 2 edge-disjoint paths from 0 to 7 
 
 Time Complexity: Same as time complexity of Edmonds-Karp implementation of Ford-Fulkerson (See time complexity discussed here)
+*/

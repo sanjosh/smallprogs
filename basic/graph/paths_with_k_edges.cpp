@@ -1,4 +1,6 @@
 
+/*
+
 http://www.geeksforgeeks.org/count-possible-paths-source-destination-exactly-k-edges/
 
 http://stackoverflow.com/questions/14272119/finding-the-number-of-paths-of-given-length-in-a-undirected-unweighted-graph
@@ -16,6 +18,7 @@ graph
 We strongly recommend to minimize the browser and try this yourself first.
 
 A simple solution is to start from u, go to all adjacent vertices and recur for adjacent vertices with k as k-1, source as adjacent vertex and destination as v. Following is C++ implementation of this simple solution.
+*/
 // C++ program to count walks from u to v with exactly k edges
 #include <iostream>
 using namespace std;
@@ -56,6 +59,7 @@ int main()
     return 0;
 }
 
+/*
 Output:
 
 2
@@ -63,6 +67,7 @@ Output:
 The worst case time complexity of the above function is O(Vk) where V is the number of vertices in the given graph. We can simply analyze the time complexity by drawing recursion tree. The worst occurs for a complete graph. In worst case, every internal node of recursion tree would have exactly n children.
 We can optimize the above solution using Dynamic Programming. The idea is to build a 3D table where first dimension is source, second dimension is destination, third dimension is number of edges from source to destination, and the value is count of walks. Like other Dynamic Programming problems, we fill the 3D table in bottom up manner.
 // C++ program to count walks from u to v with exactly k edges
+*/
 #include <iostream>
 using namespace std;
  
@@ -120,6 +125,7 @@ int main()
     return 0;
 }
 
+/*
 Output:
 
 2
@@ -127,3 +133,4 @@ Output:
 Time complexity of the above DP based solution is O(V3K) which is much better than the naive solution.
 
 We can also use Divide and Conquer to solve the above problem in O(V3Logk) time. The count of walks of length k from u to v is the [u][v]‘th entry in (graph[V][V])k. We can calculate power of by doing O(Logk) multiplication by using the divide and conquer technique to calculate power. A multiplication between two matrices of size V x V takes O(V3) time. Therefore overall time complexity of this method is O(V3Logk).
+*/

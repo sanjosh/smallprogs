@@ -6,6 +6,7 @@
 3. DFS O(V+E)
 4. earliest discovered time as in disc[vertex]=++counter; 
 5. earliest in subtree low[vertex] = min(low[vertex and its adjacents]) like union-find
+6. for early path pruning, use BFS over DFS
 
 path exploration variables should be on stack
 
@@ -14,6 +15,11 @@ path exploration variables should be on stack
 1. vertices discovered in increasing order of distance from root
 1. the shortest path tree is only useful if BFS was performed with x as the root of the search. 
 1. BFS only gives the shortest path if the graph is unweighted.
+
+O(V+E) on adjacency list
+O(V^2) on adjacency matrix
+
+since (V x adjacentE = sum of edges = E), hence it is E
 
 # DFS
 
