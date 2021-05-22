@@ -7,8 +7,9 @@
 4. earliest discovered time as in disc[vertex]=++counter; 
 5. earliest in subtree low[vertex] = min(low[vertex and its adjacents]) like union-find
 6. for early path pruning, use BFS over DFS
-
-path exploration variables should be on stack
+7. path exploration variables should be on stack
+8. transform to shortest path 
+9. start with dist[start] = 0 and all others = INF; then dist[v] = dist[u] + edge(u, v)
 
 # BFS
 
@@ -97,33 +98,44 @@ pop from queue and add vertex to sorted list
 (Skiena)
 
 
-# shortest path
+# djikstra shortest path
 
 for all j, distance(j) = INF
+distance(start) = 0
 
-update nearest distance to all vertices outside visited set
+add start to visitedSet
 
-visitedSet
-
-while count < all vertices
-   next = nearest vertex in NotVisitedSet with shortest distance 
+while visitedSet < all vertices
+   next = nearest vertex not in visitedSet with shortest distance 
    add next to visitedSet
    for each adjacent of next
-      distance(adj) = distance(next) + edge(next, adj)
+      if not visited and edge(adj, next) and distance(next) not INF
+         distance(adj) = min(distance(adj), distance(next) + edge(adj, next))
 
 O(V * V)
 
+can be O(V.logV) with a heap
+
 # all pairs shortest floyd warshall
+
+O(V^3)
  
 for each intermediate vertex (k)
    for each vertex pair (a, b)
       if dist(a, b) > dist(a, k) + dist(k, b)
          dist(a, b) = dist(a, k) + dist(k, b)
 
-# reweighting negative
+# bellman ford negative edges
 
-johnson 
+1. process all pairs at dist=1
+1. process all pairs at dist=2
+1. process all pairs at dist=V
 
-bellman ford
+there can be max V edges in a path
+
+O(V.E)
+
+# johnson negative edges
 
  w(u, v) + h[u] – h[v]
+
