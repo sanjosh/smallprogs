@@ -23,11 +23,18 @@ Following is the complete algorithm.
 A new vertex is added to the graph and connected to all existing vertices. 
 The shortest distance values from new vertex to all existing vertices are h[] values.
 
-1) Let the given graph be G. Add a new vertex s to the graph, add edges from new vertex to all vertices of G. Let the modified graph be G’.
+1) Let the given graph be G. 
+Add a new vertex s to the graph, add edges from new vertex to all vertices of G. 
+Let the modified graph be G’.
 
-2) Run Bellman-Ford algorithm on G’ with s as source. Let the distances calculated by Bellman-Ford be h[0], h[1], .. h[V-1]. If we find a negative weight cycle, then return. Note that the negative weight cycle cannot be created by new vertex s as there is no edge to s. All edges are from s.
+2) Run Bellman-Ford algorithm on G’ with s as source. 
+Let the distances calculated by Bellman-Ford be h[0], h[1], .. h[V-1]. 
+If we find a negative weight cycle, then return. 
+Note that the negative weight cycle cannot be created by new vertex s as there is no edge to s. 
+All edges are from s.
 
-3) Reweight the edges of original graph. For each edge (u, v), assign the new weight as “original weight + h[u] – h[v]“.
+3) Reweight the edges of original graph. 
+For each edge (u, v), assign the new weight as “original weight + h[u] – h[v]“.
 
 4) Remove the added vertex s and run Dijkstra’s algorithm for every vertex.
 
