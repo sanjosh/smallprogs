@@ -82,6 +82,7 @@ int main()
     return 0;
 }
 
+/*
 Output:
 
 Yes
@@ -95,6 +96,7 @@ Dynamic Programming
 Why Dynamic Programming? The above problem exhibits overlapping sub-problems. For example, see the following partial recursion tree for string “abcde” in worst case.
 
 wordBreak
+*/
 // A Dynamic Programming based program to test whether a given string can
 // be segmented into space separated words in dictionary
 #include <iostream>

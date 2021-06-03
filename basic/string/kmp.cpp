@@ -20,6 +20,13 @@ if pattern match fails at index=j, then shift pattern index to right by lps[j-1]
 using namespace std;
 #include <bits/stdc++.h>
 
+/**
+ test cases for pattern
+incr prefix : ab - abc - abcd
+decr prefix : abcd - abc - ab
+same  : aaaaaa
+diff : abcdef
+*/
 
 // Fills lps[] for given patttern pat[0..M-1]
 void computeLPSArray(char* pat, int M, int* lps)
@@ -34,28 +41,26 @@ void computeLPSArray(char* pat, int M, int* lps)
     // the loop calculates lps[i] for i = 1 to M-1
     int i = 1;
     while (i < M) {
-        cout << "current=" << prefix_len_matched << "," << pat[i] << ":" << pat[prefix_len_matched] << endl;
+        ///cout << "current=" << prefix_len_matched << "," << pat[i] << ":" << pat[prefix_len_matched] << endl;
         if (pat[i] == pat[prefix_len_matched]) {
             prefix_len_matched++;
             lps[i] = prefix_len_matched;
-            cout << i << ":m=" << prefix_len_matched << endl;
+            //cout << i << ":m=" << prefix_len_matched << endl;
             i++;
         }
-        else // (pat[i] != pat[len])
+        else // (pat[i] != pat[prefix])
         {
-            // This is tricky. Consider the example.
-            // AAACAAAA and i = 7. The idea is similar
-            // to search step.
+            // you hit 'd' in 'abcabcd' - reset search
             if (prefix_len_matched != 0) {
-                cout << "len[" << prefix_len_matched -1 << "]=" << lps[prefix_len_matched - 1] << endl;
+                //cout << "len[" << prefix_len_matched -1 << "]=" << lps[prefix_len_matched - 1] << endl;
                 prefix_len_matched = lps[prefix_len_matched - 1];
-                // Also, note that we do not increment
-                // i here
+                assert(prefix_len_matched == 0);
+                // when would this entry be non-zero ?
             }
-            else // if (len == 0)
+            else 
             {
+                // found mismatch of 'd' with 'a' during ababd
                 lps[i] = 0;
-                cout << i << ":n=" << 0 << endl;
                 i++;
             }
         }
@@ -90,22 +95,39 @@ void KMPSearch(char* pat, char* txt)
 
         // mismatch after j matches
         else if (i < N && pat[j] != txt[i]) {
-            // Do not match lps[0..lps[j-1]] characters,
-            // they will match anyway
-            if (j != 0)
-                j = lps[j - 1];
-            else
-                i = i + 1;
+            if (j != 0)  { 
+                // partial match ? 
+                // skip pattern forward by last successful prefix matched
+                // lps[] = { 0, 0, 1, 2, 0}
+                // mismatch in txt="abab[a]bgh" with pat="abab[d]"
+                // when mismatch at i=4, j = 4
+                // j = lps[4-1 = 3] = 2
+                // go back in pattern to j=2 instead of j=0
+                // pattern match resumes looking at "abab[a]abgh" with "ab[a]bd"
+                // with i=4, j=2
+                cout << " at " << i << " pat index reset=" << j << " to " << lps[j-1] << endl;
+                j = lps[j - 1]; 
+            }
+            else {
+                cout << "moving on " << i << endl;
+                i = i + 1; // no match; look at next char
+            }
         }
     }
 }
 
-// Driver program to test above function
+
 int main()
 {
-    char txt[] = "ABABDABACDABABCABAB";
-    char pat[] = "ABABCABAB";
+    char txt[] = "abababgh";
+    char pat[] = "ababd";
     int lps[strlen(pat)];
+    computeLPSArray(pat, strlen(pat), lps);
+    for (int i = 0; i < strlen(pat); i ++)
+    {
+        cout << lps[i] << ",";
+    }
+    cout << endl;
     KMPSearch(pat, txt);
     return 0;
 }

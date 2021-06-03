@@ -8,13 +8,9 @@
 using namespace std;
 #define MAX 500
 
-// lookup[i][j] is going to
-// store index of minimum value in
-// arr[i..j]. Ideally lookup
-// table size should not be fixed
-// and should be determined using
-// n Log n. It is kept
-// constant to keep code simple.
+// lookup[i][j] is going to store index of minimum value in arr[i..j]. 
+// Ideally lookup table size should not be fixed and should be determined using n Log n. 
+// It is kept constant to keep code simple.
 int lookup[MAX][MAX];
 
 // Structure to represent a query range
@@ -26,21 +22,23 @@ struct Query {
 // lookup[][] in bottom up manner.
 void preprocess(int arr[], int n)
 {
-    // Initialize M for the
-    // intervals with length 1
+    // Initialize M for the intervals with length 1
     for (int i = 0; i < n; i++)
         lookup[i][0] = i;
 
     // Compute values from smaller to bigger intervals
-    for (int range = 1; (1 << range) <= n; range++)
+    for (int range = 1; (1 << range) <= n; range ++)
     {
         // Compute minimum value for all intervals with size 2^j
-        for (int start = 0; (start + (1 << range) - 1) < n; i++)
+        cout << "range=" << (1<<range) << endl;
+        int prev_range = range - 1;
+        int prev_offset = 1 << prev_range;
+        for (int start = 0; (start + (1 << range)) <= n; start ++)
         {
-            int prev_range = range - 1;
-            int offset = 1 << (range-1);
             // take the min of previous two sub-ranges
-            lookup[start][range] = std::min(arr[lookup[start][prev_range]], arr[lookup[start + offset][prev_range]]);
+            lookup[start][range] = std::min(arr[lookup[start][prev_range]], 
+                arr[lookup[start + prev_offset][prev_range]]);
+            cout << "start=" << start << "," << start + prev_offset << endl;
         }
     }
 }
@@ -55,7 +53,7 @@ int query(int arr[], int L, int R)
 
     // For query [2,10], we take min of two intersecting ranges, each of length 8
     // one range from (0, 8) and another range from (2, 10)
-    return std::min(arr[lookup[L][j]], arr[lookup[next_offset][j]])
+    return std::min(arr[lookup[L][j]], arr[lookup[next_offset][j]]);
 }
 
 // Prints minimum of given
@@ -68,8 +66,7 @@ void RMQ(int arr[], int n, Query q[], int m)
     // One by one compute sum of all queries
     for (int i = 0; i < m; i++)
     {
-        // Left and right boundaries
-        // of current range
+        // Left and right boundaries of current range
         int L = q[i].L, R = q[i].R;
 
         // Print sum of current query range

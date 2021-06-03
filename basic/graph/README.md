@@ -6,10 +6,11 @@
 3. DFS O(V+E)
 4. earliest discovered time as in disc[vertex]=++counter; 
 5. earliest in subtree low[vertex] = min(low[vertex and its adjacents]) like union-find
-6. for early path pruning, use BFS over DFS
 7. path exploration variables should be on stack
 8. transform to shortest path 
 9. start with dist[start] = 0 and all others = INF; then dist[v] = dist[u] + edge(u, v)
+6. for early path pruning, use BFS over DFS
+10. to find multiple shortest paths in BFS, update the visitedSet after level is done
 
 # BFS
 
@@ -97,6 +98,14 @@ pop from queue and add vertex to sorted list
 
 (Skiena)
 
+
+# number of components
+
+union-find
+
+use of rank
+
+keep size of each component
 
 # djikstra shortest path
 

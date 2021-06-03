@@ -72,6 +72,14 @@ e.g.
 array[0] = sum for row 0, col12
 array[1] = sum for row 1, col12
 
+for (left = 0; left < COL; ++left) {
+   temp = new
+   for (right = left; right < COL; ++right) {
+     for (i = 0; i < ROW; ++i)
+        temp[i] += M[i][right];
+        find kadane over temp (row=0, N, col=left, right)
+
+
 pass this cumulative sum of neighbouring columns array to kadane
 
 it returns (start-row, end-row) which indicates contiguous submatrix (row L to row K, col 02)
@@ -81,5 +89,7 @@ https://www.geeksforgeeks.org/minimum-sum-submatrix-given-2d-array/
 https://www.geeksforgeeks.org/maximum-sum-rectangle-in-a-2d-matrix-dp-27/
 
 https://www.geeksforgeeks.org/smallest-sum-contiguous-subarray
+
+https://leetcode.com/problems/maximal-rectangle/solution/
 
 */

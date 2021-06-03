@@ -48,7 +48,6 @@ for repeat = 2, look for internal node which is deepest
 For repeat = k, look for internal node which has k leafs
 
 
-
 ## pattern search
 
 Three approaches
@@ -135,7 +134,11 @@ https://www.geeksforgeeks.org/longest-common-extension-lce-set-2-reduction-rmq/
 
 position of each suffix, stored in sorted order
 
-binary search on suffix array
+do two binary search on suffix array
+
+find starting pos for pattern, pattern > suffixArray[mid]
+
+find ending pos for pattern  - suffixArray[mid].startsWith(pattern)
 
 ## inverse suffix array
 
@@ -154,6 +157,16 @@ https://www.geeksforgeeks.org/%C2%AD%C2%ADkasais-algorithm-for-construction-of-l
 Augmenting the suffix array with the LCP array allows one to efficiently simulate top-down and bottom-up 
 traversals of the suffix tree,[1][2] speeds up pattern matching on the suffix array[3] and is a 
 prerequisite for compressed suffix trees.[4]
+
+for repeated patterns in text, LCP array can be used to avoid searching entire pattern in consecutive suffix array entries
+
+suffix array
+[5] = "abab"
+[6] = "ababa"
+
+LCP[6] = 4 - to prefix of 4 between suffix[5] and suffix[6].  Hnce we can avoid 4 comparisons
+
+reduce pattern search from O(m.logN) to O(m + logN) where N = num of suffixes, m = length of pattern
 
 ## LPS (palindromic) array used in palindrome
 

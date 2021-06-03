@@ -10,6 +10,7 @@ const int SIZE = 4;
 int A[SIZE];
 
 #define LSBIT(i) ((i) & -(i)) // Return the least-significant set bit in i
+
 // The following identities allow additional optimization,
 // but are omitted from this example code for clarity:
 // i - LSBIT(i)   == i & (i - 1)

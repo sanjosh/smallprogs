@@ -1,11 +1,13 @@
 
-use stack of open problems  - as in max area of histogram - see karumanchi chap5,prob 24
 
 ## Solution
 
 1. greedy : keep stack of previous elements
-1. divide and conquer : keep min over each range (i, N) where i = 1..N
-1. keep prefix sums over each range (0, i) where i = 1..N
+1. apply four russians 
+
+a. modified merge sort where count = high - mid since rest of array is sorted
+b. divide and conquer : keep min over each range (i, N) where i = 1..N
+
 
 (Karumanchi page 275 notes)
 
@@ -28,6 +30,24 @@ use stack of open problems  - as in max area of histogram - see karumanchi chap5
 1. swap using (x + y * sz)/sz = y and (x + y * sz)%sz = x
 1. quickselect - order statistics
 1. Mo's algorithm - sort queries in order and execute
+1. avoid floating point, instead store coprime
+1. count pairs in sorted by 2 pointers https://www.geeksforgeeks.org/two-pointers-technique/
+
+use stack of open problems  - as in max area of histogram - see karumanchi chap5,prob 24
+
+# secondary indices
+
+1. prefix sums over each range (0, i) where i = 1..N
+1. suffix Min over each (cur - N)
+1. xor
+2. count array + distinct set
+3. distance to predecessor
+4. location of predecessor
+5. value of next greater
+6. count of greater
+7. max to right or left
+8. bitmask of elements seen till here
+9. rmq
 
 ## trees
 
@@ -64,8 +84,7 @@ for query [L, R] - min ([L, largest range less than R], [smallest offset greater
 
 ## inversion table
 
-1) Inversion table uniquely determines permutation (Marshall Hall in Knuth vol 3)
-
+Inversion table uniquely determines permutation (Marshall Hall in Knuth vol 3)
 
 ## misc
 
@@ -233,6 +252,9 @@ maximize the sum by decrementing some sum before
 you have to find largest prefix sum before, decrementing which will cause current prefix sum to increase
 
 keep prefix sums (0, i) for all i=1, N
+
+maxSum(till i) = (prefix(i) - prefix(j) + m) % m ; where j < i
+find prefix(j) > prefix(i) and closest to it
 
 for each new prefix (0, j) 
    find largest prefix computed before which is greater than or equal to this (prefix + 1)
