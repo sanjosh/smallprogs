@@ -33,6 +33,13 @@ y13 = lambda x,y : ~x | y
 y14 = lambda x,y : ~(x & y)
 y15 = lambda x,y : 1   # affine
 
+'''
+A bent function is a Boolean function in n variables (n is even) 
+such that for any nonzero vector y its derivative 
+Dyf(x) = f(x) ⊕ f(x ⊕ y) is balanced—that is, 
+it takes values 0 and 1 equally often
+'''
+
 
 '''
 
