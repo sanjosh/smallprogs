@@ -15,7 +15,7 @@ b. divide and conquer : keep min over each range (i, N) where i = 1..N
 1. use Hash table
 1. use Dutch National flag (maintain 2 ptrs)
 1. use 2 passes 
-1. traverse from right or left
+1. traverse from right or left or BOTH
 1. use transitivity
 1. use stack or tree or hash
 1. keep array of prefix sums (left and right) - and subtract
@@ -138,10 +138,17 @@ http://www.geeksforgeeks.org/count-inversions-in-an-array-set-2-using-self-balan
 every node of Fenwick stores sum of subset of first n, where n is power of 2
 parent = remove last set bit = index + (index & -index)
 
+## missing smallest element 
+
+A positive integer ‘k’ being added to a series of consecutive positive
+integers [1, 2, 3, …….. p] furthers that series by K elements without
+disrupting the continuity as long as k ≤ (p+1).
+
+
 ## problems around smallest or largest element in array
 
 1. next smallest on right : nested relation between consecutive nearest(i), hence use stack
-2. farthest smallest on right : there is no nesting between consecutive nearest(i), hence you need suffix min array
+2. farthest smallest on right : binary search on suffix min array (no nesting between farthestRight(i) and farthestRight(i+1))
 3. count of smallest to right (inversion table) : put in tree or use merge sort
 4. count of elem with at least one smaller to left and right : use stack + count
 
@@ -212,6 +219,8 @@ https://www.geeksforgeeks.org/sliding-window-maximum-maximum-of-all-subarrays-of
 
 ### max window with less than k distinct
 
+two pointers 
+
 http://www.geeksforgeeks.org/longest-subarray-not-k-distinct-elements/
 
 ### smallest window in which all elements occur
@@ -244,6 +253,10 @@ currentSum = max(currentSum + x, 0)
 maxSum = max(maxSum, sum)
 
 https://www.geeksforgeeks.org/maximum-subarray-sum-using-divide-and-conquer-algorithm/
+
+### min sum (also kadane)
+
+### max sum with start and end index
 
 ### max sum modulo 
 
@@ -322,4 +335,59 @@ https://stackoverflow.com/questions/23301358/linear-time-algorithm-for-minimum-n
 https://www.geeksforgeeks.org/modify-array-to-another-given-array-by-replacing-with-the-sum-of-the-array/?ref=rp
 
 find the element which is greater than sum of others
+
+## pairs of nodes
+
+counting or finding optimal
+
+1. double pointer method
+2. smallest distance between same number
+
+## both forward and reverse constraints in array
+
+1. two for loops : forward and reverse (candy problem)
+2. find unknown in mountain array without peak : find peak, then bin search on both sides
+3. dynamic programming in one direction (min moves to reset an arrays)
+
+## pick (min/max/sum) optimal subset from array based on another array
+
+1. sort ascending on one, descending on another and then LIS (russian dolls)
+1. iterate by min of one dim, and then use heap for moving sum over other window (max perf of team)
+1. backtracking with pruning
+1. keep heap of points inside given range (for max value of equation - difference in 2 points)
+
+
+## coordinate compression
+
+```
+vector<int> a(n);
+// read the vector
+vector<int> b = a;
+sort(b.begin(), b.end());
+map<int, int> m;
+for (int i = 0; i < n; i++) {
+    m[b[i]] = i;
+}
+for (int i = 0; i < n; i++) {
+    a[i] = m[a[i]]; // elem = its rank
+}
+```
+
+```
+a = {13, 7, 9}
+b = {7, 9, 13}
+m = {7 : 0, 9 : 1, 13 : 2} (rank map)
+a = {2, 0, 1}
+
+```
+
+
+https://codeforces.com/blog/entry/84164
+
+## square root decomposition
+
+instead of 1..N
+create W blocks of size sqroot(W)
+
+
 

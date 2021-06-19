@@ -51,6 +51,12 @@
 
 # dynamic programming
 
+dp table can have data structure, not single elem
+
+* return value of recursion decide value in table
+* parameters to func decide rows and columns of DP
+* decision of choices in the recursion decide table predecessor choices
+
 1. recursion - start from maxElem and then reduce down, instead of maxElem = 1 and increase
 1. return 1 on reaching leaf node, to indicate valid solution
 

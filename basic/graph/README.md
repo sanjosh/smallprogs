@@ -11,12 +11,36 @@
 9. start with dist[start] = 0 and all others = INF; then dist[v] = dist[u] + edge(u, v)
 6. for early path pruning, use BFS over DFS
 10. to find multiple shortest paths in BFS, update the visitedSet after level is done
+11. Bidirectional BFS
+
+## diff
+
+BFS vs Djikstra vs Dynamic programming
+
+DP = recursive definition
+
+BFS = Djikstra on unweighted graph
+
+Djikstra : shortest path (s, t) also implies shortest (s, i) to every intermediate vertex i from s
+
+Djikstra = BFS + priority queue + distance matrix
+
+Djikstra is a DP
+
+Djikstra has relaxation of distance (minimize to new value)
+
+Djikstra stops if shortest path found
+
+BFS visits nodes in order of depth, not distance
+
 
 # BFS
 
 1. vertices discovered in increasing order of distance from root
 1. the shortest path tree is only useful if BFS was performed with x as the root of the search. 
 1. BFS only gives the shortest path if the graph is unweighted.
+1. if constraints in path, same node can be visited twice.   To simulate this add constraint to visited set hash (so same node visited twice) 
+1. Add param to Node put in BFS queue, if path tracking info needed (priority queue or nodes visited in this path)
 
 O(V+E) on adjacency list
 O(V^2) on adjacency matrix
@@ -98,6 +122,34 @@ pop from queue and add vertex to sorted list
 
 (Skiena)
 
+Kahn algo
+
+Enqueue vertices with zero incoming degree into a (priority) queue Q;
+
+```
+while (Q is not empty) {
+	node u = Q.dequeue();     // put node u into a topological sort list;
+	for (all child nodes of vertex u) {
+		indegree[child]--;          // remove this node u and all outgoing edges from this node;
+		if (indegree[child] == 0)
+			Q.enqueue(child);     // if such removal causes node child to have zero incoming degree, enqueue it in queue;
+	}
+}
+```
+
+https://leetcode.com/problems/largest-color-value-in-a-directed-graph/discuss/1220930/C%2B%2B%3A-DP-%2B-Topological-Sort-(Kahn's-Algorithm)-solution
+
+
+Note: To detect cycle in graph using this algo, if at the end of topo sort, if any node has indegree > 0, there is a cycle present in the graph.
+
+```
+bool cyclePresent = false;
+for (each node v in graph)
+	if (indegree[v] != 0)
+		cyclePresent = true;
+
+bool cyclePresent = std::for_each(v.begin(), v.end(), [](Point& v) -> bool { return indegree[v] != 0; })
+```
 
 # number of components
 
@@ -124,6 +176,14 @@ while visitedSet < all vertices
 O(V * V)
 
 can be O(V.logV) with a heap
+
+## augmented
+
+1. custom comparator & add priority queue to get vertices in certain order
+2. at each level, you can keep parent 
+3. at each level, keep distance found to each node 
+4. in constraint-based visiting, same vertex needs to be visited for each value of constraint.
+   so visited set must be able to include same vertex multiple times.  use hash based on constraint
 
 # all pairs shortest floyd warshall
 

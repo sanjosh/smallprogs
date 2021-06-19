@@ -32,7 +32,7 @@ struct Trie
         Node* cur = root;
         bool found = false;
 
-        while (cur->child['z' - str[idx]]) {
+         while (cur->child['z' - str[idx]]) {
             cur = cur->child['z' - str[idx]];
             idx ++;
             if (idx == str.size()) {

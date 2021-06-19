@@ -30,6 +30,8 @@ find if string is interleaving of 2 other strings
 
 reverse min number of elem to get lexicographically smaller string
 
+number of distinct substrings = edges in suffix tree, OR (str len * (len + 1)/2) - sum of LCP array
+
 ### edit distance
 
 ### longest common subsequence
@@ -130,15 +132,15 @@ https://www.geeksforgeeks.org/longest-common-extension-lce-set-2-reduction-rmq/
 
 ## suffix tree
 
+
+
 ## suffix array ( sorted on suffixes)
 
 position of each suffix, stored in sorted order
 
-do two binary search on suffix array
-
-find starting pos for pattern, pattern > suffixArray[mid]
-
-find ending pos for pattern  - suffixArray[mid].startsWith(pattern)
+1. do two binary search on suffix array
+2. find starting pos for pattern, pattern > suffixArray[mid]
+3. find ending pos for pattern  - suffixArray[mid].startsWith(pattern)
 
 ## inverse suffix array
 

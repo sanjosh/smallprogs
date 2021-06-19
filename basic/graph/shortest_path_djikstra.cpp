@@ -64,6 +64,8 @@ void shortestFrom(int32_t u)
         visited.insert(x);
         for (int i = 0; i < NUM_VERTICES; i++)
         {
+            // adjust dist to all adj vertices
+            // each adj and not visited and dist(cur) != INT_MAX
             if (i != x) {
                 if (not visited.count(i) && edges[x][i] != INT_MAX && dist[x] != INT_MAX) {
                     dist[i] = std::min(dist[i], edges[x][i] + dist[x]);

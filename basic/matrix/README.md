@@ -22,10 +22,17 @@ https://www.geeksforgeeks.org/find-the-number-of-islands-set-2-using-disjoint-se
 
 https://www.geeksforgeeks.org/find-number-of-islands/
 
+## finding element in sorted
+
+for any in sorted, start from top right
+
+for k-th smallest, heap over first row and replace with next elem in column
+
 ## transform
 
 1. the sun matrix
-2. 
+2. add value of row above for max rectangle
+
 
 
 ## submatrix with min
@@ -49,6 +56,10 @@ https://www.geeksforgeeks.org/largest-rectangle-under-histogram/
 http://www.geeksforgeeks.org/find-the-longest-path-in-a-matrix-with-given-constraints/
 
 http://www.geeksforgeeks.org/number-of-paths-with-exactly-k-coins/
+
+## longest increasing path
+
+topological sort from leaves to root (out degree --)
 
 ## solution ideas
 

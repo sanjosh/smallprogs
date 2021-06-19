@@ -118,6 +118,16 @@ int main()
     int orig[] = { 1, 2, 7, 6, 5, 4, 3, 0};
     int n = 8;
 
+    // to handle numbers beyond array size
+    // size of fenwick should be MAX (1 + max number in array, size of array)
+    //     std::max((int)a.size(), 1 + *std::max_element(a.begin(), a.end())
+
+    // can handle duplicates 
+
+    // to handle negatives, increment all by largest min
+
+    // during insert or query, insert index = value of element
+
     {
         Fenwick<8> b;
         int smaller_right[n];
