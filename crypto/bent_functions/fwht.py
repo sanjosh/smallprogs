@@ -33,6 +33,7 @@ plt.axhline(y=0, color='k')
 #plt.ylim(-max_coeff, max_coeff)
 
 y = fwht(truth_table)
+print(min(y), max(y))
 plt.subplot(3,1,2)
 plt.plot(t, y, color='red')
 plt.title('WHT coefficients')
@@ -40,11 +41,11 @@ plt.xlabel('Sequency index')
 plt.ylabel('Amplitude')
 plt.grid(True, which='both')
 plt.axhline(y=0, color='k')
-#plt.ylim(-max_coeff, max_coeff)
-
+#plt.ylim(min(y), max(y))
 
 
 y = fft(truth_table)
+print(min(y), max(y))
 plt.subplot(3,1,3)
 plt.plot(t, y)
 plt.title('FFT coefficients')
@@ -52,7 +53,7 @@ plt.xlabel('fft index')
 plt.ylabel('Amplitude')
 plt.grid(True, which='both')
 plt.axhline(y=0, color='k')
-#plt.ylim(-max_coeff, max_coeff)
+#plt.ylim(min(y), max(y))
 
 plt.subplots_adjust(left=0.1,
                     bottom=0.1,

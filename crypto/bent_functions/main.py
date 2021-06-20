@@ -96,7 +96,7 @@ def hamming_distance(f1_seq, f2_seq):
 
 def main():
     print(nums)
-    print("Function     :  Transform ")
+    print("Function     :  Transform   :   Is Bent ")
     for idx, f in enumerate(func_list):
         seq = truth_table(f)
         transform_seq = fwht(seq)
