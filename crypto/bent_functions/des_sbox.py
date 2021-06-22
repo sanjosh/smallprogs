@@ -14,7 +14,7 @@ decryption : same keys used in reverse order in different rounds in key schedule
 # For any even , a Boolean function f(x) = x1x2 ⊕ x3x4 ⊕⋯ ⊕ xn−1xn is a classic example of a bent function
 
 bits = list(range(2))
-b4 = list(product(bits, bits, bits, bits))
+b4 = list(product(bits, repeat=4))
 
 def bent_4(x0, x1, x2, x3):
     return (x0&x1) + (x2&x3)

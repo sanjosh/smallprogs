@@ -84,7 +84,7 @@ Linear has some Walsh coefficients as zero
 
 
 bits = list(range(2))
-nums = (list(product(bits, bits)))
+nums = (list(product(bits, repeat=2)))
 
 truth_table = lambda  f : [f(x, y) % 2 for x, y in nums]
 
