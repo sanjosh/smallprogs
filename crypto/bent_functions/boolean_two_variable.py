@@ -96,7 +96,7 @@ def hamming_distance(f1_seq, f2_seq):
 
 def main():
     print(nums)
-    print("Function     :  Transform   :   Is Bent ")
+    print("Function           :  Transform   :   Is Bent ")
     for idx, f in enumerate(func_list):
         seq = truth_table(f)
         transform_seq = fwht(seq)
@@ -114,14 +114,15 @@ def main():
         min_dist = min(10, min(linear_dist), min(affine_dist))
         print(seq, transform, min_dist)
 
-    print("all other ")
+    print("all other nonlinear")
     for idx, f in enumerate(func_list):
         if f not in bent_func_set and f not in affine_func_set and f not in linear_func_set:
             seq = truth_table(f)
+            transform = fwht(seq)
             affine_dist = [hamming_distance(seq, truth_table(af)) for af in affine_func_set]
             linear_dist = [hamming_distance(seq, truth_table(linear)) for linear in linear_func_set]
             min_dist = min(10, min(linear_dist), min(affine_dist))
-            print(seq, min_dist)
+            print(seq, transform, min_dist)
 
 if __name__ == '__main__':
     main()

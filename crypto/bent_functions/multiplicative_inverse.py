@@ -2,6 +2,10 @@
 https://stackoverflow.com/questions/45442396/a-pure-python-way-to-calculate-the-multiplicative-inverse-in-gf28-using-pytho
 '''
 
+import matplotlib.pyplot as plt
+import numpy as np
+import seaborn as sns
+
 def gf_degree(a) :
     res = 0
     a >>= 1
@@ -33,9 +37,23 @@ def gf_invert(a, mod=0x1B) :
     return g1
 
 def main():
-    print(gf_invert(5))   # 82
-    print(gf_invert(1))   #  1
-    print(gf_invert(255)) # 28
+    grid = np.zeros((256, 256))
+    x = []
+    y = []
+    for i in range(1, 256):
+        inv = gf_invert(i)
+        inv_inv = gf_invert(inv)
+        assert(inv_inv == i)
+        #print(i, " -> ", inv)
+        x.append(i)
+        y.append(inv)
+        grid[x, y] = 1
+        grid[y, x] = 1
+    #plt.plot(x, y)
+    #plt.grid(True, which='both')
+    #plt.matshow(grid)
+    sns.heatmap(grid, cbar=False) # annot=True,  xticklabels=2, yticklabels=2,
+    plt.show()
 
 if __name__ == '__main__':
     main()
