@@ -23,7 +23,7 @@ y3 = lambda x,y : x  #linear
 y4 = lambda x,y : ~x & y  # bent
 y5 = lambda x,y : y  # linear
 y6 = lambda x,y : x ^ y  #(x & ~y) | (~x & y)   #linear (XOR)
-y7 = lambda x,y : x | y
+y7 = lambda x,y : x | y # linear
 y8 = lambda x,y : ~(x | y)  # bent
 y9 = lambda x,y : (x & y) | ( ~x & ~y)  # affine = y6 + 1
 y10 = lambda x,y : ~y  # affine  = y5 + 1
@@ -126,3 +126,11 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+'''
+F(X, Y) = F1(X) + F2(Y) : this is linear
+
+F(X, Y) - terms which are higher degree = (x&y) + (y&z) 
+
+XOR = add mod 2 = linear
+'''

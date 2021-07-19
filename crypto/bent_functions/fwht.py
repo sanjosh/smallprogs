@@ -9,19 +9,16 @@ import numpy as np
 import math
 
 # Generate truth table for random Boolean function
-#
 percent_ones = 0.5
 num_boolean_var = 4
 num_combinations = pow(2, num_boolean_var)
 
-max_coeff = num_combinations + 4
-t = np.linspace(0, 1, num_combinations, endpoint=True)
+t = np.linspace(0, num_combinations, num_combinations, endpoint=True)
 print(t.shape[0])
-#x = signal.square(2 * np.pi * 1 * t)
-#x = signal.unit_impulse(t.shape)
 
+# generate random truth table
 truth_table = numpy.random.choice([0, 1], size=t.shape[0], p=[1 - percent_ones, percent_ones])
-
+print(truth_table)
 # Plot the square wave signal
 plt.subplot(3,1,1)
 plt.plot(t, truth_table)
@@ -36,9 +33,8 @@ y = fwht(truth_table)
 print(min(y), max(y))
 plt.subplot(3,1,2)
 plt.plot(t, y, color='red')
-plt.title('WHT coefficients')
+plt.title('Walsh Hadamard Transform')
 plt.xlabel('Sequency index')
-plt.ylabel('Amplitude')
 plt.grid(True, which='both')
 plt.axhline(y=0, color='k')
 #plt.ylim(min(y), max(y))
@@ -48,9 +44,8 @@ y = fft(truth_table)
 print(min(y), max(y))
 plt.subplot(3,1,3)
 plt.plot(t, y)
-plt.title('FFT coefficients')
+plt.title('Fast Fourier transform')
 plt.xlabel('fft index')
-plt.ylabel('Amplitude')
 plt.grid(True, which='both')
 plt.axhline(y=0, color='k')
 #plt.ylim(min(y), max(y))

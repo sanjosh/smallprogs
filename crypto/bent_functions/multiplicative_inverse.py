@@ -4,6 +4,7 @@ https://stackoverflow.com/questions/45442396/a-pure-python-way-to-calculate-the-
 
 import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
 import seaborn as sns
 
 def gf_degree(a) :
@@ -40,6 +41,7 @@ def main():
     grid = np.zeros((256, 256))
     x = []
     y = []
+    df_list = []
     for i in range(1, 256):
         inv = gf_invert(i)
         inv_inv = gf_invert(inv)
@@ -49,10 +51,8 @@ def main():
         y.append(inv)
         grid[x, y] = 1
         grid[y, x] = 1
-    #plt.plot(x, y)
-    #plt.grid(True, which='both')
-    #plt.matshow(grid)
-    sns.heatmap(grid, cbar=False) # annot=True,  xticklabels=2, yticklabels=2,
+    df = pd.DataFrame(list(zip(x, y)), columns=["x", "y"])
+    sns.scatterplot(data=df, x="x", y="y")
     plt.show()
 
 if __name__ == '__main__':
