@@ -62,3 +62,35 @@ quick sort vs merge sort
 
 http://www.cprogramming.com/tutorial/computersciencetheory/sortcomp.html
 
+how to parallelize on modern pipelined processors
+
+======
+
+sorting
+
+comparison : lower bound of Omega(n.logn) on any comparison based sort
+        using decision-tree model
+    insertion : like card player
+    shell sort - extension of insertion sort
+    bubble : swap adjacent elements
+    quick-sort - pivot (use median), use insertion sort for small
+    merge
+    heapsort
+
+non-comparison sorting
+    counting sort - assume numbers in range [0..k]
+    radix - sort by lsb, then next bit and so on
+    bucket sort - assume input probab distribution - put numbers into buckets and then use insertion sort within each bucket
+    bucket sort runs in linear time as long as sum of squares of bucket sizes is linear in total number of elements
+
+==============
+Bubble:
+for i=1 to n-1
+    for j = n to (i+1)  
+        if A[j] < A[j-1]
+            swap(A[j], A[j-1])
+
+==============
+Insertion sort:
+Running time depends on number of inversions - bcos u are inserting into sorted array
+
